@@ -1,0 +1,8 @@
+# build folders
+bin/
+target/
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
