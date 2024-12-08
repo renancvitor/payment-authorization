@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="btNew" prefHeight="412.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telas.CargoListController">
+<VBox prefHeight="412.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telas.CargoListController">
    <children>
       <Label text="Cadastrar cargo">
          <font>
@@ -21,7 +21,7 @@
       </Label>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button mnemonicParsing="false" text="Novo cargo" />
+          <Button fx:id="btNew" mnemonicParsing="false" text="Novo cargo" />
         </items>
       </ToolBar>
       <TableView fx:id="tableViewCargo" prefHeight="200.0" prefWidth="200.0">

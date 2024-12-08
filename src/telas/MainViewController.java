@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import model.services.CargoService;
 import model.services.DepartamentoService;
 import telas.util.Alerts;
 
@@ -48,7 +49,7 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onMenuItemCargo() {
-		loadView("/telas/CadastroCargo.fxml");
+		loadView3("/telas/CadastroCargo.fxml");
 	}
 	
 	@Override
@@ -66,7 +67,7 @@ public class MainViewController implements Initializable {
 			Node mainManu = mainVBox.getChildren().get(0);
 			mainVBox.getChildren().clear();
 			mainVBox.getChildren().add(mainManu);
-			mainVBox.getChildren().addAll(newVBox.getChildren());			
+			mainVBox.getChildren().addAll(newVBox.getChildren());
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
@@ -87,6 +88,27 @@ public class MainViewController implements Initializable {
 			
 			DepartamentoListController controller = loader.getController();
 			controller.setDepartamentoService(new DepartamentoService());
+			controller.updateTableView();
+		} catch (IOException e) {
+			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+		}
+	}
+	
+	private synchronized void loadView3(String absoluteName) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			VBox newVBox = loader.load();
+			
+			Scene mainScene = Main.getMainScene();
+			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+			
+			Node mainManu = mainVBox.getChildren().get(0);
+			mainVBox.getChildren().clear();
+			mainVBox.getChildren().add(mainManu);
+			mainVBox.getChildren().addAll(newVBox.getChildren());
+			
+			CargoListController controller = loader.getController();
+			controller.setCargoService(new CargoService());
 			controller.updateTableView();
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
