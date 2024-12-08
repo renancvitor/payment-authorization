@@ -6,8 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telas.MainViewController">
    <content>
       <VBox prefHeight="339.0" prefWidth="523.0">
          <children>
@@ -15,14 +14,14 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Cadastrar funcionários e usuários">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Cadastrar funcionário" />
-                        <MenuItem mnemonicParsing="false" text="Cadastrar usuário" />
+                    <MenuItem fx:id="menuItemFuncionario" mnemonicParsing="false" onAction="#onMenuItemFuncionarioAction" text="Cadastrar funcionário" />
+                        <MenuItem fx:id="menuItemUsuario" mnemonicParsing="false" onAction="#onMenuItemUsuario" text="Cadastrar usuário" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Cadastrar departamentos e cargos">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Cadastrar departamento" />
-                        <MenuItem mnemonicParsing="false" text="Cadastrar cargo" />
+                    <MenuItem fx:id="menuItemDepartamento" mnemonicParsing="false" onAction="#onMenuItemDepartamento" text="Cadastrar departamento" />
+                        <MenuItem fx:id="menuItemCargo" mnemonicParsing="false" onAction="#onMenuItemCargo" text="Cadastrar cargo" />
                   </items>
                 </Menu>
               </menus>
