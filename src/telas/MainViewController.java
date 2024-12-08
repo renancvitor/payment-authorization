@@ -42,7 +42,7 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onMenuItemDepartamento() {
-		System.out.println("onMenuItemDepartamento");
+		loadView("/telas/CadastroDepartamento.fxml");
 	}
 	
 	@FXML
