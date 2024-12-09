@@ -3,6 +3,7 @@ package telas;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import application.Main;
 import javafx.fxml.FXML;
@@ -44,36 +45,25 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onMenuItemDepartamento() {
-		loadView2("/telas/CadastroDepartamento.fxml");
+		loadView("/telas/CadastroDepartamento.fxml", (DepartamentoListController controller) -> {
+			controller.setDepartamentoService(new DepartamentoService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
 	public void onMenuItemCargo() {
-		loadView3("/telas/CadastroCargo.fxml");
+		loadView("/telas/CadastroCargo.fxml", (CargoListController controller) -> {
+			controller.setCargoService(new CargoService());
+			controller.updateTableView();
+		});
 	}
 	
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {
 	}
 	
-	private synchronized void loadView(String absoluteName) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-			VBox newVBox = loader.load();
-			
-			Scene mainScene = Main.getMainScene();
-			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-			
-			Node mainManu = mainVBox.getChildren().get(0);
-			mainVBox.getChildren().clear();
-			mainVBox.getChildren().add(mainManu);
-			mainVBox.getChildren().addAll(newVBox.getChildren());
-		} catch (IOException e) {
-			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
-		}
-	}
-	
-	private synchronized void loadView2(String absoluteName) {
+	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			VBox newVBox = loader.load();
@@ -86,30 +76,8 @@ public class MainViewController implements Initializable {
 			mainVBox.getChildren().add(mainManu);
 			mainVBox.getChildren().addAll(newVBox.getChildren());
 			
-			DepartamentoListController controller = loader.getController();
-			controller.setDepartamentoService(new DepartamentoService());
-			controller.updateTableView();
-		} catch (IOException e) {
-			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
-		}
-	}
-	
-	private synchronized void loadView3(String absoluteName) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-			VBox newVBox = loader.load();
-			
-			Scene mainScene = Main.getMainScene();
-			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-			
-			Node mainManu = mainVBox.getChildren().get(0);
-			mainVBox.getChildren().clear();
-			mainVBox.getChildren().add(mainManu);
-			mainVBox.getChildren().addAll(newVBox.getChildren());
-			
-			CargoListController controller = loader.getController();
-			controller.setCargoService(new CargoService());
-			controller.updateTableView();
+			T controller = loader.getController();
+			initializingAction.accept(controller);
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}

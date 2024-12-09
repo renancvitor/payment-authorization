@@ -11,7 +11,7 @@
 
 <VBox prefHeight="221.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telas.DepartamentoListController">
    <children>
-      <Label text="Cadastrar departamento">
+      <Label text="Registro de departamentos">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

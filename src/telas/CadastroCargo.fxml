@@ -11,7 +11,7 @@
 
 <VBox prefHeight="412.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telas.CargoListController">
    <children>
-      <Label text="Cadastrar cargo">
+      <Label text="Registro de cargos">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
