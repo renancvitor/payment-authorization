@@ -35,16 +35,16 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onMenuItemFuncionarioAction() {
-		System.out.println("onMenuItemFuncionarioAction");
+		loadView("/telas/CadastroFuncionario.fxml");
 	}
 	
 	@FXML
-	public void onMenuItemUsuario() {
-		System.out.println("onMenuItemUsuario");
+	public void onMenuItemUsuarioAction() {
+		loadView("/telas/CadastroUsuario.fxml");
 	}
 	
 	@FXML
-	public void onMenuItemDepartamento() {
+	public void onMenuItemDepartamentoAction() {
 		loadView("/telas/CadastroDepartamento.fxml", (DepartamentoListController controller) -> {
 			controller.setDepartamentoService(new DepartamentoService());
 			controller.updateTableView();
@@ -52,7 +52,7 @@ public class MainViewController implements Initializable {
 	}
 	
 	@FXML
-	public void onMenuItemCargo() {
+	public void onMenuItemCargoAction() {
 		loadView("/telas/CadastroCargo.fxml", (CargoListController controller) -> {
 			controller.setCargoService(new CargoService());
 			controller.updateTableView();
