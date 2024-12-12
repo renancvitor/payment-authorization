@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="272.0" prefWidth="501.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+<VBox prefHeight="272.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telas.FuncionarioListController">
    <children>
       <Label text="Cadastro Funcionários">
          <font>
@@ -22,17 +21,17 @@
       </Label>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button mnemonicParsing="false" text="Novo funcionário" />
+          <Button fx:id="btNew" mnemonicParsing="false" onAction="#onBtNewAction" text="Novo funcionário" />
         </items>
       </ToolBar>
-      <TableView prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tableViewFuncionario" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="75.0" text="Nome" />
-            <TableColumn prefWidth="108.0" text="Data Nascimento" />
-            <TableColumn prefWidth="91.0" text="Departamento" />
-            <TableColumn prefWidth="68.0" text="Cargo" />
-            <TableColumn prefWidth="50.0" text="CPF" />
+          <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="tableColumnNome" prefWidth="75.0" text="Nome" />
+            <TableColumn fx:id="tableColumnDataNascimento" prefWidth="108.0" text="Data Nascimento" />
+            <TableColumn fx:id="tableColumnDepartamento" prefWidth="91.0" text="Departamento" />
+            <TableColumn fx:id="tableColumnCargo" prefWidth="68.0" text="Cargo" />
+            <TableColumn fx:id="tableColumnCpf" prefWidth="50.0" text="CPF" />
         </columns>
       </TableView>
    </children>
