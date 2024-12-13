@@ -43,8 +43,8 @@
             </Label>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" text="Nova solicitação" />
-                  <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false" text="Solicitações Analisadas" />
+                <Button fx:id="btnNovaSolicitacao" mnemonicParsing="false" onAction="#onBtnNovaSolicitacao" text="Nova solicitação" />
+                  <Button fx:id="btnSolicitacoesAnalisadas" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#onBtnSolicitacoesAnalisadas" text="Solicitações Analisadas" />
               </items>
             </ToolBar>
             <TableView prefHeight="200.0" prefWidth="200.0">

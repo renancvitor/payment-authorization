@@ -129,6 +129,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         }
     }
 	
+	@Override
 	public boolean verificarSenhaPorUsuario(String username, String senhaAtual) {
         try {
             String senhaHash = hashSenha(senhaAtual);
@@ -157,6 +158,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         return false;
     }
 	
+	@Override
 	public void atualizarSenhaParaHash(String username, String senhaHash) {
         String query = "UPDATE usuarios SET senha = ? WHERE login = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -169,6 +171,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         }
     }
 	
+	@Override
 	public String hashSenha(String senha) {
         MessageDigest md = null;
 		try {

@@ -16,5 +16,7 @@ public interface UsuarioDao {
 	boolean isUsuarioExistente(Integer idPessoa);
 	int getIdFromUserType(UserType userType);
 	void consultarPermissoesUsuario(Usuario usuario);
-	
+	boolean verificarSenhaPorUsuario(String username, String senhaAtual);
+	void atualizarSenhaParaHash(String username, String senhaHash);
+	String hashSenha(String senha);
 }
