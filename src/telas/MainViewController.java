@@ -44,12 +44,12 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onBtnNovaSolicitacao() {
-		click("/telas/NovaSolicitacao.fxml");
+		loadView("/telas/NovaSolicitacao.fxml");
 	}
 	
 	@FXML
 	public void onBtnSolicitacoesAnalisadas() {
-		click("/telas/SolicitacoesAnalisadas.fxml");
+		loadView("/telas/SolicitacoesAnalisadas.fxml");
 	}
 	
 	@FXML
@@ -108,5 +108,4 @@ public class MainViewController implements Initializable {
 		}
 	}
 
-	
 }

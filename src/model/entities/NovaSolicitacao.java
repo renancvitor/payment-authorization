@@ -3,7 +3,9 @@ package model.entities;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class Solicitacao {
+public class NovaSolicitacao {
+	
+
     private int id;
     private String fornecedor;
     private String descricao;
@@ -15,7 +17,7 @@ public class Solicitacao {
     private StatusSolicitacao status;
     private String login;
 
-    public Solicitacao(int id, String fornecedor, String descricao, Timestamp dataCriacao, Date dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
+    public NovaSolicitacao(int id, String fornecedor, String descricao, Timestamp dataCriacao, Date dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.descricao = descricao;
@@ -28,7 +30,7 @@ public class Solicitacao {
         this.login = login;
     }
 
-    public Solicitacao() {
+    public NovaSolicitacao() {
     }
 
     public int getId() {
@@ -110,4 +112,5 @@ public class Solicitacao {
     public void setLogin(String login) {
         this.login = login;
     }
+
 }
