@@ -17,23 +17,18 @@
    <content>
       <VBox prefHeight="339.0" prefWidth="836.0">
          <children>
-            <Button mnemonicParsing="false" text="Logout">
-               <VBox.margin>
-                  <Insets left="770.0" />
-               </VBox.margin>
-            </Button>
             <MenuBar>
               <menus>
                 <Menu mnemonicParsing="false" text="Cadastrar funcionários e usuários">
                   <items>
+                        <MenuItem fx:id="menuItemUsuario" mnemonicParsing="false" onAction="#onMenuItemUsuarioAction" text="Cadastrar usuário" />
                     <MenuItem fx:id="menuItemFuncionario" mnemonicParsing="false" onAction="#onMenuItemFuncionarioAction" text="Cadastrar funcionário" />
-                        <MenuItem fx:id="menuItemUsuario" mnemonicParsing="false" onAction="#onMenuItemUsuario" text="Cadastrar usuário" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Cadastrar departamentos e cargos">
                   <items>
-                    <MenuItem fx:id="menuItemDepartamento" mnemonicParsing="false" onAction="#onMenuItemDepartamento" text="Cadastrar departamento" />
-                        <MenuItem fx:id="menuItemCargo" mnemonicParsing="false" onAction="#onMenuItemCargo" text="Cadastrar cargo" />
+                    <MenuItem fx:id="menuItemDepartamento" mnemonicParsing="false" onAction="#onMenuItemDepartamentoAction" text="Cadastrar departamento" />
+                        <MenuItem fx:id="menuItemCargo" mnemonicParsing="false" onAction="#onMenuItemCargoAction" text="Cadastrar cargo" />
                   </items>
                 </Menu>
               </menus>
@@ -67,6 +62,11 @@
                   <TableColumn prefWidth="74.0" text="Reprovar" />
               </columns>
             </TableView>
+            <Button mnemonicParsing="false" text="Logout">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="10.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </content>

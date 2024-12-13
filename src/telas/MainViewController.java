@@ -17,6 +17,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import model.services.CargoService;
 import model.services.DepartamentoService;
+import model.services.FuncionarioService;
+import model.services.UsuarioService;
 import telas.util.Alerts;
 
 public class MainViewController implements Initializable {
@@ -35,12 +37,18 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onMenuItemFuncionarioAction() {
-		loadView("/telas/CadastroFuncionario.fxml");
+		loadView("/telas/CadastroFuncionario.fxml", (FuncionarioListController controller) -> {
+			controller.setFuncionarioService(new FuncionarioService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
 	public void onMenuItemUsuarioAction() {
-		loadView("/telas/CadastroUsuario.fxml");
+		loadView("/telas/CadastroUsuario.fxml", (UsuarioListController controller) -> {
+			controller.setUsuarioService(new UsuarioService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML

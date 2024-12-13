@@ -2,9 +2,11 @@ package telas;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,8 +18,11 @@ import javafx.stage.Stage;
 import model.entities.Cargo;
 import model.entities.Departamento;
 import model.entities.Pessoa;
+import model.services.FuncionarioService;
 
 public class FuncionarioListController implements Initializable {
+	
+	private FuncionarioService service;
 	
 	@FXML
 	private TableView<Pessoa> tableViewFuncionario;
@@ -49,6 +54,10 @@ public class FuncionarioListController implements Initializable {
 	public void onBtNewAction() {
 		System.out.println("onBtNewAction");
 	}
+	
+	public void setFuncionarioService(FuncionarioService service) {
+		this.service = service;
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -65,6 +74,15 @@ public class FuncionarioListController implements Initializable {
 		
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewFuncionario.prefHeightProperty().bind(stage.heightProperty());
+	}
+	
+	public void updateTableView() {
+		if (service == null) {
+			throw new IllegalStateException("Service was null");
+		}
+		List<Pessoa> list = service.findAll();
+		obsList = FXCollections.observableArrayList();
+		tableViewFuncionario.setItems(obsList);
 	}
 
 }
