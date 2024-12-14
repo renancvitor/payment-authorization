@@ -2,10 +2,15 @@ package telas;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 import application.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,15 +20,25 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import model.entities.SolicitacoesEnviadas;
 import model.services.CargoService;
 import model.services.DepartamentoService;
 import model.services.FuncionarioService;
+import model.services.NovaSolicitacaoService;
+import model.services.SolicitacoesAnalisadasService;
+import model.services.SolicitacoesEnviadasService;
 import model.services.UsuarioService;
 import telas.util.Alerts;
 
 public class MainViewController implements Initializable {
 
+	private SolicitacoesEnviadasService service;
+	
 	@FXML
 	private MenuItem menuItemFuncionario;
 	
@@ -44,12 +59,17 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onBtnNovaSolicitacao() {
-		loadView("/telas/NovaSolicitacao.fxml");
+		loadView("/telas/NovaSolicitacao.fxml", (NovaSolicitacaoListController controller) -> {
+			controller.setNovaSolicitacaoService(new NovaSolicitacaoService());
+		});
 	}
 	
 	@FXML
 	public void onBtnSolicitacoesAnalisadas() {
-		loadView("/telas/SolicitacoesAnalisadas.fxml");
+		loadView("/telas/SolicitacoesAnalisadas.fxml", (SolicitacoesAnalistadasListController controller) -> {
+			controller.setSolicitacoesAnalisadasService(new SolicitacoesAnalisadasService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
@@ -84,6 +104,58 @@ public class MainViewController implements Initializable {
 		});
 	}
 	
+	@FXML
+	private TableView<SolicitacoesEnviadas> tableViewMainView;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, Integer> tableColumnId;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, String> tableColumnFornecedor;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, String> tableColumnDescricao;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, Timestamp> tableColumnDataCriacao;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, Date> tableColumnDataPagamento;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, String> tableColumnFormaPagamento;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, Double> tableColumnValorTotal;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, String> tableColumnStatus;
+	
+	@FXML
+	private TableColumn<SolicitacoesEnviadas, String> tableColumnLogin;
+	
+	@FXML
+	private Button btnAprovar;
+	
+	@FXML
+	public void onBtnAprovarAction() {
+		
+	}
+	
+	@FXML
+	private Button btnReprovar;
+	
+	@FXML
+	public void onBtnReprovarAction() {
+		
+	}
+	
+	private ObservableList<SolicitacoesEnviadas> obsList;
+	
+	public void setSolicitacoesEnviadasService(SolicitacoesEnviadasService service) {
+		this.service = service;
+	}
+	
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {
 	}
@@ -108,4 +180,29 @@ public class MainViewController implements Initializable {
 		}
 	}
 
+	public void initializeNodes() {
+		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tableColumnFornecedor.setCellValueFactory(new PropertyValueFactory<>("fornecedor"));
+		tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		tableColumnDataCriacao.setCellValueFactory(new PropertyValueFactory<>("dataCriacao"));
+		tableColumnDataPagamento.setCellValueFactory(new PropertyValueFactory<>("dataPagamento"));
+		tableColumnFormaPagamento.setCellValueFactory(new PropertyValueFactory<>("formaPagamento"));
+		tableColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
+		tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+		tableColumnLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
+		
+		Stage stage = (Stage) Main.getMainScene().getWindow();
+		tableViewMainView.prefHeightProperty().bind(stage.heightProperty());
+	}
+	
+	public void updateTableView() {
+		if (service == null) {
+			throw new IllegalStateException("Service was null");
+			
+		}
+		List<SolicitacoesEnviadas> list = service.findAll();
+		obsList = FXCollections.observableArrayList(list);
+		tableViewMainView.setItems(obsList);
+	}
+		
 }
