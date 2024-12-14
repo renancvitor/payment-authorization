@@ -7,23 +7,23 @@ public class SolicitacoesAnalisadas {
     private int id;
     private String fornecedor;
     private String descricao;
-    private Timestamp dataCriacao;
-    private Date dataPagamento;
-    private String formaPagamento;
-    private double valorTotal;
-    private int idUsuario;
+    private Timestamp data_criacao;
+    private Date data_pagamento;
+    private String forma_pagamento;
+    private double valor_total;
+    private int id_usuario;
     private StatusSolicitacao status;
     private String login;
 
-    public SolicitacoesAnalisadas(int id, String fornecedor, String descricao, Timestamp dataCriacao, Date dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
+    public SolicitacoesAnalisadas(int id, String fornecedor, String descricao, Timestamp data_criacao, Date data_pagamento, String forma_pagamento, double valor_total, int id_usuario, StatusSolicitacao status, String login) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.descricao = descricao;
-        this.dataCriacao = dataCriacao;
-        this.dataPagamento = dataPagamento;
-        this.formaPagamento = formaPagamento;
-        this.valorTotal = valorTotal;
-        this.idUsuario = idUsuario;
+        this.data_criacao = data_criacao;
+        this.data_pagamento = data_pagamento;
+        this.forma_pagamento = forma_pagamento;
+        this.valor_total = valor_total;
+        this.id_usuario = id_usuario;
         this.status = status;
         this.login = login;
     }
@@ -56,43 +56,43 @@ public class SolicitacoesAnalisadas {
     }
 
     public Timestamp getDataCriacao() {
-        return dataCriacao;
+        return data_criacao;
     }
 
     public void setDataCriacao(Timestamp dataCriacao) {
-        this.dataCriacao = dataCriacao;
+        this.data_criacao = dataCriacao;
     }
 
     public java.sql.Date getDataPagamento() {
-        return (java.sql.Date) dataPagamento;
+        return (java.sql.Date) data_pagamento;
     }
 
     public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
+        this.data_pagamento = dataPagamento;
     }
 
     public String getFormaPagamento() {
-        return formaPagamento;
+        return forma_pagamento;
     }
 
     public void setFormaPagamento(String formaPagamento) {
-        this.formaPagamento = formaPagamento;
+        this.forma_pagamento = formaPagamento;
     }
 
     public double getValorTotal() {
-        return valorTotal;
+        return valor_total;
     }
 
     public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+        this.valor_total = valorTotal;
     }
 
     public int getIdUsuario() {
-        return idUsuario;
+        return id_usuario;
     }
 
     public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+        this.id_usuario = idUsuario;
     }
 
     public StatusSolicitacao getStatus() {

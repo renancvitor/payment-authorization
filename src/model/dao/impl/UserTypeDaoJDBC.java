@@ -1,23 +1,30 @@
-package DAO;
+package model.dao.impl;
 
-import model.entities.UserType;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserTypeDAO {
-    private final Connection connection;
+import db.DbException;
+import model.dao.UserTypeDao;
+import model.entities.UserType;
 
-    private static final Map<UserType, Integer> userTypeToIdMap = new HashMap<>();
+public class UserTypeDaoJDBC implements UserTypeDao {
+	
+	private Connection connection;
+	
+	private static final Map<UserType, Integer> userTypeToIdMap = new HashMap<>();
     private static final Map<Integer, UserType> idToUserTypeMap = new HashMap<>();
+	
+	public UserTypeDaoJDBC(Connection connection) {
+		this.connection = connection;
+	}
 
-    public UserTypeDAO(Connection connection) {
-        this.connection = connection;
-        loadUserTypes();
-    }
-
-    private void loadUserTypes() {
-        String query = "SELECT id, nome FROM tipos_usuarios";
+	@Override
+	public void loadUserTypes() {
+		String query = "SELECT id, nome FROM tipos_usuarios";
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -32,10 +39,10 @@ public class UserTypeDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Erro ao carregar tipos de usuários do banco.");
+        	throw new DbException(e.getMessage());
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: Tipo de usuário no banco não corresponde ao enum UserType.");
         }
     }
+
 }
