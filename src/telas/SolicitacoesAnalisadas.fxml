@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="249.0" prefWidth="751.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+<VBox prefHeight="249.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Solicitações Analisadas">
          <font>
@@ -28,8 +27,9 @@
             <TableColumn prefWidth="128.0" text="Data de Criação" />
             <TableColumn prefWidth="132.0" text="Data Pagamento" />
             <TableColumn prefWidth="121.0" text="Forma Pagamento" />
-            <TableColumn prefWidth="65.0" text="Status" />
-            <TableColumn prefWidth="48.0" text="Usuario" />
+            <TableColumn prefWidth="84.0" text="Valor Total" />
+            <TableColumn prefWidth="70.0" text="Usuario" />
+            <TableColumn prefWidth="74.0" text="Status" />
         </columns>
       </TableView>
    </children>

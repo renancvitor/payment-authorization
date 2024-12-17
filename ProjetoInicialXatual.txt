@@ -1,0 +1,9 @@
+Códigos não copiados do projeto original:
+
+-> Toda a classe Application.LoginController
+-> Método alterarSenha da classe Application.TelaAlterarSenha
+-> Método validarLogin da classe Application.TelaLogin
+-> Método getSolicitacoesAnalisadas da classe Entities.TelaAnalisados
+-> Métodos refreshTable, aprovarSolicitacao, reprovarSolicitacao,  da classe Entities.TelaAnalisados
+-> Toda a classe Entities.UserService
+-> Toda a classe Servicoes.UsuarioController
