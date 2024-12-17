@@ -2,6 +2,7 @@ package telas;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -67,7 +68,7 @@ public class FuncionarioListController implements Initializable {
 	private void initializableNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		tableColumnDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
+		tableColumnDataNascimento.setCellValueFactory(new PropertyValueFactory<>("datanascimento"));
 		tableColumnDepartamento.setCellValueFactory(new PropertyValueFactory<>("departamento"));
 		tableColumnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
 		tableColumnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
@@ -80,8 +81,10 @@ public class FuncionarioListController implements Initializable {
 		if (service == null) {
 			throw new IllegalStateException("Service was null");
 		}
+		
 		List<Pessoa> list = service.findAll();
-		obsList = FXCollections.observableArrayList();
+		
+		obsList = FXCollections.observableArrayList(list);
 		tableViewFuncionario.setItems(obsList);
 	}
 

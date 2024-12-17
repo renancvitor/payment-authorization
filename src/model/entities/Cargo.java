@@ -9,6 +9,10 @@ public class Cargo {
         this.id = id;
         this.nome = nome;
     }
+    
+    public Cargo(String nome) {
+        this.nome = nome;
+    }
 
     public Cargo() {
     }
