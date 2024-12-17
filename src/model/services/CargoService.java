@@ -1,16 +1,16 @@
 package model.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import model.dao.CargoDao;
+import model.dao.DaoFactory;
 import model.entities.Cargo;
 
 public class CargoService {
 	
+	private CargoDao dao = DaoFactory.createCargoDao();
+	
 	public List<Cargo> findAll() {
-		List<Cargo> list = new ArrayList<>();
-		list.add(new Cargo(1, "Analista Jr"));
-		list.add(new Cargo(2, "Consultor Externo"));
-		return list;
+		return dao.findAll();
 	}
 }
