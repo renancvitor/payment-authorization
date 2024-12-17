@@ -6,11 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import db.DB;
 import db.DbException;
 import model.dao.UsuarioDao;
+import model.entities.Cargo;
 import model.entities.UserType;
 import model.entities.Usuario;
 
@@ -79,8 +81,30 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
 	@Override
 	public List<Usuario> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement stmt = null;
+        ResultSet rs = null;
+		
+		List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT id, login, cpf FROM usuarios";
+
+        try {        	
+        	stmt =  connection.prepareStatement(sql);
+        	rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setLogin(rs.getString("login"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuarios.add(usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+    		DB.closeStatement(stmt);
+    		DB.closeResultSet(rs);
+    	}
+        return usuarios;
 	}
 	
 	@Override

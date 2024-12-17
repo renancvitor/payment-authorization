@@ -29,10 +29,7 @@ public class UsuarioListController implements Initializable {
 	
 	@FXML
 	private TableColumn<Usuario, String> tableColumnLogin;
-	
-	@FXML
-	private TableColumn<Usuario, String> tableColumnSenha;
-	
+		
 	@FXML
 	private TableColumn<Usuario, String> tableColumnCpf;
 	
@@ -57,8 +54,7 @@ public class UsuarioListController implements Initializable {
 
 	private void initializableNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-		tableColumnLogin.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		tableColumnSenha.setCellValueFactory(new PropertyValueFactory<>("senhs"));
+		tableColumnLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
 		tableColumnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		
 		Stage stage = (Stage) Main.getMainScene().getWindow();

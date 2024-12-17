@@ -28,7 +28,6 @@
         <columns>
           <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="tableColumnLogin" prefWidth="75.0" text="Login" />
-            <TableColumn fx:id="tableColumnSenha" prefWidth="75.0" text="Senha" />
             <TableColumn fx:id="tableColumnCpf" prefWidth="75.0" text="CPF" />
         </columns>
       </TableView>

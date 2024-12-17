@@ -59,6 +59,10 @@ public class Usuario {
     public void setLogin(String login) {
         this.login = login;
     }
+    
+    public void setCpf(String cpf) {
+    	this.cpf = cpf;
+    }
 
     @Override
     public boolean equals(Object obj) {
