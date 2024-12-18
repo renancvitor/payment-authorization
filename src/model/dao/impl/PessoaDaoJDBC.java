@@ -14,7 +14,6 @@ import model.dao.PessoaDao;
 import model.entities.Cargo;
 import model.entities.Departamento;
 import model.entities.Pessoa;
-import model.entities.Usuario;
 
 public class PessoaDaoJDBC implements PessoaDao {
 	
