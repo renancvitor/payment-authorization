@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="241.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="241.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telas.FuncionarioFormController">
    <children>
       <GridPane layoutX="22.0" layoutY="22.0" prefHeight="194.0" prefWidth="640.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
@@ -30,23 +30,23 @@
          <children>
             <Label text="ID" />
             <Label text="Nome" GridPane.rowIndex="1" />
-            <TextField editable="false" GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label textFill="#ff0101" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="txtId" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="labelErrorNome" textFill="#ff0101" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label text="Data Nascimento" GridPane.rowIndex="2" />
             <Label text="Departamento" GridPane.rowIndex="3" />
             <Label text="Cargo" GridPane.rowIndex="4" />
             <Label text="CPF" GridPane.rowIndex="5" />
-            <Label textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="labelErrorDataNascimento" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="labelErrorCpf" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <TextField fx:id="txtDataNascimento" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtCpf" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="comboBoxDepartamento" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="comboBoxCargo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <Button mnemonicParsing="false" text="Salvar" />
-                  <Button mnemonicParsing="false" text="Cancelar" />
+                  <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#onBtSalvarAction" text="Salvar" />
+                  <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelarAction" text="Cancelar" />
                </children>
             </HBox>
          </children>
