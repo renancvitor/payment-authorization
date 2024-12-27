@@ -21,6 +21,9 @@ import model.services.DepartamentoService;
 
 public class FuncionarioFormController implements Initializable {
 	
+	private DepartamentoService departamentoService;
+	private CargoService cargoService;
+	
 	@FXML
 	private TextField txtId;
 	
@@ -89,9 +92,9 @@ public class FuncionarioFormController implements Initializable {
     }
 	
 	public void updateComboBoxDepartamento() {
-		DepartamentoService serviceDepartamento = new DepartamentoService();		
+		departamentoService = new DepartamentoService();
 
-	    List<Departamento> list = serviceDepartamento.findAll();
+	    List<Departamento> list = departamentoService.findAll();
 
 	    obsListDepartamento = FXCollections.observableArrayList(list);
 
@@ -123,9 +126,9 @@ public class FuncionarioFormController implements Initializable {
 	}
 	
 	public void updateComboBoxCargo() {
-		CargoService serviceCargo = new CargoService();
+		cargoService = new CargoService();
 
-	    List<Cargo> list = serviceCargo.findAll();
+	    List<Cargo> list = cargoService.findAll();
 
 	    obslistCargo = FXCollections.observableArrayList(list);
 
