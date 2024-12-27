@@ -16,10 +16,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -61,7 +61,7 @@ public class FuncionarioListController implements Initializable {
 	
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
-		Stage parentStage = utils.currentStage(event);
+		Stage parentStage = utils.currentStage(event);	    
 		createDialogForm("/gui/FuncionarioForm.fxml", parentStage);
 	}
 	
@@ -101,7 +101,7 @@ public class FuncionarioListController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
-			
+
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter cargo data");
 			dialogStage.setScene(new Scene(pane));
