@@ -50,7 +50,7 @@ public class UsuarioListController implements Initializable {
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
 		Stage parentStage = utils.currentStage(event);
-		createDialogForm("/telas/CargoForm.fxml", parentStage);
+		createDialogForm("/telas/UsuarioForm.fxml", parentStage);
 	}
 	
 	public void setUsuarioService(UsuarioService service) {

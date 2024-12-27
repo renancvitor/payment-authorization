@@ -62,7 +62,7 @@ public class FuncionarioListController implements Initializable {
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
 		Stage parentStage = utils.currentStage(event);
-		createDialogForm("/telas/CargoForm.fxml", parentStage);
+		createDialogForm("/telas/FuncionarioForm.fxml", parentStage);
 	}
 	
 	public void setFuncionarioService(FuncionarioService service) {
