@@ -7,8 +7,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -19,21 +17,27 @@
          <children>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="Cadastrar funcionários e usuários">
+                <Menu mnemonicParsing="false" text="Funcionários e usuários">
                   <items>
                         <MenuItem fx:id="menuItemUsuario" mnemonicParsing="false" onAction="#onMenuItemUsuarioAction" text="Cadastrar usuário" />
                     <MenuItem fx:id="menuItemFuncionario" mnemonicParsing="false" onAction="#onMenuItemFuncionarioAction" text="Cadastrar funcionário" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Cadastrar departamentos e cargos">
+                <Menu mnemonicParsing="false" text="Departamentos e cargos">
                   <items>
                     <MenuItem fx:id="menuItemDepartamento" mnemonicParsing="false" onAction="#onMenuItemDepartamentoAction" text="Cadastrar departamento" />
                         <MenuItem fx:id="menuItemCargo" mnemonicParsing="false" onAction="#onMenuItemCargoAction" text="Cadastrar cargo" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Solicitações">
+                    <items>
+                      <MenuItem fx:id="menuItemSolicitacoesEnviadas" mnemonicParsing="false" text="Solicitações Enviadas" />
+                        <MenuItem fx:id="menuItemSolicitacoesAnalisadas" mnemonicParsing="false" text="Solicitações Analisadas" />
+                    </items>
+                  </Menu>
               </menus>
             </MenuBar>
-            <Label prefHeight="41.0" prefWidth="185.0" text="Solicitações pendentes">
+            <Label prefHeight="41.0" prefWidth="248.0" text="Sistema autorização pagamentos">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -41,30 +45,10 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
             </Label>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                <Button fx:id="btnNovaSolicitacao" mnemonicParsing="false" onAction="#onBtnNovaSolicitacao" text="Nova solicitação" />
-                  <Button fx:id="btnSolicitacoesAnalisadas" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#onBtnSolicitacoesAnalisadas" text="Solicitações Analisadas" />
-              </items>
-            </ToolBar>
-            <TableView prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="74.0" text="Fornecedor" />
-                  <TableColumn prefWidth="74.0" text="Descrição" />
-                  <TableColumn prefWidth="74.0" text="Data Criação" />
-                  <TableColumn prefWidth="74.0" text="Data Pagamento" />
-                  <TableColumn prefWidth="74.0" text="Forma Pagamento" />
-                  <TableColumn prefWidth="74.0" text="Valor Total" />
-                  <TableColumn prefWidth="74.0" text="Status" />
-                  <TableColumn prefWidth="74.0" text="Usuário" />
-                  <TableColumn prefWidth="74.0" text="Aprovar" />
-                  <TableColumn prefWidth="74.0" text="Reprovar" />
-              </columns>
-            </TableView>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" />
             <Button mnemonicParsing="false" text="Logout">
                <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="10.0" />
+                  <Insets left="10.0" top="200.0" />
                </VBox.margin>
             </Button>
          </children>

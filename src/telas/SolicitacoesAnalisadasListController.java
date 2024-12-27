@@ -19,7 +19,7 @@ import model.entities.SolicitacoesAnalisadas;
 import model.entities.StatusSolicitacao;
 import model.services.SolicitacoesAnalisadasService;
 
-public class SolicitacoesAnalistadasListController implements Initializable {
+public class SolicitacoesAnalisadasListController implements Initializable {
 	
 	private SolicitacoesAnalisadasService service;
 	
@@ -83,7 +83,10 @@ public class SolicitacoesAnalistadasListController implements Initializable {
 		if (service == null) {
 			throw new IllegalStateException("Service was null");
 		}
-		List<SolicitacoesAnalisadas> list = service.findAll();
+		int idTipoUsuario = 0;
+		int idUser = 0;
+		
+		List<SolicitacoesAnalisadas> list = service.select(idTipoUsuario, idUser);
 		obsList = FXCollections.observableArrayList(list);
 		tableViewSolicitacoesAnalisadas.setItems(obsList);
 	}
