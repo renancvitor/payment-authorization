@@ -9,8 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.entities.Cargo;
 
 public class CargoFormController implements Initializable {
+	
+	private Cargo cargo;
 	
 	@FXML
 	private TextField txtId;
@@ -26,6 +29,10 @@ public class CargoFormController implements Initializable {
 	
 	@FXML
 	private Button btCancelar;
+	
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
 	
 	@FXML
 	public void onBtSalvarAction() {
@@ -45,6 +52,11 @@ public class CargoFormController implements Initializable {
 	public void initializaNodes() {
 		Constraints.setTextFieldInteger(txtId);
 		Constraints.setTextFieldMaxLength(txtNome, 30);
+	}
+	
+	public void updateFormData() {
+		txtId.setText(String.valueOf(cargo.getId()));
+		txtNome.setText(cargo.getNome());
 	}
 
 }

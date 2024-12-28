@@ -61,8 +61,9 @@ public class FuncionarioListController implements Initializable {
 	
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
-		Stage parentStage = utils.currentStage(event);	    
-		createDialogForm("/gui/FuncionarioForm.fxml", parentStage);
+		Stage parentStage = utils.currentStage(event);
+		Pessoa obj = new Pessoa();
+		createDialogForm(obj, "/gui/FuncionarioForm.fxml", parentStage);
 	}
 	
 	public void setFuncionarioService(FuncionarioService service) {
@@ -97,10 +98,14 @@ public class FuncionarioListController implements Initializable {
 		tableViewFuncionario.setItems(obsList);
 	}
 
-	private void createDialogForm(String absoluteName, Stage parentStage) {
+	private void createDialogForm(Pessoa obj, String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
+			
+			FuncionarioFormController controller = loader.getController();
+			controller.setFuncionario(obj);
+			controller.updateFormData();
 
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter cargo data");

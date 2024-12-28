@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,13 +17,18 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import model.entities.Cargo;
 import model.entities.Departamento;
+import model.entities.Pessoa;
 import model.services.CargoService;
 import model.services.DepartamentoService;
 
 public class FuncionarioFormController implements Initializable {
 	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
 	private DepartamentoService departamentoService;
 	private CargoService cargoService;
+	
+	private Pessoa funcionario;
 	
 	@FXML
 	private TextField txtId;
@@ -59,6 +65,10 @@ public class FuncionarioFormController implements Initializable {
 	
 	private ObservableList<Departamento> obsListDepartamento;
 	private ObservableList<Cargo> obslistCargo;
+	
+	public void setFuncionario(Pessoa funcionario) {
+		this.funcionario = funcionario;
+	}
 	
 	@FXML
 	public void onBtSalvarAction() {
@@ -157,6 +167,28 @@ public class FuncionarioFormController implements Initializable {
 	            }
 	        }
 	    });
+	}
+	
+	public void updateFormData() {
+		txtId.setText(String.valueOf(funcionario.getId()));
+		txtNome.setText(funcionario.getNome());
+		// txtDataNascimento.setText(funcionario.getDatanascimento().format(formatter));
+		
+		if (funcionario.getDatanascimento() != null) {
+	        txtDataNascimento.setText(funcionario.getDatanascimento().format(formatter));
+	    } else {
+	        txtDataNascimento.setText("");
+	    }
+		
+		/*String dataNascimentoStr = (funcionario.getDatanascimento() != null) 
+                ? funcionario.getDatanascimento().format(formatter) 
+                : "Data não informada";
+
+		txtDataNascimento.setText(dataNascimentoStr);*/
+		
+		comboBoxDepartamento.setValue(funcionario.getDepartamento());
+		comboBoxCargo.setValue(funcionario.getCargo());
+		txtCpf.setText(funcionario.getCpf());
 	}
 	
 }

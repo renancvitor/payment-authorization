@@ -9,8 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.entities.Usuario;
 
 public class AlterarSenhaFormController implements Initializable {
+	
+	private Usuario alterarSenhaUsuario;
 	
 	@FXML
 	private TextField txtLogin;
@@ -39,6 +42,10 @@ public class AlterarSenhaFormController implements Initializable {
 	@FXML
 	private Button btSalvar;
 	
+	public void setAlterarSenhaUsuario(Usuario alterarSenhaUsuario) {
+		this.alterarSenhaUsuario = alterarSenhaUsuario;
+	}
+	
 	@FXML
 	public void onBtSalvarAction() {
 		
@@ -51,6 +58,11 @@ public class AlterarSenhaFormController implements Initializable {
 	
 	public void initializaNodes() {
 		Constraints.setTextFieldMaxLength(txtNovaSenha, 8);
+	}
+	
+	public void updateFormData() {
+		txtLogin.setText(alterarSenhaUsuario.getLogin());
+		txtSenhaAtual.setText(alterarSenhaUsuario.getSenha());
 	}
 	
 }

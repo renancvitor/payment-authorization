@@ -47,7 +47,8 @@ public class CargoListController implements Initializable {
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
 		Stage parentStage = utils.currentStage(event);
-		createDialogForm("/gui/CargoForm.fxml", parentStage);
+		Cargo obj = new Cargo();
+		createDialogForm(obj, "/gui/CargoForm.fxml", parentStage);
 	}
 	
 	public void setCargoService(CargoService service) {
@@ -77,10 +78,14 @@ public class CargoListController implements Initializable {
 		tableViewCargo.setItems(obsList);
 	}
 	
-	private void createDialogForm(String absoluteName, Stage parentStage) {
+	private void createDialogForm(Cargo obj, String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
+			
+			CargoFormController controller = loader.getController();
+			controller.setCargo(obj);
+			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter cargo data");

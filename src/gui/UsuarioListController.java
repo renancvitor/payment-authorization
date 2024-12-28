@@ -50,7 +50,8 @@ public class UsuarioListController implements Initializable {
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
 		Stage parentStage = utils.currentStage(event);
-		createDialogForm("/gui/UsuarioForm.fxml", parentStage);
+		Usuario obj = new Usuario();
+		createDialogForm(obj, "/gui/UsuarioForm.fxml", parentStage);
 	}
 	
 	public void setUsuarioService(UsuarioService service) {
@@ -80,10 +81,14 @@ public class UsuarioListController implements Initializable {
 		tableViewUsuario.setItems(obsList);
 	}
 	
-	private void createDialogForm(String absoluteName, Stage parentStage) {
+	private void createDialogForm(Usuario obj, String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
+			
+			UsuarioFormController controller = loader.getController();
+			controller.setUsuario(obj);
+			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter cargo data");

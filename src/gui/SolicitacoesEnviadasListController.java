@@ -17,14 +17,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.entities.NovaSolicitacao;
 import model.entities.SolicitacoesEnviadas;
 import model.services.SolicitacoesEnviadasService;
 
@@ -68,7 +69,8 @@ public class SolicitacoesEnviadasListController implements Initializable {
 	@FXML
 	public void onBtnNovaSolicitacaoAction(ActionEvent event) {
 		Stage parentStage = utils.currentStage(event);
-		createDialogForm("/gui/NovaSolicitacao.fxml", parentStage);
+		NovaSolicitacao obj = new NovaSolicitacao();
+		createDialogForm(obj, "/gui/NovaSolicitacao.fxml", parentStage);
 	}
 	
 	@FXML
@@ -126,10 +128,14 @@ public class SolicitacoesEnviadasListController implements Initializable {
 		tableViewSolicitacoesEnviadas.setItems(obsList);
 	}
 	
-	private void createDialogForm(String absoluteName, Stage parentStage) {
+	private void createDialogForm(NovaSolicitacao obj, String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
+			
+			NovaSolicitacaoFormController controller = loader.getController();
+			controller.setNovaSolicitacao(obj);
+			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter cargo data");

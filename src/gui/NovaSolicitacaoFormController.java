@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 import gui.util.Constraints;
@@ -9,8 +10,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.entities.NovaSolicitacao;
 
 public class NovaSolicitacaoFormController implements Initializable {
+	
+	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+	
+	private NovaSolicitacao novaSolicitacao;
 	
 	@FXML
 	private TextField txtFornecedor;
@@ -48,6 +54,10 @@ public class NovaSolicitacaoFormController implements Initializable {
 	@FXML
 	private Button btCancelar;
 	
+	public void setNovaSolicitacao(NovaSolicitacao novaSolicitacao) {
+		this.novaSolicitacao = novaSolicitacao;
+	}
+	
 	@FXML
 	public void onBtEnviarAction() {
 		
@@ -66,6 +76,14 @@ public class NovaSolicitacaoFormController implements Initializable {
 	private void initializaNodes() {
 		Constraints.setTextFieldInteger(txtValorTotal);
 		Constraints.setTextFieldInteger(txtDataPagamento);
+	}
+	
+	public void updateFormData() {
+		txtFornecedor.setText(novaSolicitacao.getFornecedor());
+		txtDescricao.setText(novaSolicitacao.getDescricao());
+		txtDataPagamento.setText(dateFormatter.format(novaSolicitacao.getDataPagamento()));
+		txtFormaPagamento.setText(novaSolicitacao.getFormaPagamento());
+		txtValorTotal.setText(String.format("%.2f", novaSolicitacao.getValorTotal()));
 	}
 
 }

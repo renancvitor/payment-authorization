@@ -8,8 +8,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.entities.Usuario;
 
 public class LoginFormController implements Initializable {
+	
+	private Usuario usuarioLogin;
 	
 	@FXML
 	private TextField txtLogin;
@@ -29,6 +32,10 @@ public class LoginFormController implements Initializable {
 	@FXML
 	private Button btAlterarSenha;
 	
+	public void setUsuarioLogin(Usuario usuarioLogin) {
+		this.usuarioLogin = usuarioLogin;
+	}
+	
 	@FXML
 	public void onBtEntrarAction() {
 		
@@ -47,5 +54,10 @@ public class LoginFormController implements Initializable {
 	public void initializaNodes() {
 		// TODO Auto-generated method stub
 	}
+	
+	/* public void updateFormData() { *** LOGIN NÃO É UM FORMULÁRIO ***
+		txtLogin.setText(usuarioLogin.getLogin());
+		txtSenha.setText(usuarioLogin.getSenha());
+	}*/
 
 }
