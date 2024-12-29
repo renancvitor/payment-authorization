@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.utils;
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 import model.entities.Cargo;
 import model.services.CargoService;
 
-public class CargoListController implements Initializable {
+public class CargoListController implements Initializable, DataChangeListener {
 	
 	private CargoService service;
 
@@ -86,6 +87,7 @@ public class CargoListController implements Initializable {
 			CargoFormController controller = loader.getController();
 			controller.setCargo(obj);
 			controller.setCargoService(new CargoService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
@@ -99,6 +101,11 @@ public class CargoListController implements Initializable {
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
+	}
+	
+	@Override
+	public void onDataChanged() {
+		updateTableView();
 	}
 
 }

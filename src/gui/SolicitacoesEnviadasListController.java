@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.utils;
 import javafx.collections.FXCollections;
@@ -30,7 +31,7 @@ import model.entities.SolicitacoesEnviadas;
 import model.services.NovaSolicitacaoService;
 import model.services.SolicitacoesEnviadasService;
 
-public class SolicitacoesEnviadasListController implements Initializable {
+public class SolicitacoesEnviadasListController implements Initializable, DataChangeListener {
 	
 	private SolicitacoesEnviadasService service;
 	
@@ -137,6 +138,7 @@ public class SolicitacoesEnviadasListController implements Initializable {
 			NovaSolicitacaoFormController controller = loader.getController();
 			controller.setNovaSolicitacao(obj);
 			controller.setNovaSolicitacaoService(new NovaSolicitacaoService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
@@ -150,6 +152,11 @@ public class SolicitacoesEnviadasListController implements Initializable {
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
+	}
+	
+	@Override
+	public void onDataChanged() {
+		updateTableView();
 	}
 
 }

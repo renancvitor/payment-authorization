@@ -1,10 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import db.DbException;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.utils;
@@ -31,6 +33,8 @@ public class UsuarioFormController implements Initializable {
 	private UsuarioService usuarioService;
 	
 	private UserTypeService userTypeService;
+	
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
 	private TextField txtId;
@@ -72,14 +76,25 @@ public class UsuarioFormController implements Initializable {
 		this.usuarioService = usuarioService;
 	}
 	
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
+	}
+	
 	@FXML
 	public void onBtSalvarAction(ActionEvent event) {
 		try {
 			usuario = getFormData();
 			usuarioService.saveOrUpdate(usuario);
+			notifyDataChangeListeners();
 			utils.currentStage(event).close();
 		} catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+		}
+	}
+	
+	private void notifyDataChangeListeners() {
+		for (DataChangeListener listener : dataChangeListeners) {
+			listener.onDataChanged();
 		}
 	}
 	

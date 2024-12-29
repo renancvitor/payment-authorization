@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.utils;
 import javafx.collections.FXCollections;
@@ -29,7 +30,7 @@ import model.entities.Departamento;
 import model.entities.Pessoa;
 import model.services.FuncionarioService;
 
-public class FuncionarioListController implements Initializable {
+public class FuncionarioListController implements Initializable, DataChangeListener {
 	
 	private FuncionarioService service;
 	
@@ -106,6 +107,7 @@ public class FuncionarioListController implements Initializable {
 			FuncionarioFormController controller = loader.getController();
 			controller.setFuncionario(obj);
 			controller.setFuncionarioService(new FuncionarioService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 
 			Stage dialogStage = new Stage();
@@ -119,6 +121,11 @@ public class FuncionarioListController implements Initializable {
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
+	}
+	
+	@Override
+	public void onDataChanged() {
+		updateTableView();
 	}
 	
 }

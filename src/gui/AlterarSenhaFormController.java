@@ -2,8 +2,11 @@ package gui;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.utils;
@@ -25,6 +28,8 @@ public class AlterarSenhaFormController implements Initializable {
 	private UsuarioDaoJDBC usuarioDao;
 	
 	private AlterarSenhaService alterarSenhaService;
+	
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
 	private TextField txtLogin;
@@ -61,6 +66,10 @@ public class AlterarSenhaFormController implements Initializable {
 		this.alterarSenhaService = alterarSenhaService;
 	}
 	
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
+	}
+	
 	@FXML
 	public void onBtSalvarAction(ActionEvent event) {
 		try {
@@ -71,6 +80,7 @@ public class AlterarSenhaFormController implements Initializable {
 	        
 	        alterarSenha(username, senhaAtual, novaSenha, stage);
 	        
+	        notifyDataChangeListeners();
 	        utils.currentStage(event).close();
 	    } catch (SQLException e) {
 	        Alerts.showAlert(
@@ -81,6 +91,12 @@ public class AlterarSenhaFormController implements Initializable {
 	        );
 	        e.printStackTrace();
 	    }
+	}
+	
+	private void notifyDataChangeListeners() {
+		for (DataChangeListener listener : dataChangeListeners) {
+			listener.onDataChanged();
+		}
 	}
 
 	private void alterarSenha(String username, String senhaAtual, String novaSenha, Stage stage) throws SQLException {

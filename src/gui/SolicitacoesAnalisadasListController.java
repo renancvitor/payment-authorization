@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import model.entities.SolicitacoesAnalisadas;
 import model.entities.StatusSolicitacao;
 import model.services.SolicitacoesAnalisadasService;
 
-public class SolicitacoesAnalisadasListController implements Initializable {
+public class SolicitacoesAnalisadasListController implements Initializable, DataChangeListener {
 	
 	private SolicitacoesAnalisadasService service;
 	
@@ -89,6 +90,11 @@ public class SolicitacoesAnalisadasListController implements Initializable {
 		List<SolicitacoesAnalisadas> list = service.select(idTipoUsuario, idUser);
 		obsList = FXCollections.observableArrayList(list);
 		tableViewSolicitacoesAnalisadas.setItems(obsList);
+	}
+	
+	@Override
+	public void onDataChanged() {
+		updateTableView();
 	}
 
 }

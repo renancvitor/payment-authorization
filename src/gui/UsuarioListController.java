@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.utils;
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 import model.entities.Usuario;
 import model.services.UsuarioService;
 
-public class UsuarioListController implements Initializable {
+public class UsuarioListController implements Initializable, DataChangeListener {
 	
 	private UsuarioService service;
 	
@@ -89,6 +90,7 @@ public class UsuarioListController implements Initializable {
 			UsuarioFormController controller = loader.getController();
 			controller.setUsuario(obj);
 			controller.setUsuarioService(new UsuarioService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
@@ -102,6 +104,11 @@ public class UsuarioListController implements Initializable {
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
+	}
+	
+	@Override
+	public void onDataChanged() {
+		updateTableView();
 	}
 
 }

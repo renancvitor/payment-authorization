@@ -2,10 +2,13 @@ package gui;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import db.DbException;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.utils;
@@ -26,6 +29,8 @@ public class NovaSolicitacaoFormController implements Initializable {
 	private NovaSolicitacao novaSolicitacao;
 	
 	private NovaSolicitacaoService novaSolicitacaoService;
+	
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
 	private TextField txtFornecedor;
@@ -71,14 +76,25 @@ public class NovaSolicitacaoFormController implements Initializable {
 		this.novaSolicitacaoService = novaSolicitacaoService;
 	}
 	
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
+	}
+	
 	@FXML
 	public void onBtEnviarAction(ActionEvent event) {
 		try {
 			novaSolicitacao = getFormData();
 			novaSolicitacaoService.saveOrUpdate(novaSolicitacao);
+			notifyDataChangeListeners();
 			utils.currentStage(event).close();
 		} catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+		}
+	}
+	
+	private void notifyDataChangeListeners() {
+		for (DataChangeListener listener : dataChangeListeners) {
+			listener.onDataChanged();
 		}
 	}
 	
