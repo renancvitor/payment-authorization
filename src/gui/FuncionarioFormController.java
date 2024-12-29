@@ -5,7 +5,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import db.DbException;
 import gui.listeners.DataChangeListener;
@@ -26,6 +28,7 @@ import javafx.scene.control.Alert.AlertType;
 import model.entities.Cargo;
 import model.entities.Departamento;
 import model.entities.Pessoa;
+import model.exceptions.ValidationException;
 import model.services.CargoService;
 import model.services.DepartamentoService;
 import model.services.FuncionarioService;
@@ -98,6 +101,8 @@ public class FuncionarioFormController implements Initializable {
 			funcionarioService.saveOrUpdate(funcionario);
 			notifyDataChangeListeners();
 			utils.currentStage(event).close();
+		} catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
@@ -111,10 +116,19 @@ public class FuncionarioFormController implements Initializable {
 	
 	private Pessoa getFormData() {
 		Pessoa obj = new Pessoa();
+		
+		ValidationException exception = new ValidationException("Validation Error");
 			
 		obj.setId(utils.tryParseToInt(txtId.getText()));
+		
+		if (txtNome.getText() == null || txtNome.getText().trim().equals("")) {
+			exception.addError("nome", "Campo não pode ser vazio.");
+		}
 		obj.setNome(txtNome.getText());
 		
+		if (txtDataNascimento.getText() == null || txtDataNascimento.getText().trim().equals("")) {
+			exception.addError("datanascimento", "Campo não pode ser vazio.");
+		}
 		String dataNascimentoText = txtDataNascimento.getText();
 	    try {
 	        LocalDate dataNascimento = LocalDate.parse(dataNascimentoText, formatter);
@@ -125,7 +139,15 @@ public class FuncionarioFormController implements Initializable {
 	    
 	    obj.setDepartamento(comboBoxDepartamento.getValue());
 	    obj.setCargo(comboBoxCargo.getValue());
+	    
+	    if (txtCpf.getText() == null || txtCpf.getText().trim().equals("")) {
+			exception.addError("cpf", "Campo não pode ser vazio.");
+		}
 	    obj.setCpf(txtCpf.getText());
+	    
+	    if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
 			
 		return obj;
 	}
@@ -244,6 +266,20 @@ public class FuncionarioFormController implements Initializable {
 		comboBoxDepartamento.setValue(funcionario.getDepartamento());
 		comboBoxCargo.setValue(funcionario.getCargo());
 		txtCpf.setText(funcionario.getCpf());
+	}
+	
+	private void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		
+		if (fields.contains("nome")) {
+			labelErrorNome.setText(errors.get("nome"));
+		}
+		if (fields.contains("datanascimento")) {
+			labelErrorDataNascimento.setText(errors.get("datanascimento"));
+		}
+		if (fields.contains("cpf")) {
+			labelErrorCpf.setText(errors.get("cpf"));
+		}
 	}
 	
 }

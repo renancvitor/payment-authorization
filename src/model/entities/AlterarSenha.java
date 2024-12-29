@@ -9,5 +9,8 @@ public class AlterarSenha {
 	public AlterarSenha(Connection connection) {
         this.connection = connection;
     }
+	
+	public AlterarSenha() {
+	}
 
 }

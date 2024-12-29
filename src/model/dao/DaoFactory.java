@@ -12,6 +12,7 @@ import model.dao.impl.SolicitacoesEnviadasDaoJDBC;
 import model.dao.impl.UserPermissionsDaoJDBC;
 import model.dao.impl.UserTypeDaoJDBC;
 import model.dao.impl.UsuarioDaoJDBC;
+import model.services.PermissaoService;
 
 public class DaoFactory {
 
@@ -24,7 +25,8 @@ public class DaoFactory {
 	}
 	
 	public static UsuarioDao createUsuarioDao() {
-		return new UsuarioDaoJDBC(DB.getConnection());
+	    PermissaoService permissaoService = new PermissaoService();
+	    return new UsuarioDaoJDBC(DB.getConnection(), permissaoService);
 	}
 	
 	public static PessoaDao createPessoaDao() {

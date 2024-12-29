@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.List;
 
 import model.entities.UserType;
@@ -19,4 +21,7 @@ public interface UsuarioDao {
 	boolean verificarSenhaPorUsuario(String username, String senhaAtual);
 	void atualizarSenhaParaHash(String username, String senhaHash);
 	String hashSenha(String senha);
+	Usuario getUsuarioByLogin(String login, String senha) throws SQLException, NoSuchAlgorithmException;
+	UserType getUserTypeFromId(int idTipoUsuario);
+	List<String> getPermissoesByUsuarioId(int usuarioId) throws SQLException;
 }

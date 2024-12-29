@@ -3,7 +3,9 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import db.DbException;
 import gui.listeners.DataChangeListener;
@@ -18,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Cargo;
+import model.exceptions.ValidationException;
 import model.services.CargoService;
 
 public class CargoFormController implements Initializable {
@@ -62,6 +65,8 @@ public class CargoFormController implements Initializable {
 			cargoService.saveOrUpdate(cargo);
 			notifyDataChangeListeners();
 			utils.currentStage(event).close();
+		} catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
@@ -75,9 +80,19 @@ public class CargoFormController implements Initializable {
 	
 	private Cargo getFormData() {
 		Cargo obj = new Cargo();
+		
+		ValidationException exception = new ValidationException("Validation Error");
 			
 		obj.setId(utils.tryParseToInt(txtId.getText()));
+		
+		if (txtNome.getText() == null || txtNome.getText().trim().equals("")) {
+			exception.addError("nome", "Campo não pode ser vazio.");
+		}
 		obj.setNome(txtNome.getText());
+		
+		if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
 			
 		return obj;
 	}
@@ -100,6 +115,14 @@ public class CargoFormController implements Initializable {
 	public void updateFormData() {
 		txtId.setText(String.valueOf(cargo.getId()));
 		txtNome.setText(cargo.getNome());
+	}
+	
+	private void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		
+		if (fields.contains("nome")) {
+			labelErrorNome.setText(errors.get("nome"));
+		}
 	}
 
 }

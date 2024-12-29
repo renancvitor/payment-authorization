@@ -3,7 +3,9 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import db.DbException;
 import gui.listeners.DataChangeListener;
@@ -23,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import model.entities.UserType;
 import model.entities.Usuario;
+import model.exceptions.ValidationException;
 import model.services.UserTypeService;
 import model.services.UsuarioService;
 
@@ -87,6 +90,8 @@ public class UsuarioFormController implements Initializable {
 			usuarioService.saveOrUpdate(usuario);
 			notifyDataChangeListeners();
 			utils.currentStage(event).close();
+		} catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
@@ -100,6 +105,22 @@ public class UsuarioFormController implements Initializable {
 	
 	private Usuario getFormData() {
 		Usuario usuario = new Usuario(txtLogin.getText(), txtSenha.getText(), txtCpf.getText(), comboBoxUserType.getValue());
+		
+		ValidationException exception = new ValidationException("Validation Error");
+		
+		if (txtLogin.getText() == null || txtLogin.getText().trim().equals("")) {
+			exception.addError("login", "Campo não pode ser vazio.");
+		}
+		if (txtSenha.getText() == null || txtSenha.getText().trim().equals("")) {
+			exception.addError("senha", "Campo não pode ser vazio.");
+		}
+		if (txtCpf.getText() == null || txtCpf.getText().trim().equals("")) {
+			exception.addError("cpf", "Campo não pode ser vazio.");
+		}
+		
+		if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
 			
 		return usuario;
 	}
@@ -167,6 +188,20 @@ public class UsuarioFormController implements Initializable {
 		txtSenha.setText(usuario.getSenha());
 		txtCpf.setText(usuario.getCpf());
 		comboBoxUserType.setValue(usuario.getUserType());
+	}
+	
+	private void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		
+		if (fields.contains("nome")) {
+			labelErrorLogin.setText(errors.get("nome"));
+		}
+		if (fields.contains("senha")) {
+			labelErrorSenha.setText(errors.get("senha"));
+		}
+		if (fields.contains("cpf")) {
+			labelErrorCpf.setText(errors.get("cpf"));
+		}
 	}
 	
 }

@@ -16,12 +16,6 @@ public class UsuarioService {
 	
 	public void saveOrUpdate(Usuario usuario) {
 		dao.insert(usuario);
-		/* Remover o código abaixo e quando for ter update, criar método para isso
-		 * if (usuario.getId() == null) {
-			dao.insert(usuario);
-		} else {
-			dao.update(usuario);
-		}*/
 	}
 
 }

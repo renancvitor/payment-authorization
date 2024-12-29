@@ -1,19 +1,24 @@
 package gui;
 
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import gui.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.dao.DaoFactory;
+import model.dao.UsuarioDao;
 import model.entities.Usuario;
+import model.services.UserLoginService;
 
 public class LoginFormController implements Initializable {
-	
-	private Usuario usuarioLogin;
-	
+			
 	@FXML
 	private TextField txtLogin;
 	
@@ -32,13 +37,33 @@ public class LoginFormController implements Initializable {
 	@FXML
 	private Button btAlterarSenha;
 	
-	public void setUsuarioLogin(Usuario usuarioLogin) {
-		this.usuarioLogin = usuarioLogin;
-	}
-	
 	@FXML
-	public void onBtEntrarAction() {
-		
+	public void onBtEntrarAction() throws NoSuchAlgorithmException {
+		String login = txtLogin.getText().trim();
+        String senha = txtSenha.getText().trim();
+
+        if (login.isEmpty()) {
+            labelErrorLogin.setText("O campo login é obrigatório.");
+            return;
+        } else {
+            labelErrorLogin.setText("");
+        }
+
+        if (senha.isEmpty()) {
+            labelErrorSenha.setText("O campo senha é obrigatório.");
+            return;
+        } else {
+            labelErrorSenha.setText("");
+        }
+
+        Usuario usuario = validarLogin(login, senha);
+
+        if (usuario != null) {
+            Alerts.showAlert("Login Bem-Sucedido", null, "Bem-vindo, " + usuario.getLogin() + "!", AlertType.INFORMATION);
+            System.out.println("Usuário logado: " + usuario.getLogin());
+        } else {
+            Alerts.showAlert("Erro de Login", null, "Usuário ou senha inválidos.", AlertType.WARNING);
+        }
 	}
 	
 	@FXML
@@ -55,9 +80,23 @@ public class LoginFormController implements Initializable {
 		// TODO Auto-generated method stub
 	}
 	
-	/* public void updateFormData() { *** LOGIN NÃO É UM FORMULÁRIO ***
-		txtLogin.setText(usuarioLogin.getLogin());
-		txtSenha.setText(usuarioLogin.getSenha());
-	}*/
+	private Usuario validarLogin(String login, String senha) throws NoSuchAlgorithmException {
+		try {
+			UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+	        Usuario usuario = usuarioDao.getUsuarioByLogin(login, senha);
+			
+			if (usuario != null) {
+				UserLoginService.setUsuarioLogado(usuario);
+				return usuario;
+			} else {
+                Alerts.showAlert("Erro de Login", null, "Usuário ou senha inválidos.", AlertType.WARNING);
+            }
+		} catch (SQLException e) {
+			Alerts.showAlert("Erro de Conexão", null, "Erro ao conectar ao banco de dados. Tente novamente mais tarde.", AlertType.ERROR);
+            e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 }

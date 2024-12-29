@@ -4,7 +4,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
@@ -20,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.dao.impl.UsuarioDaoJDBC;
 import model.entities.Usuario;
+import model.exceptions.ValidationException;
 import model.services.AlterarSenhaService;
 
 public class AlterarSenhaFormController implements Initializable {
@@ -82,7 +85,9 @@ public class AlterarSenhaFormController implements Initializable {
 	        
 	        notifyDataChangeListeners();
 	        utils.currentStage(event).close();
-	    } catch (SQLException e) {
+	    } catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
+		} catch (SQLException e) {
 	        Alerts.showAlert(
 	            "Erro",
 	            null,
@@ -126,6 +131,28 @@ public class AlterarSenhaFormController implements Initializable {
 	            Alert.AlertType.ERROR
 	        );
 	    }
+	    
+	    ValidationException exception = new ValidationException("Validation Error");
+	    
+	    if (txtLogin.getText() == null || txtLogin.getText().trim().equals("")) {
+			exception.addError("login", "Campo não pode ser vazio.");
+		}
+	    
+	    if (txtSenhaAtual.getText() == null || txtSenhaAtual.getText().trim().equals("")) {
+			exception.addError("senhaatual", "Campo não pode ser vazio.");
+		}
+	    
+	    if (txtNovaSenha.getText() == null || txtNovaSenha.getText().trim().equals("")) {
+			exception.addError("novasenha", "Campo não pode ser vazio.");
+		}
+	    
+	    if (txtRepetirNovaSenha.getText() == null || txtRepetirNovaSenha.getText().trim().equals("")) {
+			exception.addError("repetirnovasenha", "Campo não pode ser vazio.");
+		}
+	    
+	    if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
 	}
 
 
@@ -141,6 +168,23 @@ public class AlterarSenhaFormController implements Initializable {
 	public void updateFormData() {
 		txtLogin.setText(alterarSenhaUsuario.getLogin());
 		txtSenhaAtual.setText(alterarSenhaUsuario.getSenha());
+	}
+	
+	private void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		
+		if (fields.contains("login")) {
+			labelErrorLogin.setText(errors.get("login"));
+		}
+		if (fields.contains("senhaatual")) {
+			labelErrorSenhaAtual.setText(errors.get("senhaatual"));
+		}
+		if (fields.contains("novasenha")) {
+			labelErrorNovaSenha.setText(errors.get("novasenha"));
+		}
+		if (fields.contains("repetirnovasenha")) {
+			labelErrorRepetirNovaSenha.setText(errors.get("repetirnovasenha"));
+		}
 	}
 	
 }

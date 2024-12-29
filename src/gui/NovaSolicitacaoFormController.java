@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import db.DbException;
 import gui.listeners.DataChangeListener;
@@ -20,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import model.entities.NovaSolicitacao;
+import model.exceptions.ValidationException;
 import model.services.NovaSolicitacaoService;
 
 public class NovaSolicitacaoFormController implements Initializable {
@@ -87,6 +90,8 @@ public class NovaSolicitacaoFormController implements Initializable {
 			novaSolicitacaoService.saveOrUpdate(novaSolicitacao);
 			notifyDataChangeListeners();
 			utils.currentStage(event).close();
+		} catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
@@ -101,9 +106,21 @@ public class NovaSolicitacaoFormController implements Initializable {
 	private NovaSolicitacao getFormData() {
 		NovaSolicitacao obj = new NovaSolicitacao();
 		
+		ValidationException exception = new ValidationException("Validation Error");
+		
+		if (txtFornecedor.getText() == null || txtFornecedor.getText().trim().equals("")) {
+			exception.addError("fornecedor", "Campo não pode ser vazio.");
+		}
 		obj.setFornecedor(txtFornecedor.getText());
+		
+		if (txtDescricao.getText() == null || txtDescricao.getText().trim().equals("")) {
+			exception.addError("descricao", "Campo não pode ser vazio.");
+		}
 		obj.setDescricao(txtDescricao.getText());
 		
+		if (txtDataPagamento.getText() == null || txtDataPagamento.getText().trim().equals("")) {
+			exception.addError("datapagamento", "Campo não pode ser vazio.");
+		}
 		String dataPagamentoText = txtDataPagamento.getText();
 	    if (dataPagamentoText != null && !dataPagamentoText.isEmpty()) {
 	        try {
@@ -117,8 +134,14 @@ public class NovaSolicitacaoFormController implements Initializable {
 	        obj.setDataPagamento(null);
 	    }
 		
+	    if (txtFormaPagamento.getText() == null || txtFormaPagamento.getText().trim().equals("")) {
+			exception.addError("formapagamento", "Campo não pode ser vazio.");
+		}
 		obj.setFormaPagamento(txtFormaPagamento.getText());
 		
+		if (txtValorTotal.getText() == null || txtValorTotal.getText().trim().equals("")) {
+			exception.addError("valortotal", "Campo não pode ser vazio.");
+		}
 		String valorTotalText = txtValorTotal.getText();
 	    try {
 	        double valorTotal = Double.parseDouble(valorTotalText.replace(",", "."));
@@ -126,6 +149,10 @@ public class NovaSolicitacaoFormController implements Initializable {
 	    } catch (NumberFormatException e) {
 	        System.out.println("Valor inválido! Por favor, insira um número válido.");
 	    }
+	    
+	    if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
 		
 		return obj;
 	}
@@ -158,6 +185,26 @@ public class NovaSolicitacaoFormController implements Initializable {
 		
 		txtFormaPagamento.setText(novaSolicitacao.getFormaPagamento());
 		txtValorTotal.setText(String.format("%.2f", novaSolicitacao.getValorTotal()));
+	}
+	
+	private void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		
+		if (fields.contains("fornecedor")) {
+			labelErrorFornecedor.setText(errors.get("fornecedor"));
+		}
+		if (fields.contains("descricao")) {
+			labelErrorDescricao.setText(errors.get("descricao"));
+		}
+		if (fields.contains("datapagamento")) {
+			labelErrorDataPagamento.setText(errors.get("datapagamento"));
+		}
+		if (fields.contains("formapagamento")) {
+			labelErrorFormaPagamento.setText(errors.get("formapagamento"));
+		}
+		if (fields.contains("valortotal")) {
+			labelErrorValorTotal.setText(errors.get("valortotal"));
+		}
 	}
 
 }
