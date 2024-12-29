@@ -12,7 +12,6 @@ import java.util.List;
 import db.DB;
 import db.DbException;
 import model.dao.UsuarioDao;
-import model.entities.Cargo;
 import model.entities.UserType;
 import model.entities.Usuario;
 
@@ -27,9 +26,10 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 	@Override
 	public void insert(Usuario obj) {
 		try {
-			int idPessoa = getIdPessoaByCpf(obj.getCpf());
-	        if (idPessoa == -1) {
-	            throw new IllegalArgumentException("CPF não cadastrado na tabela Pessoa!");
+			Integer idPessoa = getIdPessoaByCpf(obj.getCpf());
+			
+	        if (idPessoa == null) {
+	            throw new NullPointerException("CPF não cadastrado na tabela Pessoa!");
 	        }
 
 	        if (isUsuarioExistente(idPessoa)) {
@@ -108,7 +108,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 	}
 	
 	@Override
-	public int getIdPessoaByCpf(String cpf) {
+	public Integer getIdPessoaByCpf(String cpf) {
         String sql = "SELECT idpessoa FROM pessoa WHERE cpf = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cpf);
@@ -120,7 +120,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         } catch (SQLException e) {
         	throw new DbException(e.getMessage());
         }
-        return -1;
+        return null;
     }
 		
 	@Override

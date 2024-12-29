@@ -3,17 +3,25 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import db.DbException;
+import gui.util.Alerts;
 import gui.util.Constraints;
+import gui.util.utils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Cargo;
+import model.services.CargoService;
 
 public class CargoFormController implements Initializable {
 	
 	private Cargo cargo;
+	
+	private CargoService cargoService;
 	
 	@FXML
 	private TextField txtId;
@@ -34,14 +42,33 @@ public class CargoFormController implements Initializable {
 		this.cargo = cargo;
 	}
 	
-	@FXML
-	public void onBtSalvarAction() {
-		
+	public void setCargoService(CargoService cargoService) {
+		this.cargoService = cargoService;
 	}
 	
 	@FXML
-	public void onBtCancelarAction() {
-		
+	public void onBtSalvarAction(ActionEvent event) {
+		try {
+			cargo = getFormData();
+			cargoService.saveOrUpdate(cargo);
+			utils.currentStage(event).close();
+		} catch (DbException e) {
+			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+		}
+	}
+	
+	private Cargo getFormData() {
+		Cargo obj = new Cargo();
+			
+		obj.setId(utils.tryParseToInt(txtId.getText()));
+		obj.setNome(txtNome.getText());
+			
+		return obj;
+	}
+
+	@FXML
+	public void onBtCancelarAction(ActionEvent event) {
+		utils.currentStage(event).close();
 	}
 
 	@Override

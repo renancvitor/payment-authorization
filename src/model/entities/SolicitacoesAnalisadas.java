@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class SolicitacoesAnalisadas {
-    private int id;
+    private Integer id;
     private String fornecedor;
     private String descricao;
     private Timestamp data_criacao;
@@ -15,7 +15,7 @@ public class SolicitacoesAnalisadas {
     private StatusSolicitacao status;
     private String login;
 
-    public SolicitacoesAnalisadas(int id, String fornecedor, String descricao, Timestamp data_criacao, Date data_pagamento, String forma_pagamento, double valor_total, int id_usuario, StatusSolicitacao status, String login) {
+    public SolicitacoesAnalisadas(Integer id, String fornecedor, String descricao, Timestamp data_criacao, Date data_pagamento, String forma_pagamento, double valor_total, int id_usuario, StatusSolicitacao status, String login) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.descricao = descricao;
@@ -31,11 +31,11 @@ public class SolicitacoesAnalisadas {
     public SolicitacoesAnalisadas() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

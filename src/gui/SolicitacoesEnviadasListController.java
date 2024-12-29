@@ -27,6 +27,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.NovaSolicitacao;
 import model.entities.SolicitacoesEnviadas;
+import model.services.NovaSolicitacaoService;
 import model.services.SolicitacoesEnviadasService;
 
 public class SolicitacoesEnviadasListController implements Initializable {
@@ -70,7 +71,7 @@ public class SolicitacoesEnviadasListController implements Initializable {
 	public void onBtnNovaSolicitacaoAction(ActionEvent event) {
 		Stage parentStage = utils.currentStage(event);
 		NovaSolicitacao obj = new NovaSolicitacao();
-		createDialogForm(obj, "/gui/NovaSolicitacao.fxml", parentStage);
+		createDialogForm(obj, "/gui/NovaSolicitacaoForm.fxml", parentStage);
 	}
 	
 	@FXML
@@ -135,6 +136,7 @@ public class SolicitacoesEnviadasListController implements Initializable {
 			
 			NovaSolicitacaoFormController controller = loader.getController();
 			controller.setNovaSolicitacao(obj);
+			controller.setNovaSolicitacaoService(new NovaSolicitacaoService());
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();

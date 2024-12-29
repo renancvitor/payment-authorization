@@ -3,7 +3,7 @@ package model.entities;
 import java.time.LocalDate;
 
 public class Pessoa {
-    private int id;
+    private Integer id;
     private String nome;
     private LocalDate datanascimento;
     private Departamento departamento;
@@ -13,7 +13,7 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(int id, String nome, LocalDate datanascimento, Departamento departamento, Cargo cargo, String cpf) {
+    public Pessoa(Integer id, String nome, LocalDate datanascimento, Departamento departamento, Cargo cargo, String cpf) {
         this.id = id;
         this.nome = nome;
         this.datanascimento = datanascimento;
@@ -22,11 +22,11 @@ public class Pessoa {
         this.cpf = cpf;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

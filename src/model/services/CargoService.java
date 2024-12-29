@@ -13,4 +13,12 @@ public class CargoService {
 	public List<Cargo> findAll() {
 		return dao.findAll();
 	}
+	
+	public void saveOrUpdate(Cargo obj) {
+		if (obj.getId() == null) {
+			dao.insert(obj);
+		} else {
+			dao.update(obj);
+		}
+	}
 }

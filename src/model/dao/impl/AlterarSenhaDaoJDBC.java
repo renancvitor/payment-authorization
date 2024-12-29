@@ -16,6 +16,11 @@ public class AlterarSenhaDaoJDBC implements AlterarSenhaDao {
 	public AlterarSenhaDaoJDBC(Connection connection) {
 		this.connection = connection;
 	}
+	
+	@Override
+	public void insert(String username, String novaSenha) {
+		// TODO Auto-generated method stub
+	}
 
 	@Override
 	public boolean update(String username, String novaSenha)  {

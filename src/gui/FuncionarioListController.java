@@ -105,6 +105,7 @@ public class FuncionarioListController implements Initializable {
 			
 			FuncionarioFormController controller = loader.getController();
 			controller.setFuncionario(obj);
+			controller.setFuncionarioService(new FuncionarioService());
 			controller.updateFormData();
 
 			Stage dialogStage = new Stage();

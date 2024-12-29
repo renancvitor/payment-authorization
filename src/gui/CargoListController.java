@@ -85,6 +85,7 @@ public class CargoListController implements Initializable {
 			
 			CargoFormController controller = loader.getController();
 			controller.setCargo(obj);
+			controller.setCargoService(new CargoService());
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();

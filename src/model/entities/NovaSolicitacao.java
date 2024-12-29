@@ -6,7 +6,7 @@ import java.util.Date;
 public class NovaSolicitacao {
 	
 
-    private int id;
+    private Integer id;
     private String fornecedor;
     private String descricao;
     private Timestamp dataCriacao;
@@ -17,7 +17,7 @@ public class NovaSolicitacao {
     private StatusSolicitacao status;
     private String login;
 
-    public NovaSolicitacao(int id, String fornecedor, String descricao, Timestamp dataCriacao, Date dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
+    public NovaSolicitacao(Integer id, String fornecedor, String descricao, Timestamp dataCriacao, Date dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.descricao = descricao;
@@ -33,11 +33,11 @@ public class NovaSolicitacao {
     public NovaSolicitacao() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

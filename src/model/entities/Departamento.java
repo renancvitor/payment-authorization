@@ -2,10 +2,10 @@ package model.entities;
 
 public class Departamento {
 
-    private int id;
+    private Integer id;
     private String nome;
     
-    public Departamento(int id, String nome) {
+    public Departamento(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -17,11 +17,11 @@ public class Departamento {
     public Departamento() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

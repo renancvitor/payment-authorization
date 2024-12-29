@@ -2,10 +2,10 @@ package model.entities;
 
 public class Cargo {
 
-    private int id;
+    private Integer id;
     private String nome;
 
-    public Cargo(int id, String nome) {
+    public Cargo(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -17,11 +17,11 @@ public class Cargo {
     public Cargo() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

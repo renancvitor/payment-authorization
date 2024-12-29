@@ -35,5 +35,10 @@ public class NovaSolicitacaoDaoJDBC implements NovaSolicitacaoDao {
         	throw new DbException(e.getMessage());
         }
 	}
+	
+	@Override
+	public void update(NovaSolicitacao obj) {
+		// TODO Auto-generated method stub
+	}
 
 }

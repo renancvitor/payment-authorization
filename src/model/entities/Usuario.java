@@ -5,19 +5,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class Usuario {
-    private int id;
+    private Integer id;
     private String login;
     private String senha;
     private String cpf;
     private UserType userType;
     private List<String> permissoes;
 
-    public Usuario(int id, String login, String senha, List<String> permissoes, String cpf, int idTipoUsuario, UserType userType) {
+    public Usuario(Integer id, String login, String senha, List<String> permissoes, String cpf, int idTipoUsuario, UserType userType) {
         this.id = id;
         this.login = login;
         this.senha = senha;
         this.permissoes = permissoes;
         this.cpf = cpf;
+        this.userType = userType;
+    }
+    
+    public Usuario(String login, String senha, String cpf, UserType userType) {
+    	this.login = login;
+    	this.senha = senha;
+    	this.cpf = cpf;
         this.userType = userType;
     }
 
@@ -28,7 +35,7 @@ public class Usuario {
         return permissoes.contains(permissao);
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -52,7 +59,7 @@ public class Usuario {
         return permissoes;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,13 +1,18 @@
 package gui;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import db.DbException;
+import gui.util.Alerts;
 import gui.util.Constraints;
+import gui.util.utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,11 +20,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import model.entities.Cargo;
 import model.entities.Departamento;
 import model.entities.Pessoa;
 import model.services.CargoService;
 import model.services.DepartamentoService;
+import model.services.FuncionarioService;
 
 public class FuncionarioFormController implements Initializable {
 	
@@ -29,6 +36,8 @@ public class FuncionarioFormController implements Initializable {
 	private CargoService cargoService;
 	
 	private Pessoa funcionario;
+	
+	private FuncionarioService funcionarioService;
 	
 	@FXML
 	private TextField txtId;
@@ -70,14 +79,45 @@ public class FuncionarioFormController implements Initializable {
 		this.funcionario = funcionario;
 	}
 	
-	@FXML
-	public void onBtSalvarAction() {
-		
+	public void setFuncionarioService(FuncionarioService funcionarioService) {
+		this.funcionarioService = funcionarioService;
 	}
 	
 	@FXML
-	public void onBtCancelarAction() {
+	public void onBtSalvarAction(ActionEvent event) {
+		try {
+			funcionario = getFormData();
+			funcionarioService.saveOrUpdate(funcionario);
+			utils.currentStage(event).close();
+		} catch (DbException e) {
+			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+		}
+	}
+	
+	private Pessoa getFormData() {
+		Pessoa obj = new Pessoa();
+			
+		obj.setId(utils.tryParseToInt(txtId.getText()));
+		obj.setNome(txtNome.getText());
 		
+		String dataNascimentoText = txtDataNascimento.getText();
+	    try {
+	        LocalDate dataNascimento = LocalDate.parse(dataNascimentoText, formatter);
+	        obj.setDatanascimento(dataNascimento);
+	    } catch (Exception e) {
+	        System.out.println("Data inválida! Por favor, insira a data no formato dd/MM/yyyy.");
+	    }
+	    
+	    obj.setDepartamento(comboBoxDepartamento.getValue());
+	    obj.setCargo(comboBoxCargo.getValue());
+	    obj.setCpf(txtCpf.getText());
+			
+		return obj;
+	}
+
+	@FXML
+	public void onBtCancelarAction(ActionEvent event) {
+		utils.currentStage(event).close();
 	}
 		
 	@Override

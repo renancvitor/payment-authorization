@@ -13,5 +13,13 @@ public class FuncionarioService {
 	public List<Pessoa> findAll() {
 		return dao.findAll();
 	}
+	
+	public void saveOrUpdate(Pessoa obj) {
+		if (obj.getId() == null) {
+			dao.insert(obj);
+		} else {
+			dao.update(obj);
+		}
+	}
 
 }

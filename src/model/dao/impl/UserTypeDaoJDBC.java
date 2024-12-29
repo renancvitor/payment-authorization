@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import db.DbException;
@@ -23,26 +25,32 @@ public class UserTypeDaoJDBC implements UserTypeDao {
 	}
 
 	@Override
-	public void loadUserTypes() {
-		String query = "SELECT id, nome FROM tipos_usuarios";
+	public List<UserType> loadUserTypes() {
+		List<UserType> userTypes = new ArrayList<>();
+	    String query = "SELECT id, tipo_usuario FROM tipos_usuarios";
 
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+	    try (Statement stmt = connection.createStatement();
+	         ResultSet rs = stmt.executeQuery(query)) {
 
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
+	        while (rs.next()) {
+	            int id = rs.getInt("id");
+	            String nome = rs.getString("tipo_usuario");
 
-                UserType userType = UserType.valueOf(nome.toUpperCase());
-                userTypeToIdMap.put(userType, id);
-                idToUserTypeMap.put(id, userType);
-            }
+	            try {
+	                UserType userType = UserType.valueOf(nome.toUpperCase());
+	                userTypeToIdMap.put(userType, id);
+	                idToUserTypeMap.put(id, userType);
+	                userTypes.add(userType);
+	            } catch (IllegalArgumentException e) {
+	                System.out.println("Erro: Tipo de usuário no banco não corresponde ao enum UserType.");
+	            }
+	        }
 
-        } catch (SQLException e) {
-        	throw new DbException(e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: Tipo de usuário no banco não corresponde ao enum UserType.");
-        }
+	    } catch (SQLException e) {
+	        throw new DbException(e.getMessage());
+	    }
+
+	    return userTypes;
     }
 
 }
