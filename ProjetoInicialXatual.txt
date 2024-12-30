@@ -1,5 +1,4 @@
 Códigos não copiados do projeto original:
 
--> Toda a classe Application.LoginController
 -> Método getSolicitacoesAnalisadas da classe Entities.TelaAnalisados
 -> Toda a classe Servicoes.UsuarioController

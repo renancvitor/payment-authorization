@@ -21,13 +21,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.dao.impl.UsuarioDaoJDBC;
-import model.entities.Usuario;
 import model.exceptions.ValidationException;
 import model.services.AlterarSenhaService;
 
 public class AlterarSenhaFormController implements Initializable {
 	
-	private Usuario alterarSenhaUsuario;
 	private UsuarioDaoJDBC usuarioDao;
 	
 	private AlterarSenhaService alterarSenhaService;
@@ -61,9 +59,9 @@ public class AlterarSenhaFormController implements Initializable {
 	@FXML
 	private Button btSalvar;
 	
-	public void setAlterarSenhaUsuario(Usuario alterarSenhaUsuario) {
+	/*public void setAlterarSenhaUsuario(AlterarSenha alterarSenhaUsuario) {
 		this.alterarSenhaUsuario = alterarSenhaUsuario;
-	}
+	}*/
 	
 	public void setAlterarSenhaService(AlterarSenhaService alterarSenhaService) {
 		this.alterarSenhaService = alterarSenhaService;
@@ -105,7 +103,25 @@ public class AlterarSenhaFormController implements Initializable {
 	}
 
 	private void alterarSenha(String username, String senhaAtual, String novaSenha, Stage stage) throws SQLException {
-		if (!usuarioDao.verificarSenhaPorUsuario(username, senhaAtual)) {
+	    ValidationException exception = new ValidationException("Validation Error");
+	    
+	    if (username == null || username.trim().isEmpty()) {
+	        exception.addError("login", "Campo não pode ser vazio.");
+	    }
+	    if (senhaAtual == null || senhaAtual.trim().isEmpty()) {
+	        exception.addError("senhaatual", "Campo não pode ser vazio.");
+	    }
+	    if (novaSenha == null || novaSenha.trim().isEmpty()) {
+	        exception.addError("novasenha", "Campo não pode ser vazio.");
+	    }
+	    if (!txtNovaSenha.getText().equals(txtRepetirNovaSenha.getText())) {
+	        exception.addError("repetirnovasenha", "As senhas não coincidem.");
+	    }
+	    if (!exception.getErrors().isEmpty()) {
+	        throw exception;
+	    }
+
+	    if (!usuarioDao.verificarSenhaPorUsuario(username, senhaAtual)) {
 	        Alerts.showAlert(
 	            "Erro",
 	            null,
@@ -115,7 +131,9 @@ public class AlterarSenhaFormController implements Initializable {
 	        return;
 	    }
 
-	    if (alterarSenhaService.saveOrUpdate(username, novaSenha)) {
+	    boolean sucesso = alterarSenhaService.saveOrUpdate(username, novaSenha);
+
+	    if (sucesso) {
 	        Alerts.showAlert(
 	            "Sucesso",
 	            null,
@@ -131,30 +149,7 @@ public class AlterarSenhaFormController implements Initializable {
 	            Alert.AlertType.ERROR
 	        );
 	    }
-	    
-	    ValidationException exception = new ValidationException("Validation Error");
-	    
-	    if (txtLogin.getText() == null || txtLogin.getText().trim().equals("")) {
-			exception.addError("login", "Campo não pode ser vazio.");
-		}
-	    
-	    if (txtSenhaAtual.getText() == null || txtSenhaAtual.getText().trim().equals("")) {
-			exception.addError("senhaatual", "Campo não pode ser vazio.");
-		}
-	    
-	    if (txtNovaSenha.getText() == null || txtNovaSenha.getText().trim().equals("")) {
-			exception.addError("novasenha", "Campo não pode ser vazio.");
-		}
-	    
-	    if (txtRepetirNovaSenha.getText() == null || txtRepetirNovaSenha.getText().trim().equals("")) {
-			exception.addError("repetirnovasenha", "Campo não pode ser vazio.");
-		}
-	    
-	    if (exception.getErrors().size() > 0) {
-			throw exception;
-		}
 	}
-
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -165,10 +160,10 @@ public class AlterarSenhaFormController implements Initializable {
 		Constraints.setTextFieldMaxLength(txtNovaSenha, 8);
 	}
 	
-	public void updateFormData() {
+	/*public void updateFormData() {
 		txtLogin.setText(alterarSenhaUsuario.getLogin());
 		txtSenhaAtual.setText(alterarSenhaUsuario.getSenha());
-	}
+	}*/
 	
 	private void setErrorMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();

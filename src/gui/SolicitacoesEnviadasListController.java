@@ -143,9 +143,15 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 		tableColumnFornecedor.setCellValueFactory(new PropertyValueFactory<>("fornecedor"));
 		tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
 		tableColumnDataCriacao.setCellValueFactory(new PropertyValueFactory<>("dataCriacao"));
+		utils.formatTableColumnTimestamp(tableColumnDataCriacao, "dd/MM/yyyy");
+		
 		tableColumnDataPagamento.setCellValueFactory(new PropertyValueFactory<>("dataPagamento"));
+		utils.formatTableColumnDate(tableColumnDataPagamento, "dd/MM/yyyy");
+		
 		tableColumnFormaPagamento.setCellValueFactory(new PropertyValueFactory<>("formaPagamento"));
 		tableColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
+		utils.formatTableColumnDouble(tableColumnValorTotal, 2);
+		
 		tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 		tableColumnLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
 		

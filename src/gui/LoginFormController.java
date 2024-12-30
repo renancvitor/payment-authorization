@@ -1,17 +1,26 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import gui.util.Alerts;
+import gui.util.Constraints;
+import gui.util.utils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Pane;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.dao.DaoFactory;
 import model.dao.UsuarioDao;
 import model.entities.Usuario;
@@ -67,8 +76,31 @@ public class LoginFormController implements Initializable {
 	}
 	
 	@FXML
-	public void onBtAlterarSenhaAction() {
+	public void onBtAlterarSenhaAction(ActionEvent event) {
+		Stage parentStage = utils.currentStage(event);
 		
+		createDialogForm("/gui/AlterarSenhaForm.fxml", parentStage);
+	}
+
+	private void createDialogForm(String absoluteName, Stage parentStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			Pane pane = loader.load();
+			
+			AlterarSenhaFormController controller = loader.getController();
+			controller.setAlterarSenhaService(null);
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Alterar Senhaa");
+			dialogStage.setScene(new Scene(pane));
+			dialogStage.setResizable(false);
+			dialogStage.initOwner(parentStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.showAndWait();
+			
+		} catch (IOException e) {
+			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+		}
 	}
 
 	@Override
@@ -77,7 +109,7 @@ public class LoginFormController implements Initializable {
 	}
 	
 	public void initializaNodes() {
-		// TODO Auto-generated method stub
+		Constraints.setTextFieldMaxLength(txtSenha, 8);
 	}
 	
 	private Usuario validarLogin(String login, String senha) throws NoSuchAlgorithmException {

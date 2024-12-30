@@ -80,6 +80,8 @@ public class FuncionarioListController implements Initializable, DataChangeListe
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		tableColumnDataNascimento.setCellValueFactory(new PropertyValueFactory<>("datanascimento"));
+		utils.formatTableColumnLocalDate(tableColumnDataNascimento, "dd/MM/yyyy");
+		
 		tableColumnDepartamento.setCellValueFactory(new PropertyValueFactory<>("departamento"));
 		tableColumnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
 		tableColumnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
