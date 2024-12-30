@@ -86,8 +86,9 @@ public class SolicitacoesAnalisadasListController implements Initializable, Data
 		}
 		int idTipoUsuario = 0;
 		int idUser = 0;
+		StatusSolicitacao status = null;
 		
-		List<SolicitacoesAnalisadas> list = service.select(idTipoUsuario, idUser);
+		List<SolicitacoesAnalisadas> list = service.select(status, idTipoUsuario, idUser);
 		obsList = FXCollections.observableArrayList(list);
 		tableViewSolicitacoesAnalisadas.setItems(obsList);
 	}

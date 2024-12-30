@@ -21,7 +21,7 @@ public class SolicitacoesAnalisadasDaoJDBC implements SolicitacoesAnalisadasDao 
 	}
 
 	@Override
-	public List<SolicitacoesAnalisadas> select(int idTipoUsuario, int idUsuario) {
+	public List<SolicitacoesAnalisadas> select(StatusSolicitacao status, int idTipoUsuario, int idUsuario) {
 		List<SolicitacoesAnalisadas> solicitacoes = new ArrayList<>();
         String sql;
 
