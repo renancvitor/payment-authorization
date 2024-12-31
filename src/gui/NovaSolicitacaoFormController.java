@@ -2,6 +2,8 @@ package gui;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +19,11 @@ import gui.util.utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import model.entities.NovaSolicitacao;
 import model.exceptions.ValidationException;
 import model.services.NovaSolicitacaoService;
@@ -42,7 +45,7 @@ public class NovaSolicitacaoFormController implements Initializable {
 	private TextField txtDescricao;
 	
 	@FXML
-	private TextField txtDataPagamento;
+	private DatePicker dpDataPagamento;
 	
 	@FXML
 	private TextField txtFormaPagamento;
@@ -118,10 +121,10 @@ public class NovaSolicitacaoFormController implements Initializable {
 		}
 		obj.setDescricao(txtDescricao.getText());
 		
-		if (txtDataPagamento.getText() == null || txtDataPagamento.getText().trim().equals("")) {
+		/*if (dpDataPagamento.getPromptText() == null || dpDataPagamento.getPromptText().trim().equals("")) {
 			exception.addError("datapagamento", "Campo não pode ser vazio.");
 		}
-		String dataPagamentoText = txtDataPagamento.getText();
+		String dataPagamentoText = dpDataPagamento.getPromptText();
 	    if (dataPagamentoText != null && !dataPagamentoText.isEmpty()) {
 	        try {
 	            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -132,7 +135,16 @@ public class NovaSolicitacaoFormController implements Initializable {
 	        }
 	    } else {
 	        obj.setDataPagamento(null);
-	    }
+	    }*/
+		
+		if (dpDataPagamento.getValue() == null) {
+		    exception.addError("datapagamento", "Campo não pode ser vazio.");
+		} else {
+		    LocalDate dataPagamentoLocalDate = dpDataPagamento.getValue();
+		    Date dataPagamento = Date.from(dataPagamentoLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		    obj.setDataPagamento(dataPagamento);
+		}
+
 		
 	    if (txtFormaPagamento.getText() == null || txtFormaPagamento.getText().trim().equals("")) {
 			exception.addError("formapagamento", "Campo não pode ser vazio.");
@@ -168,8 +180,8 @@ public class NovaSolicitacaoFormController implements Initializable {
 	}
 	
 	private void initializaNodes() {
-		Constraints.setTextFieldInteger(txtValorTotal);
-		Constraints.setTextFieldInteger(txtDataPagamento);
+		Constraints.setTextFieldDouble(txtValorTotal);
+		utils.formatDatePicker(dpDataPagamento, "dd/MM/yyyy");
 	}
 	
 	public void updateFormData() {
@@ -178,9 +190,10 @@ public class NovaSolicitacaoFormController implements Initializable {
 		//txtDataPagamento.setText(dateFormatter.format(novaSolicitacao.getDataPagamento()));
 		
 		if (novaSolicitacao.getDataPagamento() != null) {
-	        txtDataPagamento.setText(dateFormatter.format(novaSolicitacao.getDataPagamento()));
+			dpDataPagamento.setValue(LocalDate.ofInstant(novaSolicitacao.getDataPagamento().toInstant(), ZoneId.systemDefault()));
+	        // dpDataPagamento.setValue(dateFormatter.format(novaSolicitacao.getDataPagamento()));
 	    } else {
-	        txtDataPagamento.setText("");
+	        dpDataPagamento.setPromptText("");
 	    }
 		
 		txtFormaPagamento.setText(novaSolicitacao.getFormaPagamento());

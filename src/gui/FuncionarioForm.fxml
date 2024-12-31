@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -39,7 +40,6 @@
             <Label text="CPF" GridPane.rowIndex="5" />
             <Label fx:id="labelErrorDataNascimento" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label fx:id="labelErrorCpf" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <TextField fx:id="txtDataNascimento" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtCpf" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ComboBox fx:id="comboBoxDepartamento" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="comboBoxCargo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -49,6 +49,7 @@
                   <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelarAction" text="Cancelar" />
                </children>
             </HBox>
+            <DatePicker fx:id="dpDataNascimento" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

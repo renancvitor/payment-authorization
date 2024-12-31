@@ -19,12 +19,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import model.entities.Cargo;
 import model.entities.Departamento;
 import model.entities.Pessoa;
@@ -53,7 +54,7 @@ public class FuncionarioFormController implements Initializable {
 	private TextField txtNome;
 	
 	@FXML
-	private TextField txtDataNascimento;
+	private DatePicker dpDataNascimento;
 	
 	@FXML
 	private ComboBox<Departamento> comboBoxDepartamento;
@@ -126,10 +127,12 @@ public class FuncionarioFormController implements Initializable {
 		}
 		obj.setNome(txtNome.getText());
 		
-		if (txtDataNascimento.getText() == null || txtDataNascimento.getText().trim().equals("")) {
+		if (dpDataNascimento.getPromptText() == null || dpDataNascimento.getPromptText().trim().equals("")) {
 			exception.addError("datanascimento", "Campo não pode ser vazio.");
 		}
-		String dataNascimentoText = txtDataNascimento.getText();
+		
+		String dataNascimentoText = dpDataNascimento.getPromptText();
+		
 	    try {
 	        LocalDate dataNascimento = LocalDate.parse(dataNascimentoText, formatter);
 	        obj.setDatanascimento(dataNascimento);
@@ -166,8 +169,8 @@ public class FuncionarioFormController implements Initializable {
 	public void initializeNodes() {
         Constraints.setTextFieldInteger(txtId);
         Constraints.setTextFieldMaxLength(txtNome, 30);
-        Constraints.setTextFieldInteger(txtDataNascimento);
         Constraints.setTextFieldInteger(txtCpf);
+        utils.formatDatePicker(dpDataNascimento, "dd/MM/yyyy");
         
         comboBoxDepartamento.getItems().clear();
         comboBoxCargo.getItems().clear();
@@ -252,9 +255,10 @@ public class FuncionarioFormController implements Initializable {
 		// txtDataNascimento.setText(funcionario.getDatanascimento().format(formatter));
 		
 		if (funcionario.getDatanascimento() != null) {
-	        txtDataNascimento.setText(funcionario.getDatanascimento().format(formatter));
+			dpDataNascimento.setValue(funcionario.getDatanascimento());
+			// dpDataNascimento.setPromptText(funcionario.getDatanascimento().format(formatter));
 	    } else {
-	        txtDataNascimento.setText("");
+	    	dpDataNascimento.setPromptText("");
 	    }
 		
 		/*String dataNascimentoStr = (funcionario.getDatanascimento() != null) 
