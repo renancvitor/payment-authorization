@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,38 +25,61 @@ import model.entities.Usuario;
 import model.services.UserLoginService;
 
 public class Main extends Application {
-    
+
     private static Scene mainScene;
 
     private TextField usernameField;
     private PasswordField passwordField;
     private Button loginButton;
-    private Button alterarSenhaButton; // Novo botão
+    private Button alterarSenhaButton;
     private Label labelErrorLogin;
     private Label labelErrorSenha;
 
     @Override
     public void start(Stage primaryStage) {
-        VBox loginBox = new VBox(10);
+        GridPane loginGrid = new GridPane();
+        loginGrid.setVgap(10);
+        loginGrid.setHgap(10);
+        loginGrid.setStyle("-fx-padding: 20; -fx-background-color: #f0f0f0;");
 
+        // Label "Login"
+        Label labelLogin = new Label("Login:");
+        loginGrid.add(labelLogin, 0, 0);
+
+        // Campo de texto para Login
         usernameField = new TextField();
         usernameField.setPromptText("Nome de usuário");
+        loginGrid.add(usernameField, 1, 0);
 
+        // Label "Senha"
+        Label labelSenha = new Label("Senha:");
+        loginGrid.add(labelSenha, 0, 1);
+
+        // Campo de texto para Senha
         passwordField = new PasswordField();
         passwordField.setPromptText("Senha");
+        loginGrid.add(passwordField, 1, 1);
 
-        loginButton = new Button("Login");
-        loginButton.setOnAction(this::onBtEntrarAction);
-
-        alterarSenhaButton = new Button("Alterar Senha"); // Novo botão
-        alterarSenhaButton.setOnAction(this::onBtAlterarSenhaAction); // Ação para abrir a tela de alteração de senha
-
+        // Labels de erro
         labelErrorLogin = new Label();
         labelErrorSenha = new Label();
+        loginGrid.add(labelErrorLogin, 1, 2);
+        loginGrid.add(labelErrorSenha, 1, 3);
 
-        loginBox.getChildren().addAll(usernameField, passwordField, loginButton, alterarSenhaButton, labelErrorLogin, labelErrorSenha);
+        // Botão de Login
+        loginButton = new Button("Login");
+        loginButton.setOnAction(this::onBtEntrarAction);
+        loginGrid.add(loginButton, 0, 4);
 
-        Scene loginScene = new Scene(loginBox, 300, 250); // Tamanho ajustado para incluir o novo botão
+        // Botão Alterar Senha
+        alterarSenhaButton = new Button("Alterar Senha");
+        alterarSenhaButton.setOnAction(this::onBtAlterarSenhaAction);
+        loginGrid.add(alterarSenhaButton, 1, 4);
+
+        // Ajustar o alinhamento dos elementos para ficar centralizado
+        loginGrid.setStyle("-fx-padding: 20; -fx-alignment: center;");
+
+        Scene loginScene = new Scene(loginGrid, 300, 250);
         primaryStage.setTitle("Tela de Login");
         primaryStage.setScene(loginScene);
         primaryStage.show();
