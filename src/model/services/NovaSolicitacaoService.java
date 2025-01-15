@@ -15,11 +15,7 @@ public class NovaSolicitacaoService {
 	}
 
 	public void saveOrUpdate(NovaSolicitacao obj) {
-		if (obj.getId() == null) {
-			dao.insert(obj);
-		} else {
-			dao.update(obj);
-		}
+		dao.insert(obj);
 	}
 	
 }

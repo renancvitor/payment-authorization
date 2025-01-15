@@ -24,11 +24,14 @@ public class NovaSolicitacaoDaoJDBC implements NovaSolicitacaoDao {
             pstmt.setString(1, obj.getFornecedor());
             pstmt.setString(2, obj.getDescricao());
             pstmt.setTimestamp(3, obj.getDataCriacao());
-            pstmt.setDate(4, obj.getDataPagamento());
+            pstmt.setDate(4, new java.sql.Date(obj.getDataPagamento().getTime()));
             pstmt.setString(5, obj.getFormaPagamento());
             pstmt.setDouble(6, obj.getValorTotal());
             pstmt.setInt(7, obj.getIdUsuario());
-            pstmt.setString(8, obj.getStatus().name());
+            // pstmt.setString(8, obj.getStatus().name());
+            
+            String status = (obj.getStatus() != null) ? obj.getStatus().name() : "PENDENTE";
+            pstmt.setString(8, status);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

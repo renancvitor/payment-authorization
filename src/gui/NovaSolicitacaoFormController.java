@@ -121,22 +121,6 @@ public class NovaSolicitacaoFormController implements Initializable {
 		}
 		obj.setDescricao(txtDescricao.getText());
 		
-		/*if (dpDataPagamento.getPromptText() == null || dpDataPagamento.getPromptText().trim().equals("")) {
-			exception.addError("datapagamento", "Campo não pode ser vazio.");
-		}
-		String dataPagamentoText = dpDataPagamento.getPromptText();
-	    if (dataPagamentoText != null && !dataPagamentoText.isEmpty()) {
-	        try {
-	            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-	            Date dataPagamento = dateFormatter.parse(dataPagamentoText);
-	            obj.setDataPagamento(dataPagamento);
-	        } catch (Exception e) {
-	            System.out.println("Data de pagamento inválida! Por favor, insira a data no formato dd/MM/yyyy.");
-	        }
-	    } else {
-	        obj.setDataPagamento(null);
-	    }*/
-		
 		if (dpDataPagamento.getValue() == null) {
 		    exception.addError("datapagamento", "Campo não pode ser vazio.");
 		} else {

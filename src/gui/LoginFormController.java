@@ -13,12 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.dao.DaoFactory;
@@ -47,7 +48,7 @@ public class LoginFormController implements Initializable {
 	private Button btAlterarSenha;
 	
 	@FXML
-	public void onBtEntrarAction() throws NoSuchAlgorithmException {
+	public void onBtEntrarAction(ActionEvent event) throws NoSuchAlgorithmException {
 		String login = txtLogin.getText().trim();
         String senha = txtSenha.getText().trim();
 
@@ -68,8 +69,23 @@ public class LoginFormController implements Initializable {
         Usuario usuario = validarLogin(login, senha);
 
         if (usuario != null) {
-            Alerts.showAlert("Login Bem-Sucedido", null, "Bem-vindo, " + usuario.getLogin() + "!", AlertType.INFORMATION);
-            System.out.println("Usuário logado: " + usuario.getLogin());
+            try {                
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));
+                ScrollPane mainPane = loader.load();
+
+                Stage loginStage = (Stage) btEntrar.getScene().getWindow();
+                loginStage.close();
+
+                Stage primaryStage = new Stage();
+                Scene newScene = new Scene(mainPane);
+                primaryStage.setScene(newScene);
+                primaryStage.setTitle("Main View");
+                primaryStage.show();
+                
+            } catch (IOException e) {
+                Alerts.showAlert("Erro", "Não foi possível carregar a tela principal.", e.getMessage(), AlertType.ERROR);
+                e.printStackTrace();
+            }
         } else {
             Alerts.showAlert("Erro de Login", null, "Usuário ou senha inválidos.", AlertType.WARNING);
         }

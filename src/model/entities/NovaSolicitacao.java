@@ -65,8 +65,8 @@ public class NovaSolicitacao {
         this.dataCriacao = dataCriacao;
     }
 
-    public java.sql.Date getDataPagamento() {
-        return (java.sql.Date) dataPagamento;
+    public Date getDataPagamento() {
+        return dataPagamento;
     }
 
     public void setDataPagamento(Date dataPagamento) {

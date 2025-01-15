@@ -192,7 +192,12 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.showAndWait();
+			
+			if (pane == null || dialogStage == null) {
+			    System.out.println("Erro: pane ou dialogStage está nulo.");
+			} else {
+			    dialogStage.showAndWait();
+			}
 			
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);

@@ -127,18 +127,17 @@ public class FuncionarioFormController implements Initializable {
 		}
 		obj.setNome(txtNome.getText());
 		
-		if (dpDataNascimento.getPromptText() == null || dpDataNascimento.getPromptText().trim().equals("")) {
-			exception.addError("datanascimento", "Campo não pode ser vazio.");
+		if (dpDataNascimento.getValue() == null) {
+		    exception.addError("datanascimento", "Campo não pode ser vazio.");
+		} else {
+		    try {
+		        LocalDate dataNascimento = dpDataNascimento.getValue();
+		        obj.setDatanascimento(dataNascimento);
+		    } catch (Exception e) {
+		        exception.addError("datanascimento", "Data inválida! Por favor, insira uma data no formato dd/MM/yyyy.");
+		    }
 		}
-		
-		String dataNascimentoText = dpDataNascimento.getPromptText();
-		
-	    try {
-	        LocalDate dataNascimento = LocalDate.parse(dataNascimentoText, formatter);
-	        obj.setDatanascimento(dataNascimento);
-	    } catch (Exception e) {
-	        System.out.println("Data inválida! Por favor, insira a data no formato dd/MM/yyyy.");
-	    }
+
 	    
 	    obj.setDepartamento(comboBoxDepartamento.getValue());
 	    obj.setCargo(comboBoxCargo.getValue());

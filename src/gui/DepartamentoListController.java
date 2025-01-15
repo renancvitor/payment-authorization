@@ -71,9 +71,6 @@ public class DepartamentoListController implements Initializable, DataChangeList
 	}
 	
 	public void updateTableView() {
-		if (service == null) {
-			throw new IllegalStateException("Service was null");
-		}
 		List<Departamento> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		tableViewDepartamento.setItems(obsList);
