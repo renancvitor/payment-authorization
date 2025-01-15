@@ -25,13 +25,15 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.NovaSolicitacao;
+import model.entities.Usuario;
 import model.exceptions.ValidationException;
 import model.services.NovaSolicitacaoService;
+import model.services.UserLoginService;
 
 public class NovaSolicitacaoFormController implements Initializable {
 	
 	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-	
+		
 	private NovaSolicitacao novaSolicitacao;
 	
 	private NovaSolicitacaoService novaSolicitacaoService;
@@ -89,8 +91,11 @@ public class NovaSolicitacaoFormController implements Initializable {
 	@FXML
 	public void onBtEnviarAction(ActionEvent event) {
 		try {
+			UserLoginService user = new UserLoginService();
+			int idUsuario = user.getUsuarioLogado().getId();
+			
 			novaSolicitacao = getFormData();
-			novaSolicitacaoService.saveOrUpdate(novaSolicitacao);
+			novaSolicitacaoService.saveOrUpdate(novaSolicitacao, idUsuario);
 			notifyDataChangeListeners();
 			utils.currentStage(event).close();
 		} catch (ValidationException e) {
@@ -125,8 +130,8 @@ public class NovaSolicitacaoFormController implements Initializable {
 		    exception.addError("datapagamento", "Campo não pode ser vazio.");
 		} else {
 		    LocalDate dataPagamentoLocalDate = dpDataPagamento.getValue();
-		    Date dataPagamento = Date.from(dataPagamentoLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		    obj.setDataPagamento(dataPagamento);
+		   // Date dataPagamento = Date.from(dataPagamentoLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		    obj.setDataPagamento(dataPagamentoLocalDate);
 		}
 
 		
@@ -174,7 +179,7 @@ public class NovaSolicitacaoFormController implements Initializable {
 		//txtDataPagamento.setText(dateFormatter.format(novaSolicitacao.getDataPagamento()));
 		
 		if (novaSolicitacao.getDataPagamento() != null) {
-			dpDataPagamento.setValue(LocalDate.ofInstant(novaSolicitacao.getDataPagamento().toInstant(), ZoneId.systemDefault()));
+			dpDataPagamento.setValue(novaSolicitacao.getDataPagamento());
 	        // dpDataPagamento.setValue(dateFormatter.format(novaSolicitacao.getDataPagamento()));
 	    } else {
 	        dpDataPagamento.setPromptText("");

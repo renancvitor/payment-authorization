@@ -46,7 +46,7 @@
                </padding>
             </Label>
             <ToolBar prefHeight="40.0" prefWidth="200.0" />
-            <Button mnemonicParsing="false" text="Logout">
+            <Button fx:id="buttonLogout" mnemonicParsing="false" onAction="#onMenuItemLogoutAction" text="Logout">
                <VBox.margin>
                   <Insets left="10.0" top="200.0" />
                </VBox.margin>

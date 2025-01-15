@@ -1,7 +1,7 @@
 package model.entities;
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class NovaSolicitacao {
 	
@@ -10,14 +10,14 @@ public class NovaSolicitacao {
     private String fornecedor;
     private String descricao;
     private Timestamp dataCriacao;
-    private Date dataPagamento;
+    private LocalDate dataPagamento;
     private String formaPagamento;
     private double valorTotal;
     private int idUsuario;
     private StatusSolicitacao status;
     private String login;
 
-    public NovaSolicitacao(Integer id, String fornecedor, String descricao, Timestamp dataCriacao, Date dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
+    public NovaSolicitacao(Integer id, String fornecedor, String descricao, Timestamp dataCriacao, LocalDate dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.descricao = descricao;
@@ -65,11 +65,11 @@ public class NovaSolicitacao {
         this.dataCriacao = dataCriacao;
     }
 
-    public Date getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(Date dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 

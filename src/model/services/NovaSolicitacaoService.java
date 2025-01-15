@@ -14,8 +14,8 @@ public class NovaSolicitacaoService {
 		return null;
 	}
 
-	public void saveOrUpdate(NovaSolicitacao obj) {
-		dao.insert(obj);
+	public void saveOrUpdate(NovaSolicitacao obj, int idUsuario) {
+		dao.insert(obj, idUsuario);
 	}
 	
 }

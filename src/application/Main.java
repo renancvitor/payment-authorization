@@ -37,51 +37,45 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+    	
         GridPane loginGrid = new GridPane();
         loginGrid.setVgap(10);
         loginGrid.setHgap(10);
         loginGrid.setStyle("-fx-padding: 20; -fx-background-color: #f0f0f0;");
 
-        // Label "Login"
         Label labelLogin = new Label("Login:");
         loginGrid.add(labelLogin, 0, 0);
 
-        // Campo de texto para Login
         usernameField = new TextField();
         usernameField.setPromptText("Nome de usuário");
         loginGrid.add(usernameField, 1, 0);
 
-        // Label "Senha"
         Label labelSenha = new Label("Senha:");
         loginGrid.add(labelSenha, 0, 1);
 
-        // Campo de texto para Senha
         passwordField = new PasswordField();
         passwordField.setPromptText("Senha");
         loginGrid.add(passwordField, 1, 1);
 
-        // Labels de erro
         labelErrorLogin = new Label();
         labelErrorSenha = new Label();
         loginGrid.add(labelErrorLogin, 1, 2);
         loginGrid.add(labelErrorSenha, 1, 3);
 
-        // Botão de Login
         loginButton = new Button("Login");
         loginButton.setOnAction(this::onBtEntrarAction);
         loginGrid.add(loginButton, 0, 4);
 
-        // Botão Alterar Senha
         alterarSenhaButton = new Button("Alterar Senha");
         alterarSenhaButton.setOnAction(this::onBtAlterarSenhaAction);
         loginGrid.add(alterarSenhaButton, 1, 4);
 
-        // Ajustar o alinhamento dos elementos para ficar centralizado
         loginGrid.setStyle("-fx-padding: 20; -fx-alignment: center;");
 
-        Scene loginScene = new Scene(loginGrid, 300, 250);
+        Scene loginScene = new Scene(loginGrid);
         primaryStage.setTitle("Tela de Login");
         primaryStage.setScene(loginScene);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
@@ -107,26 +101,35 @@ public class Main extends Application {
             Usuario usuario = validarLogin(login, senha);
 
             if (usuario != null) {
+            	UserLoginService.setUsuarioLogado(usuario);
                 loadMainView(event);
             } else {
                 Alerts.showAlert("Erro de Login", null, "Usuário ou senha inválidos.", AlertType.WARNING);
             }
-        } catch (NoSuchAlgorithmException | SQLException e) {
+        } catch (NoSuchAlgorithmException e) {
             Alerts.showAlert("Erro de Conexão", null, "Erro ao conectar ao banco de dados. Tente novamente mais tarde.", AlertType.ERROR);
             e.printStackTrace();
         }
     }
 
-    private Usuario validarLogin(String login, String senha) throws NoSuchAlgorithmException, SQLException {
-        UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
-        Usuario usuario = usuarioDao.getUsuarioByLogin(login, senha);
-
-        if (usuario != null) {
-            UserLoginService.setUsuarioLogado(usuario);
-            return usuario;
-        }
-        return null;
-    }
+    private Usuario validarLogin(String login, String senha) throws NoSuchAlgorithmException {
+		try {
+			UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
+	        Usuario usuario = usuarioDao.getUsuarioByLogin(login, senha);
+			
+			if (usuario != null) {
+				UserLoginService.setUsuarioLogado(usuario);
+				return usuario;
+			} else {
+                Alerts.showAlert("Erro de Login", null, "Usuário ou senha inválidos.", AlertType.WARNING);
+            }
+		} catch (SQLException e) {
+			Alerts.showAlert("Erro de Conexão", null, "Erro ao conectar ao banco de dados. Tente novamente mais tarde.", AlertType.ERROR);
+            e.printStackTrace();
+		}
+		
+		return null;
+	}
 
     private void loadMainView(ActionEvent event) {
         try {
@@ -139,6 +142,11 @@ public class Main extends Application {
             scrollPane.setFitToWidth(true);
 
             mainScene = new Scene(scrollPane);
+            
+            if (UserLoginService.getUsuarioLogado() == null) {
+                Alerts.showAlert("Erro de Login", "Usuário não logado", "Você precisa fazer login para acessar a tela principal.", AlertType.ERROR);
+                return;
+            }
 
             Stage loginStage = (Stage) loginButton.getScene().getWindow();
             loginStage.close();

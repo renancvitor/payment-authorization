@@ -13,4 +13,13 @@ public class UserLoginService {
 	public static Usuario getUsuarioLogado() {
         return usuarioLogado;
     }
+	
+	public static boolean isUsuarioLogado() {
+        return usuarioLogado != null;
+    }
+	
+	public static void logout() {
+        usuarioLogado = null;
+    }
+	
 }

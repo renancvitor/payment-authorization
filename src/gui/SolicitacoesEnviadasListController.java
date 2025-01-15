@@ -160,10 +160,6 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	}
 	
 	public void updateTableView() {
-		if (service == null) {
-			throw new IllegalStateException("Service was null");
-			
-		}
 		int idTipoUsuario = 0;
 		int idUser = 0;
 		
@@ -187,17 +183,18 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Enter cargo data");
+			dialogStage.setTitle("Enter solicitação data");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			
-			if (pane == null || dialogStage == null) {
+			/*if (pane == null || dialogStage == null) {
 			    System.out.println("Erro: pane ou dialogStage está nulo.");
 			} else {
 			    dialogStage.showAndWait();
-			}
+			}*/
+			dialogStage.showAndWait();
 			
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
