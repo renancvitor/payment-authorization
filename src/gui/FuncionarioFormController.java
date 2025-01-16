@@ -168,7 +168,8 @@ public class FuncionarioFormController implements Initializable {
 	public void initializeNodes() {
         Constraints.setTextFieldInteger(txtId);
         Constraints.setTextFieldMaxLength(txtNome, 30);
-        Constraints.setTextFieldInteger(txtCpf);
+        //Constraints.setTextFieldInteger(txtCpf);
+        utils.applyCpfMask(txtCpf);
         utils.formatDatePicker(dpDataNascimento, "dd/MM/yyyy");
         
         comboBoxDepartamento.getItems().clear();

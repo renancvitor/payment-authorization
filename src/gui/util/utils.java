@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -133,5 +134,44 @@ public class utils {
 			}
 		});
 	}
+	
+	public static void applyCpfMask(TextField textField) {
+	    textField.textProperty().addListener((obs, oldValue, newValue) -> {
+	        // Verifica se o newValue é nulo
+	        if (newValue != null) {
+	            // Remove caracteres não numéricos
+	            String numericValue = newValue.replaceAll("[^\\d]", "");
+
+	            // Limita a entrada a 11 dígitos
+	            if (numericValue.length() > 11) {
+	                numericValue = numericValue.substring(0, 11);
+	            }
+
+	            // Formata o CPF
+	            StringBuilder formattedCpf = new StringBuilder();
+	            if (numericValue.length() > 3) {
+	                formattedCpf.append(numericValue.substring(0, 3)).append(".");
+	                if (numericValue.length() > 6) {
+	                    formattedCpf.append(numericValue.substring(3, 6)).append(".");
+	                    if (numericValue.length() > 9) {
+	                        formattedCpf.append(numericValue.substring(6, 9)).append("-");
+	                        formattedCpf.append(numericValue.substring(9));
+	                    } else {
+	                        formattedCpf.append(numericValue.substring(6));
+	                    }
+	                } else {
+	                    formattedCpf.append(numericValue.substring(3));
+	                }
+	            } else {
+	                formattedCpf.append(numericValue);
+	            }
+
+	            // Atualiza o texto no campo
+	            textField.setText(formattedCpf.toString());
+	            textField.positionCaret(formattedCpf.length()); // Mantém o cursor no final
+	        }
+	    });
+	}
+
 
 }
