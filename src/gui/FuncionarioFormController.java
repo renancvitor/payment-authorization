@@ -168,7 +168,6 @@ public class FuncionarioFormController implements Initializable {
 	public void initializeNodes() {
         Constraints.setTextFieldInteger(txtId);
         Constraints.setTextFieldMaxLength(txtNome, 30);
-        //Constraints.setTextFieldInteger(txtCpf);
         utils.applyCpfMask(txtCpf);
         utils.formatDatePicker(dpDataNascimento, "dd/MM/yyyy");
         
@@ -252,20 +251,12 @@ public class FuncionarioFormController implements Initializable {
 	public void updateFormData() {
 		txtId.setText(String.valueOf(funcionario.getId()));
 		txtNome.setText(funcionario.getNome());
-		// txtDataNascimento.setText(funcionario.getDatanascimento().format(formatter));
 		
 		if (funcionario.getDatanascimento() != null) {
 			dpDataNascimento.setValue(funcionario.getDatanascimento());
-			// dpDataNascimento.setPromptText(funcionario.getDatanascimento().format(formatter));
 	    } else {
 	    	dpDataNascimento.setPromptText("");
 	    }
-		
-		/*String dataNascimentoStr = (funcionario.getDatanascimento() != null) 
-                ? funcionario.getDatanascimento().format(formatter) 
-                : "Data não informada";
-
-		txtDataNascimento.setText(dataNascimentoStr);*/
 		
 		comboBoxDepartamento.setValue(funcionario.getDepartamento());
 		comboBoxCargo.setValue(funcionario.getCargo());

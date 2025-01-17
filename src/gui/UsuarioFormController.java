@@ -140,6 +140,7 @@ public class UsuarioFormController implements Initializable {
 		Constraints.setTextFieldInteger(txtId);
 		Constraints.setTextFieldMaxLength(txtLogin, 10);
 		Constraints.setTextFieldMaxLength(txtSenha, 8);
+		utils.applyCpfMask(txtCpf);
 		
 		comboBoxUserType.getItems().clear();
 	}
@@ -187,6 +188,7 @@ public class UsuarioFormController implements Initializable {
 		txtLogin.setText(usuario.getLogin());
 		txtSenha.setText(usuario.getSenha());
 		txtCpf.setText(usuario.getCpf());
+		
 		comboBoxUserType.setValue(usuario.getUserType());
 	}
 	
