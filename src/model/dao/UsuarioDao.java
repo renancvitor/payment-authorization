@@ -24,4 +24,5 @@ public interface UsuarioDao {
 	Usuario getUsuarioByLogin(String login, String senha) throws SQLException, NoSuchAlgorithmException;
 	UserType getUserTypeFromId(int idTipoUsuario);
 	List<String> getPermissoesByUsuarioId(int usuarioId) throws SQLException;
+	boolean update(String username, String novaSenha);
 }

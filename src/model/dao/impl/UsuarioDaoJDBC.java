@@ -294,5 +294,20 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
         return (userType != null) ? permissaoService.getPermissoesByUserType(userType) : List.of();
     }
+	
+	@Override
+	public boolean update(String username, String novaSenha)  {
+            String senhaHash = null;
+			senhaHash = hashSenha(novaSenha);
+            String query = "UPDATE usuarios SET senha = ? WHERE login = ?";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, senhaHash);
+                stmt.setString(2, username);
+                int rowsUpdated = stmt.executeUpdate();
+                return rowsUpdated > 0;
+            } catch (SQLException e) {
+            	throw new DbException(e.getMessage());
+            }
+	}
 
 }

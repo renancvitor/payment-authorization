@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +21,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.dao.impl.UsuarioDaoJDBC;
 import model.exceptions.ValidationException;
 import model.services.AlterarSenhaService;
+import model.services.PermissaoService;
+import model.services.UsuarioService;
 
 public class AlterarSenhaFormController implements Initializable {
-	
-	private UsuarioDaoJDBC usuarioDao;
-	
-	private AlterarSenhaService alterarSenhaService;
-	
+		
+	private UsuarioService userService = new UsuarioService();
+	private AlterarSenhaService senhaService = new AlterarSenhaService();
+		
 	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
@@ -64,7 +65,7 @@ public class AlterarSenhaFormController implements Initializable {
 	}*/
 	
 	public void setAlterarSenhaService(AlterarSenhaService alterarSenhaService) {
-		this.alterarSenhaService = alterarSenhaService;
+		this.senhaService = alterarSenhaService;
 	}
 	
 	public void subscribeDataChangeListener(DataChangeListener listener) {
@@ -103,53 +104,18 @@ public class AlterarSenhaFormController implements Initializable {
 	}
 
 	private void alterarSenha(String username, String senhaAtual, String novaSenha, Stage stage) throws SQLException {
-	    ValidationException exception = new ValidationException("Validation Error");
-	    
-	    if (username == null || username.trim().isEmpty()) {
-	        exception.addError("login", "Campo não pode ser vazio.");
-	    }
-	    if (senhaAtual == null || senhaAtual.trim().isEmpty()) {
-	        exception.addError("senhaatual", "Campo não pode ser vazio.");
-	    }
-	    if (novaSenha == null || novaSenha.trim().isEmpty()) {
-	        exception.addError("novasenha", "Campo não pode ser vazio.");
-	    }
-	    if (!txtNovaSenha.getText().equals(txtRepetirNovaSenha.getText())) {
-	        exception.addError("repetirnovasenha", "As senhas não coincidem.");
-	    }
-	    if (!exception.getErrors().isEmpty()) {
-	        throw exception;
-	    }
-
-	    if (!usuarioDao.verificarSenhaPorUsuario(username, senhaAtual)) {
-	        Alerts.showAlert(
-	            "Erro",
-	            null,
-	            "Nome de usuário ou senha atual inválidos.",
-	            Alert.AlertType.ERROR
-	        );
-	        return;
-	    }
-
-	    boolean sucesso = alterarSenhaService.saveOrUpdate(username, novaSenha);
-
-	    if (sucesso) {
-	        Alerts.showAlert(
-	            "Sucesso",
-	            null,
-	            "Senha alterada com sucesso.",
-	            Alert.AlertType.INFORMATION
-	        );
-	        stage.close();
-	    } else {
-	        Alerts.showAlert(
-	            "Erro",
-	            null,
-	            "Erro ao alterar a senha.",
-	            Alert.AlertType.ERROR
-	        );
-	    }
+	    if (userService.verificarSenha(username, senhaAtual)) {
+		    if (senhaService.saveOrUpdate(username, novaSenha)) {
+		        System.out.println("Senha alterada com sucesso.");
+		        stage.close();
+		    } else {
+		        System.out.println("Erro ao alterar a senha.");
+		    }
+		} else {
+		    System.out.println("Nome de usuário ou senha atual inválidos.");
+		}
 	}
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {

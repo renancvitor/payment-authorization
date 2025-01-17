@@ -16,6 +16,11 @@ public class UsuarioService {
 	
 	public void saveOrUpdate(Usuario usuario) {
 		dao.insert(usuario);
+		
+	}
+	
+	public boolean verificarSenha(String username, String senhaAtual) {
+		return dao.verificarSenhaPorUsuario(username, senhaAtual);
 	}
 
 }
