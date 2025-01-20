@@ -90,5 +90,5 @@ public class UserPermissionsDaoJDBC implements UserPermissionsDao {
         }
         throw new SQLException("Tipo de usuário não encontrado");
 	}
-	
+		
 }

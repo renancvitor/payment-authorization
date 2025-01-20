@@ -34,12 +34,15 @@ import model.dao.SolicitacoesEnviadasDao;
 import model.entities.NovaSolicitacao;
 import model.entities.SolicitacoesEnviadas;
 import model.entities.StatusSolicitacao;
+import model.entities.Usuario;
 import model.services.NovaSolicitacaoService;
 import model.services.SolicitacoesEnviadasService;
 
 public class SolicitacoesEnviadasListController implements Initializable, DataChangeListener {
 	
 	private SolicitacoesEnviadasService service;
+	
+	private Usuario usuario;
 		
 	@FXML
 	private TableView<SolicitacoesEnviadas> tableViewSolicitacoesEnviadas;
@@ -159,16 +162,19 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 		tableViewSolicitacoesEnviadas.prefHeightProperty().bind(stage.heightProperty());
 	}
 	
-	public void updateTableView() {
-		int idTipoUsuario = 0;
-		int idUser = 0;
+	public void updateTableView(Usuario usuarioAtual) {
+		usuario = usuarioAtual;
+		int idTipoUsuario = usuario.getUserType().getId();
+		int idUser = usuario.getId();
 		
 		List<SolicitacoesEnviadas> list = service.findAll(idTipoUsuario, idUser);
 		obsList = FXCollections.observableArrayList(list);
 		tableViewSolicitacoesEnviadas.setItems(obsList);
 		
-		initApproveColumn();
-		initReproveColumn();
+		if (isExibirAprovarReprovar(usuario)) {
+			initApproveColumn();
+			initReproveColumn();
+		}		
 	}
 	
 	private void createDialogForm(NovaSolicitacao obj, String absoluteName, Stage parentStage) {
@@ -188,12 +194,7 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
-			
-			/*if (pane == null || dialogStage == null) {
-			    System.out.println("Erro: pane ou dialogStage está nulo.");
-			} else {
-			    dialogStage.showAndWait();
-			}*/
+
 			dialogStage.showAndWait();
 			
 		} catch (IOException e) {
@@ -203,7 +204,7 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	
 	@Override
 	public void onDataChanged() {
-		updateTableView();
+		updateTableView(usuario);
 	}
 	
 	private void aprovarSolicitacao(SolicitacoesEnviadas solicitacao) throws SQLException {
@@ -272,6 +273,14 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	            });
 	        }
 		});
+	}
+	
+	public boolean isExibirAprovarReprovar(Usuario usuarioPermissao) {
+		if (usuarioPermissao.getUserType().getId() == 1 || usuarioPermissao.getUserType().getId() == 2) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }
