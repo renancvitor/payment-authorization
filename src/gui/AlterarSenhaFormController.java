@@ -101,13 +101,13 @@ public class AlterarSenhaFormController implements Initializable {
 	private void alterarSenha(String username, String senhaAtual, String novaSenha, Stage stage) throws SQLException {
 	    if (userService.verificarSenha(username, senhaAtual)) {
 		    if (senhaService.saveOrUpdate(username, novaSenha)) {
-		        System.out.println("Senha alterada com sucesso.");
+		        Alerts.showAlert("Sucesso!", null, "Senha alterada com sucesso.", Alert.AlertType.CONFIRMATION);
 		        stage.close();
 		    } else {
-		        System.out.println("Erro ao alterar a senha.");
+		    	Alerts.showAlert("Erro", null, "Erro ao alterar a senha.", Alert.AlertType.ERROR);
 		    }
 		} else {
-		    System.out.println("Nome de usuário ou senha atual inválidos.");
+		    Alerts.showAlert("Erro", null, "Erro ao alterar a senha.", Alert.AlertType.ERROR);
 		}
 	}
 
