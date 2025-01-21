@@ -93,7 +93,7 @@ public class UsuarioFormController implements Initializable {
 		} catch (ValidationException e) {
 			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
-			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("Erro ao salvar.", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
 	
@@ -106,7 +106,7 @@ public class UsuarioFormController implements Initializable {
 	private Usuario getFormData() {
 		Usuario usuario = new Usuario(txtLogin.getText(), txtSenha.getText(), txtCpf.getText(), comboBoxUserType.getValue());
 		
-		ValidationException exception = new ValidationException("Validation Error");
+		ValidationException exception = new ValidationException("Erro de validação.");
 		
 		if (txtLogin.getText() == null || txtLogin.getText().trim().equals("")) {
 			exception.addError("login", "Campo não pode ser vazio.");

@@ -94,7 +94,7 @@ public class UsuarioListController implements Initializable, DataChangeListener 
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Enter cargo data");
+			dialogStage.setTitle("Cadastrar usuário");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);

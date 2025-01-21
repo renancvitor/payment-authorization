@@ -189,7 +189,7 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Enter solicitação data");
+			dialogStage.setTitle("Cadastrar solicitação");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);

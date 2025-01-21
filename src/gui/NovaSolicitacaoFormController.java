@@ -101,7 +101,7 @@ public class NovaSolicitacaoFormController implements Initializable {
 		} catch (ValidationException e) {
 			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
-			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("Erro ao salvar.", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
 	
@@ -114,7 +114,7 @@ public class NovaSolicitacaoFormController implements Initializable {
 	private NovaSolicitacao getFormData() {
 		NovaSolicitacao obj = new NovaSolicitacao();
 		
-		ValidationException exception = new ValidationException("Validation Error");
+		ValidationException exception = new ValidationException("Erro de validação.");
 		
 		if (txtFornecedor.getText() == null || txtFornecedor.getText().trim().equals("")) {
 			exception.addError("fornecedor", "Campo não pode ser vazio.");
@@ -129,8 +129,7 @@ public class NovaSolicitacaoFormController implements Initializable {
 		if (dpDataPagamento.getValue() == null) {
 		    exception.addError("datapagamento", "Campo não pode ser vazio.");
 		} else {
-		    LocalDate dataPagamentoLocalDate = dpDataPagamento.getValue();
-		   // Date dataPagamento = Date.from(dataPagamentoLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		    LocalDate dataPagamentoLocalDate = dpDataPagamento.getValue(); 
 		    obj.setDataPagamento(dataPagamentoLocalDate);
 		}
 
@@ -176,11 +175,9 @@ public class NovaSolicitacaoFormController implements Initializable {
 	public void updateFormData() {
 		txtFornecedor.setText(novaSolicitacao.getFornecedor());
 		txtDescricao.setText(novaSolicitacao.getDescricao());
-		//txtDataPagamento.setText(dateFormatter.format(novaSolicitacao.getDataPagamento()));
 		
 		if (novaSolicitacao.getDataPagamento() != null) {
 			dpDataPagamento.setValue(novaSolicitacao.getDataPagamento());
-	        // dpDataPagamento.setValue(dateFormatter.format(novaSolicitacao.getDataPagamento()));
 	    } else {
 	        dpDataPagamento.setPromptText("");
 	    }

@@ -107,7 +107,7 @@ public class LoginFormController implements Initializable {
 			controller.setAlterarSenhaService(null);
 			
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Alterar Senhaa");
+			dialogStage.setTitle("Alterar Senha");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);

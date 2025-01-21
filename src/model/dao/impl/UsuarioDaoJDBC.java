@@ -12,7 +12,6 @@ import java.util.List;
 import db.DB;
 import db.DbException;
 import gui.util.Alerts;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.dao.UsuarioDao;
 import model.entities.UserType;

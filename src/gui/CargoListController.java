@@ -91,7 +91,7 @@ public class CargoListController implements Initializable, DataChangeListener {
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Enter cargo data");
+			dialogStage.setTitle("Cadastrar cargo");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);

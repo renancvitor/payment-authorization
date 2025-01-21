@@ -88,7 +88,7 @@ public class DepartamentoListController implements Initializable, DataChangeList
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Digite os dados do departamento");
+			dialogStage.setTitle("Cadastrar departamento.");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);

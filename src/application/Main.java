@@ -73,7 +73,7 @@ public class Main extends Application {
         loginGrid.setStyle("-fx-padding: 20; -fx-alignment: center;");
 
         Scene loginScene = new Scene(loginGrid);
-        primaryStage.setTitle("Tela de Login");
+        primaryStage.setTitle("Login");
         primaryStage.setScene(loginScene);
         primaryStage.setResizable(true);
         primaryStage.show();

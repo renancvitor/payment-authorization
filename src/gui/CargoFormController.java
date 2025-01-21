@@ -68,7 +68,7 @@ public class CargoFormController implements Initializable {
 		} catch (ValidationException e) {
 			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
-			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("Erro ao salvar.", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class CargoFormController implements Initializable {
 	private Cargo getFormData() {
 		Cargo obj = new Cargo();
 		
-		ValidationException exception = new ValidationException("Validation Error");
+		ValidationException exception = new ValidationException("Erro de validação.");
 			
 		obj.setId(utils.tryParseToInt(txtId.getText()));
 		

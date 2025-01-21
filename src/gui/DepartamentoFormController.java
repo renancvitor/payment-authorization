@@ -68,7 +68,7 @@ public class DepartamentoFormController implements Initializable {
 		} catch (ValidationException e) {
 			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
-			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("Erro ao salvar.", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class DepartamentoFormController implements Initializable {
 	private Departamento getFormData() {
 		Departamento obj = new Departamento();
 		
-		ValidationException exception = new ValidationException("Validation Error");
+		ValidationException exception = new ValidationException("Erro de validação.");
 		
 		obj.setId(utils.tryParseToInt(txtId.getText()));
 		

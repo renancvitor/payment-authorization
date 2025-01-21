@@ -105,7 +105,7 @@ public class FuncionarioFormController implements Initializable {
 		} catch (ValidationException e) {
 			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
-			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("Erro ao salvar.", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
 	
@@ -118,7 +118,7 @@ public class FuncionarioFormController implements Initializable {
 	private Pessoa getFormData() {
 		Pessoa obj = new Pessoa();
 		
-		ValidationException exception = new ValidationException("Validation Error");
+		ValidationException exception = new ValidationException("Erro de validação");
 			
 		obj.setId(utils.tryParseToInt(txtId.getText()));
 		
