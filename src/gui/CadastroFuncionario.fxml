@@ -26,12 +26,12 @@
       </ToolBar>
       <TableView fx:id="tableViewFuncionario" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="tableColumnNome" prefWidth="75.0" text="Nome" />
+          <TableColumn fx:id="tableColumnId" prefWidth="60.0" text="ID" />
+          <TableColumn fx:id="tableColumnNome" minWidth="50.0" prefWidth="175.0" text="Nome" />
             <TableColumn fx:id="tableColumnDataNascimento" prefWidth="108.0" text="Data Nascimento" />
-            <TableColumn fx:id="tableColumnDepartamento" prefWidth="91.0" text="Departamento" />
-            <TableColumn fx:id="tableColumnCargo" prefWidth="68.0" text="Cargo" />
-            <TableColumn fx:id="tableColumnCpf" prefWidth="50.0" text="CPF" />
+            <TableColumn fx:id="tableColumnDepartamento" minWidth="90.0" prefWidth="275.0" text="Departamento" />
+            <TableColumn fx:id="tableColumnCargo" minWidth="50.0" prefWidth="175.0" text="Cargo" />
+            <TableColumn fx:id="tableColumnCpf" minWidth="20.0" prefWidth="100.0" text="CPF" />
         </columns>
       </TableView>
    </children>
