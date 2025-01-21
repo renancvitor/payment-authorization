@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.entities.Usuario;
 import model.services.CargoService;
 import model.services.DepartamentoService;
@@ -110,8 +111,20 @@ public class MainViewController implements Initializable {
 	    UserLoginService.logout();
 	    Alerts.showAlert("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION);
 
-	    // loadLoginView();
+	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
+
+	    currentStage.close();
+
+	    try {
+	        Stage loginStage = new Stage();
+	        Main mainApp = new Main();
+	        mainApp.start(loginStage);
+	    } catch (Exception e) {
+	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(), AlertType.ERROR);
+	        e.printStackTrace();
+	    }
 	}
+
 		
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {
