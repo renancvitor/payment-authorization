@@ -11,6 +11,9 @@ import java.util.List;
 
 import db.DB;
 import db.DbException;
+import gui.util.Alerts;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import model.dao.UsuarioDao;
 import model.entities.UserType;
 import model.entities.Usuario;
@@ -192,7 +195,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             stmt.setString(1, senhaHash);
             stmt.setString(2, username);
             stmt.executeUpdate();
-            System.out.println("Senha migrada para hash com sucesso para o usuário: " + username);
+            Alerts.showAlert("Sucesso", null, "Senha migrada para hash com sucesso para o usuário: " + username, AlertType.INFORMATION);
         } catch (SQLException e) {
         	throw new DbException(e.getMessage());
         }

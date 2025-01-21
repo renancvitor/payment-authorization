@@ -101,7 +101,7 @@ public class AlterarSenhaFormController implements Initializable {
 	private void alterarSenha(String username, String senhaAtual, String novaSenha, Stage stage) throws SQLException {
 	    if (userService.verificarSenha(username, senhaAtual)) {
 		    if (senhaService.saveOrUpdate(username, novaSenha)) {
-		        Alerts.showAlert("Sucesso!", null, "Senha alterada com sucesso.", Alert.AlertType.CONFIRMATION);
+		        Alerts.showAlert("Sucesso!", null, "Senha alterada com sucesso.", Alert.AlertType.INFORMATION);
 		        stage.close();
 		    } else {
 		    	Alerts.showAlert("Erro", null, "Erro ao alterar a senha.", Alert.AlertType.ERROR);
