@@ -19,8 +19,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -83,6 +85,23 @@ public class FuncionarioListController implements Initializable, DataChangeListe
 		utils.formatTableColumnLocalDate(tableColumnDataNascimento, "dd/MM/yyyy");
 		
 		tableColumnDepartamento.setCellValueFactory(new PropertyValueFactory<>("departamento"));
+		tableColumnDepartamento.setCellFactory(col -> {
+		    return new TableCell<Pessoa, Departamento>() {
+		        @Override
+		        protected void updateItem(Departamento item, boolean empty) {
+		            super.updateItem(item, empty);
+		            if (item != null && !empty) {
+		                setText(item.getNome());
+		                Tooltip tooltip = new Tooltip(item.getNome());
+		                setTooltip(tooltip);
+		            } else {
+		                setText(null);
+		                setTooltip(null);
+		            }
+		        }
+		    };
+		});
+		
 		tableColumnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
 		tableColumnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		
