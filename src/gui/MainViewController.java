@@ -65,7 +65,7 @@ public class MainViewController implements Initializable {
 		this.usuarioAtual = UserLoginService.getUsuarioLogado();
 		loadView("/gui/SolicitacoesAnalisadas.fxml", (SolicitacoesAnalisadasListController controller) -> {
 			controller.setSolicitacoesAnalisadasService(new SolicitacoesAnalisadasService());
-			controller.updateTableView();
+			controller.updateTableView(usuarioAtual);
 		});
 	}
 	

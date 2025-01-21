@@ -19,11 +19,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.entities.SolicitacoesAnalisadas;
 import model.entities.StatusSolicitacao;
+import model.entities.Usuario;
 import model.services.SolicitacoesAnalisadasService;
 
 public class SolicitacoesAnalisadasListController implements Initializable, DataChangeListener {
 	
 	private SolicitacoesAnalisadasService service;
+	
+	private Usuario usuario;
 	
 	@FXML
 	private TableView<SolicitacoesAnalisadas> tableViewSolicitacoesAnalisadas;
@@ -87,12 +90,10 @@ public class SolicitacoesAnalisadasListController implements Initializable, Data
 		tableViewSolicitacoesAnalisadas.prefHeightProperty().bind(stage.heightProperty());
 	}
 	
-	public void updateTableView() {
-		if (service == null) {
-			throw new IllegalStateException("Service was null");
-		}
-		int idTipoUsuario = 0;
-		int idUser = 0;
+	public void updateTableView(Usuario usuarioAtual) {
+		usuario = usuarioAtual;
+		int idTipoUsuario = usuario.getUserType().getId();
+		int idUser = usuario.getId();
 		StatusSolicitacao status = null;
 		
 		List<SolicitacoesAnalisadas> list = service.select(status, idTipoUsuario, idUser);
@@ -102,7 +103,7 @@ public class SolicitacoesAnalisadasListController implements Initializable, Data
 	
 	@Override
 	public void onDataChanged() {
-		updateTableView();
+		updateTableView(usuario);
 	}
 
 }
