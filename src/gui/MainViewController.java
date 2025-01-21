@@ -116,6 +116,13 @@ public class MainViewController implements Initializable {
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {
 		this.usuarioAtual = UserLoginService.getUsuarioLogado();
+		
+		if (usuarioAtual.getUserType().getId() != 1) {
+	        menuItemFuncionario.setVisible(false);
+	        menuItemUsuario.setVisible(false);
+	        menuItemDepartamento.setVisible(false);
+	        menuItemCargo.setVisible(false);
+	    }
 	}
 	
 	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
