@@ -31,13 +31,8 @@
             <Label text="Descrição" GridPane.rowIndex="1" />
             <TextField fx:id="txtFornecedor" GridPane.columnIndex="1" />
             <TextField fx:id="txtDescricao" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dpDataPagamento" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="labelErrorDescricao" textFill="#fc0a0a" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <children>
-                  <Button fx:id="btEnviar" mnemonicParsing="false" onAction="#onBtEnviarAction" text="Enviar Solicitação" />
-                  <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelarAction" text="Cancelar" />
-               </children>
-            </HBox>
             <Label text="Forma Pagamento" GridPane.rowIndex="3" />
             <Label text="Valor Total" GridPane.rowIndex="4" />
             <Label text="Data Pagamento" GridPane.rowIndex="2" />
@@ -47,7 +42,12 @@
             <Label fx:id="labelErrorValorTotal" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="txtFormaPagamento" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="txtValorTotal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="dpDataPagamento" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <children>
+                  <Button fx:id="btEnviar" mnemonicParsing="false" onAction="#onBtEnviarAction" text="Enviar Solicitação" />
+                  <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelarAction" text="Cancelar" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
    </children>
