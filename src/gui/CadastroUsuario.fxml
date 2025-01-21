@@ -27,8 +27,8 @@
       <TableView fx:id="tableViewUsuario" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="tableColumnLogin" prefWidth="75.0" text="Login" />
-            <TableColumn fx:id="tableColumnCpf" prefWidth="75.0" text="CPF" />
+          <TableColumn fx:id="tableColumnLogin" minWidth="30.0" prefWidth="125.0" text="Login" />
+            <TableColumn fx:id="tableColumnCpf" minWidth="30.0" prefWidth="125.0" text="CPF" />
         </columns>
       </TableView>
    </children>
