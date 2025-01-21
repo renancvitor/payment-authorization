@@ -33,6 +33,7 @@
             <Label text="Nome" GridPane.rowIndex="1" />
             <TextField fx:id="txtId" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dpDataNascimento" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="labelErrorNome" textFill="#ff0101" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label text="Data Nascimento" GridPane.rowIndex="2" />
             <Label text="Departamento" GridPane.rowIndex="3" />
@@ -40,16 +41,15 @@
             <Label text="CPF" GridPane.rowIndex="5" />
             <Label fx:id="labelErrorDataNascimento" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label fx:id="labelErrorCpf" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <TextField fx:id="txtCpf" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ComboBox fx:id="comboBoxDepartamento" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="comboBoxCargo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtCpf" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
                   <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#onBtSalvarAction" text="Salvar" />
                   <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelarAction" text="Cancelar" />
                </children>
             </HBox>
-            <DatePicker fx:id="dpDataNascimento" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
