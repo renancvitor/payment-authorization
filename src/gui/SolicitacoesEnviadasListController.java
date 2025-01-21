@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -143,8 +144,13 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	
 	public void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+		
 		tableColumnFornecedor.setCellValueFactory(new PropertyValueFactory<>("fornecedor"));
+		
+		
 		tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		
+		
 		tableColumnDataCriacao.setCellValueFactory(new PropertyValueFactory<>("dataCriacao"));
 		utils.formatTableColumnTimestamp(tableColumnDataCriacao, "dd/MM/yyyy");
 		
@@ -152,6 +158,8 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 		utils.formatTableColumnDate(tableColumnDataPagamento, "dd/MM/yyyy");
 		
 		tableColumnFormaPagamento.setCellValueFactory(new PropertyValueFactory<>("formaPagamento"));
+		
+		
 		tableColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
 		utils.formatTableColumnDouble(tableColumnValorTotal, 2);
 		
