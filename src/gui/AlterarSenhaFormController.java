@@ -1,7 +1,6 @@
 package gui;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +18,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.exceptions.ValidationException;
 import model.services.AlterarSenhaService;
-import model.services.PermissaoService;
 import model.services.UsuarioService;
 
 public class AlterarSenhaFormController implements Initializable {
@@ -37,13 +36,13 @@ public class AlterarSenhaFormController implements Initializable {
 	private TextField txtLogin;
 	
 	@FXML
-	private TextField txtSenhaAtual;
+	private PasswordField txtSenhaAtual;
 	
 	@FXML
-	private TextField txtNovaSenha;
+	private PasswordField txtNovaSenha;
 	
 	@FXML
-	private TextField txtRepetirNovaSenha;
+	private PasswordField txtRepetirNovaSenha;
 	
 	@FXML
 	private Label labelErrorLogin;
@@ -59,11 +58,7 @@ public class AlterarSenhaFormController implements Initializable {
 	
 	@FXML
 	private Button btSalvar;
-	
-	/*public void setAlterarSenhaUsuario(AlterarSenha alterarSenhaUsuario) {
-		this.alterarSenhaUsuario = alterarSenhaUsuario;
-	}*/
-	
+		
 	public void setAlterarSenhaService(AlterarSenhaService alterarSenhaService) {
 		this.senhaService = alterarSenhaService;
 	}
@@ -116,7 +111,6 @@ public class AlterarSenhaFormController implements Initializable {
 		}
 	}
 
-
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		initializaNodes();
@@ -125,11 +119,6 @@ public class AlterarSenhaFormController implements Initializable {
 	public void initializaNodes() {
 		Constraints.setTextFieldMaxLength(txtNovaSenha, 8);
 	}
-	
-	/*public void updateFormData() {
-		txtLogin.setText(alterarSenhaUsuario.getLogin());
-		txtSenhaAtual.setText(alterarSenhaUsuario.getSenha());
-	}*/
 	
 	private void setErrorMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();
