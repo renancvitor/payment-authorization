@@ -146,10 +146,40 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		
 		tableColumnFornecedor.setCellValueFactory(new PropertyValueFactory<>("fornecedor"));
-		
+		tableColumnFornecedor.setCellFactory(col -> {
+			return new TableCell<SolicitacoesEnviadas, String>() {
+				@Override
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item != null && !empty) {
+						setText(item);
+						Tooltip tooltip = new Tooltip(item);
+						setTooltip(tooltip);
+					} else {
+						setText(null);
+						setTooltip(null);
+					}
+				}
+			};
+		});
 		
 		tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-		
+		tableColumnDescricao.setCellFactory(col -> {
+			return new TableCell<SolicitacoesEnviadas, String>() {
+				@Override
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item != null && !empty) {
+						setText(item);
+						Tooltip tooltip = new Tooltip(item);
+						setTooltip(tooltip);
+					} else {
+						setText(null);
+						setTooltip(null);
+					}
+				}
+			};
+		});
 		
 		tableColumnDataCriacao.setCellValueFactory(new PropertyValueFactory<>("dataCriacao"));
 		utils.formatTableColumnTimestamp(tableColumnDataCriacao, "dd/MM/yyyy");
@@ -158,7 +188,22 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 		utils.formatTableColumnDate(tableColumnDataPagamento, "dd/MM/yyyy");
 		
 		tableColumnFormaPagamento.setCellValueFactory(new PropertyValueFactory<>("formaPagamento"));
-		
+		tableColumnFormaPagamento.setCellFactory(col -> {
+			return new TableCell<SolicitacoesEnviadas, String>() {
+				@Override
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item != null && !empty) {
+						setText(item);
+						Tooltip tooltip = new Tooltip(item);
+						setTooltip(tooltip);
+					} else {
+						setText(null);
+						setTooltip(null);
+					}
+				}
+			};
+		});
 		
 		tableColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
 		utils.formatTableColumnDouble(tableColumnValorTotal, 2);

@@ -34,7 +34,7 @@
             <TableColumn fx:id="tableColumnFormaPagamento" prefWidth="117.0" text="Forma Pagamento" />
             <TableColumn fx:id="tableColumnValorTotal" prefWidth="68.0" text="Valor Total" />
             <TableColumn fx:id="tableColumnLogin" prefWidth="65.0" text="Usuário" />
-            <TableColumn fx:id="tableColumnStatus" prefWidth="55.0" text="Status" />
+            <TableColumn fx:id="tableColumnStatus" prefWidth="75.0" text="Status" />
             <TableColumn fx:id="tableColumnApprove" prefWidth="75.0" />
             <TableColumn fx:id="tableColumnReprove" prefWidth="75.0" />
         </columns>
