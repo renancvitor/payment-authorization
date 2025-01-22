@@ -156,7 +156,7 @@ public class Main extends Application {
 
             Stage primaryStage = new Stage();
             primaryStage.setScene(mainScene);
-            primaryStage.setTitle("Tela Principal");
+            primaryStage.setTitle("Tela Principal - Desenvolvido por Renan");
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -175,7 +175,7 @@ public class Main extends Application {
             VBox pane = loader.load();
 
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Alterar Senha");
+            dialogStage.setTitle("Alterar Senha - Desenvolvido por Renan");
             dialogStage.setScene(new Scene(pane));
             dialogStage.setResizable(false);
             dialogStage.initOwner(parentStage);
