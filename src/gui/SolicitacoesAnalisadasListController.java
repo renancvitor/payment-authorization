@@ -8,21 +8,25 @@ import java.util.ResourceBundle;
 
 import application.Main;
 import gui.listeners.DataChangeListener;
+import gui.util.Alerts;
 import gui.util.utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.entities.SolicitacoesAnalisadas;
 import model.entities.StatusSolicitacao;
 import model.entities.Usuario;
 import model.services.SolicitacoesAnalisadasService;
+import model.services.UserLoginService;
 
 public class SolicitacoesAnalisadasListController implements Initializable, DataChangeListener {
 	
@@ -59,6 +63,28 @@ public class SolicitacoesAnalisadasListController implements Initializable, Data
 	
 	@FXML
 	private TableColumn<SolicitacoesAnalisadas, String> tableColumnLogin;
+	
+	@FXML
+	private Button buttonLogout;
+	
+	@FXML
+	public void onMenuItemLogoutAction() {
+	    UserLoginService.logout();
+	    Alerts.showAlert("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION);
+
+	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
+
+	    currentStage.close();
+
+	    try {
+	        Stage loginStage = new Stage();
+	        Main mainApp = new Main();
+	        mainApp.start(loginStage);
+	    } catch (Exception e) {
+	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(), AlertType.ERROR);
+	        e.printStackTrace();
+	    }
+	}
 	
 	private ObservableList<SolicitacoesAnalisadas> obsList;
 	

@@ -22,7 +22,7 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
           <Button fx:id="btNew" mnemonicParsing="false" onAction="#onBtNewAction" text="Novo usuário" />
-            <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="buttonLogout" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onMenuItemLogoutAction" text="Logout" />
         </items>
       </ToolBar>
       <TableView fx:id="tableViewUsuario" prefHeight="200.0" prefWidth="200.0">

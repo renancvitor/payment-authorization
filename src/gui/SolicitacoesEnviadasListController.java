@@ -38,6 +38,7 @@ import model.entities.StatusSolicitacao;
 import model.entities.Usuario;
 import model.services.NovaSolicitacaoService;
 import model.services.SolicitacoesEnviadasService;
+import model.services.UserLoginService;
 
 public class SolicitacoesEnviadasListController implements Initializable, DataChangeListener {
 	
@@ -83,6 +84,28 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	
 	@FXML
 	private Button btnNovaSolicitacao;
+	
+	@FXML
+	private Button buttonLogout;
+	
+	@FXML
+	public void onMenuItemLogoutAction() {
+	    UserLoginService.logout();
+	    Alerts.showAlert("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION);
+
+	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
+
+	    currentStage.close();
+
+	    try {
+	        Stage loginStage = new Stage();
+	        Main mainApp = new Main();
+	        mainApp.start(loginStage);
+	    } catch (Exception e) {
+	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(), AlertType.ERROR);
+	        e.printStackTrace();
+	    }
+	}
 	
 	@FXML
 	public void onBtnNovaSolicitacaoAction(ActionEvent event) {
