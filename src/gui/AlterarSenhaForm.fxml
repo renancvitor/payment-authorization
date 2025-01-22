@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="213.0" prefWidth="646.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AlterarSenhaFormController">
+<VBox prefHeight="213.0" prefWidth="646.0" spacing="10.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AlterarSenhaFormController">
    <children>
       <GridPane prefHeight="169.0" prefWidth="592.0">
          <columnConstraints>

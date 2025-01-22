@@ -73,6 +73,9 @@ public class Main extends Application {
         loginGrid.setStyle("-fx-padding: 20; -fx-alignment: center;");
 
         Scene loginScene = new Scene(loginGrid);
+        
+        loginScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        
         primaryStage.setTitle("Login");
         primaryStage.setScene(loginScene);
         primaryStage.setResizable(true);
