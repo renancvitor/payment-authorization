@@ -31,6 +31,7 @@ import model.entities.Cargo;
 import model.entities.Departamento;
 import model.entities.Pessoa;
 import model.services.FuncionarioService;
+import model.services.UserLoginService;
 
 public class FuncionarioListController implements Initializable, DataChangeListener {
 	
@@ -59,6 +60,28 @@ public class FuncionarioListController implements Initializable, DataChangeListe
 	
 	@FXML
 	private Button btNew;
+	
+	@FXML
+	private Button buttonLogout;
+	
+	@FXML
+	public void onMenuItemLogoutAction() {
+	    UserLoginService.logout();
+	    Alerts.showAlert("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION);
+
+	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
+
+	    currentStage.close();
+
+	    try {
+	        Stage loginStage = new Stage();
+	        Main mainApp = new Main();
+	        mainApp.start(loginStage);
+	    } catch (Exception e) {
+	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(), AlertType.ERROR);
+	        e.printStackTrace();
+	    }
+	}
 	
 	private ObservableList<Pessoa> obsList;
 	

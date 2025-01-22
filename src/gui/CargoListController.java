@@ -26,6 +26,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Cargo;
 import model.services.CargoService;
+import model.services.UserLoginService;
 
 public class CargoListController implements Initializable, DataChangeListener {
 	
@@ -42,6 +43,28 @@ public class CargoListController implements Initializable, DataChangeListener {
 	
 	@FXML
 	private Button btNew;
+	
+	@FXML
+	private Button buttonLogout;
+	
+	@FXML
+	public void onMenuItemLogoutAction() {
+	    UserLoginService.logout();
+	    Alerts.showAlert("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION);
+
+	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
+
+	    currentStage.close();
+
+	    try {
+	        Stage loginStage = new Stage();
+	        Main mainApp = new Main();
+	        mainApp.start(loginStage);
+	    } catch (Exception e) {
+	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(), AlertType.ERROR);
+	        e.printStackTrace();
+	    }
+	}
 	
 	private ObservableList<Cargo> obsList;
 	
