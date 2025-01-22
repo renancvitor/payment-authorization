@@ -50,9 +50,10 @@ public class CargoListController implements Initializable, DataChangeListener {
 	@FXML
 	public void onMenuItemLogoutAction() {
 	    UserLoginService.logout();
-	    Alerts.showAlert("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION);
-
+	    
 	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
+	    
+	    Alerts.showAlertWithOwner("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION, currentStage);
 
 	    currentStage.close();
 
