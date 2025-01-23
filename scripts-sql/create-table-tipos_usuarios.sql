@@ -1,0 +1,4 @@
+CREATE TABLE tipos_usuarios (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    tipo_usuario VARCHAR(255) NOT NULL
+);
