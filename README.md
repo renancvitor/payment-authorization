@@ -2,7 +2,7 @@
 
 ---
 
-<h4 align="center">🚧 Em desenvolvimento... 🚧</h4>
+<h4 align="center">🎉 Projeto concluído! 🎉</h4>
 
 ---
 
