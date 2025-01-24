@@ -1,4 +1,4 @@
-<h1 align="center">💳 Autorização Pagamento 💵</h1>
+<h1 align="center">💳 Autorização Pagamento 💵 <br> <img src="https://img.shields.io/badge/Status-Concluído-green"></h1>
 
 ---
 
@@ -15,7 +15,7 @@
 
 **Pré-requisitos**:
 - JDK 17 ou superior.
-- MySQL Server instalado e configurado.
+- MySQL Server 8.0 ou superior.
 
 ---
 
@@ -23,12 +23,22 @@
 
 Este é um projeto de um sistema para gerar requisições detalhadas de autorização de pagamentos por usuários, em que gestores têm a responsabilidade de aprovar ou reprovar as solicitações enviadas.
 
+- 🔑 **Login e Alterar Senha (GIF combinado)**: Visualize o processo de login e alteração de senha.
+  ![GIF de Login e Alterar Senha](https://github.com/renancvitor/payment-authorization/tree/main/usability-gifs/Login-AlterarSenha.gif)
+- 🏠 **Tela Principal e Logout (GIF combinado)**: Visualize a interação na tela principal e o logout do sistema.
+  ![GIF de Tela Principal e Logout](https://github.com/renancvitor/payment-authorization/tree/main/usability-gifs/TelaPrincipalLogout.gif)
 - 🏢 **Cadastrar Departamentos**: Cadastro de departamentos por usuários autorizados.
 - 👔 **Cadastrar Cargos**: Registro de cargos vinculados a departamentos.
+- 🏢👔 **Cadastrar Departamentos e Cargos (GIF combinado)**: Visualize ambas as ações em um único fluxo.  
+  ![GIF de Cadastro de Departamentos e Cargos](https://github.com/renancvitor/payment-authorization/tree/main/usability-gifs/DepartamentosCargos.gif)
 - 👦🏽 **Cadastrar Pessoas**: Inserção de pessoas no sistema por usuários com permissão.
 - 👤 **Cadastrar Usuários**: Criação de usuários para acesso ao sistema.
+- 👦🏽👤 **Cadastrar Pessoas e Usuários (GIF combinado)**: Visualize ambas as ações em um único fluxo.
+  ![GIF de Cadastro de Pessoas e Usuários](https://github.com/renancvitor/payment-authorization/tree/main/usability-gifs/FuncionariosUsuarios.gif)
 - 📝 **Cadastrar Solicitações**: Geração de solicitações de autorização de pagamento.
 - 📊 **Analisar Solicitações**: Aprovação ou reprovação de solicitações pendentes.
+- 📝📊 **Cadastrar e Analisar Solicitações (GIF combinado)**: Visualize ambas as ações em um único fluxo.
+  ![GIF de Cadastrar e Analisar Solicitações](https://github.com/renancvitor/payment-authorization/tree/main/usability-gifs/Solicitacoes.gif)
 
 ---
 
