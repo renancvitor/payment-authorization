@@ -25,16 +25,20 @@ Este é um projeto de um sistema para gerar requisições detalhadas de autoriza
 
 - 🔑 **Login e Alterar Senha (GIF combinado)**: Visualize o processo de login e alteração de senha.
   ![GIF de Login e Alterar Senha](https://raw.githubusercontent.com/renancvitor/payment-authorization/main/usability-gifs/Login-AlterarSenha.gif)
+  
 - 🏠 **Tela Principal e Logout (GIF combinado)**: Visualize a interação na tela principal e o logout do sistema.
   ![GIF de Tela Principal e Logout](https://raw.githubusercontent.com/renancvitor/payment-authorization/main/usability-gifs/TelaPrincipalLogout.gif)
+  
 - 🏢 **Cadastrar Departamentos**: Cadastro de departamentos por usuários autorizados.
 - 👔 **Cadastrar Cargos**: Registro de cargos vinculados a departamentos.
 - 🏢👔 **Cadastrar Departamentos e Cargos (GIF combinado)**: Visualize ambas as ações em um único fluxo.  
   ![GIF de Cadastro de Departamentos e Cargos](https://raw.githubusercontent.com/renancvitor/payment-authorization/main/usability-gifs/DepartamentosCargos.gif)
+  
 - 👦🏽 **Cadastrar Pessoas**: Inserção de pessoas no sistema por usuários com permissão.
 - 👤 **Cadastrar Usuários**: Criação de usuários para acesso ao sistema.
 - 👦🏽👤 **Cadastrar Pessoas e Usuários (GIF combinado)**: Visualize ambas as ações em um único fluxo.
   ![GIF de Cadastro de Pessoas e Usuários](https://raw.githubusercontent.com/renancvitor/payment-authorization/main/usability-gifs/FuncionariosUsuarios.gif)
+  
 - 📝 **Cadastrar Solicitações**: Geração de solicitações de autorização de pagamento.
 - 📊 **Analisar Solicitações**: Aprovação ou reprovação de solicitações pendentes.
 - 📝📊 **Cadastrar e Analisar Solicitações (GIF combinado)**: Visualize ambas as ações em um único fluxo.
