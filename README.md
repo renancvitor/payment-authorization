@@ -63,6 +63,6 @@ Se tiver dúvidas ou sugestões, entre em contato:
 
 ---
 
-<h2 align="center">## 📄 Licença</h2>
+<h2 align="center"> 📄 Licença</h2>
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
