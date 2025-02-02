@@ -2,7 +2,7 @@
 
 ---
 
-<h4 align="center">🎉 Projeto concluído! 🎉</h4>
+<h4 align="center">✅ Projeto concluído! ✅</h4>
 
 ---
 
@@ -65,4 +65,4 @@ Se tiver dúvidas ou sugestões, entre em contato:
 
 <h2 align="center"> 📄 Licença</h2>
 
-Este projeto está licenciado sob a [Licença MIT](LICENSE).
+Este projeto está licenciado sob a [Licença MIT](LICENSE), permitindo sua utilização, modificação e distribuição de forma livre, conforme os termos descritos.
