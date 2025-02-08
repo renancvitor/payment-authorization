@@ -33,6 +33,11 @@ public class SolicitacoesAnalisadasDaoJDBC implements SolicitacoesAnalisadasDao 
                     "INNER JOIN usuarios u ON s.id_usuario = u.id " +
                     "WHERE status IN ('APROVADA', 'REPROVADA') " +
                     "AND id_usuario = ?";
+        } else if (idTipoUsuario == 3) {
+            sql = "SELECT s.*, u.login " +
+                    "FROM solicitacoes s " +
+                    "INNER JOIN usuarios u ON s.id_usuario = u.id " +
+                    "WHERE (s.status = 'APROVADA' OR (s.status = 'REPROVADA' AND s.id_usuario = ?))";
         } else {
             sql = "SELECT " +
                     "s.*, u.login " +
@@ -43,7 +48,7 @@ public class SolicitacoesAnalisadasDaoJDBC implements SolicitacoesAnalisadasDao 
         }
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            if (idTipoUsuario == 4) {
+            if (idTipoUsuario == 4 || idTipoUsuario == 3) {
                 stmt.setInt(1, idUsuario);
             }
 
