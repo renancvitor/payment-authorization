@@ -34,8 +34,10 @@ public class SolicitacoesAnalisadasDaoJDBC implements SolicitacoesAnalisadasDao 
                     "WHERE status IN ('APROVADA', 'REPROVADA') " +
                     "AND id_usuario = ?";
         } else if (idTipoUsuario == 3) {
-            sql = "SELECT s.*, u.login " +
-                    "FROM solicitacoes s " +
+            sql = "SELECT " +
+                    "s.*, u.login " +
+                    "FROM " +
+                    "solicitacoes s " +
                     "INNER JOIN usuarios u ON s.id_usuario = u.id " +
                     "WHERE (s.status = 'APROVADA' OR (s.status = 'REPROVADA' AND s.id_usuario = ?))";
         } else {
