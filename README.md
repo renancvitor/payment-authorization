@@ -79,3 +79,4 @@ Obrigado pelo interesse em contribuir!
 <h2 align="center"> 📄 Licença</h2>
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE), permitindo sua utilização, modificação e distribuição de forma livre, conforme os termos descritos.
+ 
