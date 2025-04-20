@@ -79,5 +79,4 @@ public class CargoDaoJDBC implements CargoDao {
     	}
         return cargos;
 	}
-	
 }
