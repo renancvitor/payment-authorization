@@ -19,7 +19,8 @@ public class NovaSolicitacaoDaoJDBC implements NovaSolicitacaoDao {
 
 	@Override
 	public void insert(NovaSolicitacao obj, int idUsuario) {
-		String sql = "INSERT INTO solicitacoes (fornecedor, descricao, data_criacao, data_pagamento, forma_pagamento, valor_total, status, id_usuario) " +
+		String sql = "INSERT INTO solicitacoes (fornecedor, descricao, data_criacao, " +
+				"data_pagamento, forma_pagamento, valor_total, status, id_usuario) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
         	
@@ -44,5 +45,4 @@ public class NovaSolicitacaoDaoJDBC implements NovaSolicitacaoDao {
 	public void update(NovaSolicitacao obj) {
 		// TODO Auto-generated method stub
 	}
-
 }
