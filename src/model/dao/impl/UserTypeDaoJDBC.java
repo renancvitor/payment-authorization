@@ -49,8 +49,6 @@ public class UserTypeDaoJDBC implements UserTypeDao {
 	    } catch (SQLException e) {
 	        throw new DbException(e.getMessage());
 	    }
-
 	    return userTypes;
     }
-
 }
