@@ -10,6 +10,5 @@ public interface CargoDao {
 	void update(Cargo obj);
 	void debeteById(Cargo obj);
 	Cargo findById(Integer id);
-	// List<Cargo> findCargo();
 	List<Cargo> findAll();
 }
