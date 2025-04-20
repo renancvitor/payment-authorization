@@ -134,7 +134,8 @@ public class FuncionarioFormController implements Initializable {
 		        LocalDate dataNascimento = dpDataNascimento.getValue();
 		        obj.setDatanascimento(dataNascimento);
 		    } catch (Exception e) {
-		        exception.addError("datanascimento", "Data inválida! Por favor, insira uma data no formato dd/MM/yyyy.");
+		        exception.addError("datanascimento",
+						"Data inválida! Por favor, insira uma data no formato dd/MM/yyyy.");
 		    }
 		}
 
@@ -150,7 +151,6 @@ public class FuncionarioFormController implements Initializable {
 	    if (exception.getErrors().size() > 0) {
 			throw exception;
 		}
-			
 		return obj;
 	}
 
@@ -276,5 +276,4 @@ public class FuncionarioFormController implements Initializable {
 			labelErrorCpf.setText(errors.get("cpf"));
 		}
 	}
-	
 }
