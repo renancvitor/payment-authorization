@@ -104,7 +104,8 @@ public class UsuarioFormController implements Initializable {
 	}
 	
 	private Usuario getFormData() {
-		Usuario usuario = new Usuario(txtLogin.getText(), txtSenha.getText(), txtCpf.getText(), comboBoxUserType.getValue());
+		Usuario usuario = new Usuario(txtLogin.getText(), txtSenha.getText(), txtCpf.getText(),
+				comboBoxUserType.getValue());
 		
 		ValidationException exception = new ValidationException("Erro de validação.");
 		
@@ -205,5 +206,4 @@ public class UsuarioFormController implements Initializable {
 			labelErrorCpf.setText(errors.get("cpf"));
 		}
 	}
-	
 }
