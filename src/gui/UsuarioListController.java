@@ -56,7 +56,8 @@ public class UsuarioListController implements Initializable, DataChangeListener 
 	    
 	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
 	    
-	    Alerts.showAlertWithOwner("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION, currentStage);
+	    Alerts.showAlertWithOwner("Logout", "Você foi desconectado",
+				"Você foi desconectado do sistema.", AlertType.INFORMATION, currentStage);
 
 	    currentStage.close();
 
@@ -65,7 +66,8 @@ public class UsuarioListController implements Initializable, DataChangeListener 
 	        Main mainApp = new Main();
 	        mainApp.start(loginStage);
 	    } catch (Exception e) {
-	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(), AlertType.ERROR);
+	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login",
+					e.getMessage(), AlertType.ERROR);
 	        e.printStackTrace();
 	    }
 	}
@@ -134,5 +136,4 @@ public class UsuarioListController implements Initializable, DataChangeListener 
 	public void onDataChanged() {
 		updateTableView();
 	}
-
 }
