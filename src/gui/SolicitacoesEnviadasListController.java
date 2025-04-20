@@ -94,7 +94,8 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	    
 	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
 	    
-	    Alerts.showAlertWithOwner("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION, currentStage);
+	    Alerts.showAlertWithOwner("Logout", "Você foi desconectado",
+				"Você foi desconectado do sistema.", AlertType.INFORMATION, currentStage);
 
 	    currentStage.close();
 
@@ -103,7 +104,8 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	        Main mainApp = new Main();
 	        mainApp.start(loginStage);
 	    } catch (Exception e) {
-	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(), AlertType.ERROR);
+	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login",
+					e.getMessage(), AlertType.ERROR);
 	        e.printStackTrace();
 	    }
 	}
@@ -120,16 +122,19 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	
 	@FXML
 	public void onBtnAprovarAction() { 
-		List<SolicitacoesEnviadas> selectedSolicitacoes = tableViewSolicitacoesEnviadas.getSelectionModel().getSelectedItems();
+		List<SolicitacoesEnviadas> selectedSolicitacoes = tableViewSolicitacoesEnviadas
+				.getSelectionModel().getSelectedItems();
 	    if (selectedSolicitacoes.isEmpty()) {
-	        Alerts.showAlert("Aviso", "Aviso", "Selecione uma solicitação para aprovar.", AlertType.WARNING);
+	        Alerts.showAlert("Aviso", "Aviso",
+					"Selecione uma solicitação para aprovar.", AlertType.WARNING);
 	    } else {
 	        for (SolicitacoesEnviadas solicitacao : selectedSolicitacoes) {
 	            try {
 	                aprovarSolicitacao(solicitacao);
 	            } catch (SQLException e) {
 	                e.printStackTrace();
-	                Alerts.showAlert("Erro", "Erro", "Erro ao aprovar a solicitação: " + e.getMessage(), AlertType.ERROR);
+	                Alerts.showAlert("Erro", "Erro",
+							"Erro ao aprovar a solicitação: " + e.getMessage(), AlertType.ERROR);
 	            }
 	        }
 	    }
@@ -140,16 +145,19 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 	
 	@FXML
 	public void onBtnReprovarAction() {
-		List<SolicitacoesEnviadas> selectedSolicitacoes = tableViewSolicitacoesEnviadas.getSelectionModel().getSelectedItems();
+		List<SolicitacoesEnviadas> selectedSolicitacoes = tableViewSolicitacoesEnviadas
+				.getSelectionModel().getSelectedItems();
 	    if (selectedSolicitacoes.isEmpty()) {
-	        Alerts.showAlert("Aviso", "Aviso", "Selecione uma solicitação para reprovar.", AlertType.WARNING);
+	        Alerts.showAlert("Aviso", "Aviso",
+					"Selecione uma solicitação para reprovar.", AlertType.WARNING);
 	    } else {
 	        for (SolicitacoesEnviadas solicitacao : selectedSolicitacoes) {
 	            try {
 	                reprovarSolicitacao(solicitacao);
 	            } catch (SQLException e) {
 	                e.printStackTrace();
-	                Alerts.showAlert("Erro", "Erro", "Erro ao reprovar a solicitação: " + e.getMessage(), AlertType.ERROR);
+	                Alerts.showAlert("Erro", "Erro",
+							"Erro ao reprovar a solicitação: " + e.getMessage(), AlertType.ERROR);
 	            }
 	        }
 	    }
@@ -359,5 +367,4 @@ public class SolicitacoesEnviadasListController implements Initializable, DataCh
 		
 		return false;
 	}
-
 }
