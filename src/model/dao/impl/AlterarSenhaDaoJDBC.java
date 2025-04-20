@@ -15,15 +15,6 @@ import model.entities.Usuario;
 import model.services.PermissaoService;
 
 public class AlterarSenhaDaoJDBC implements AlterarSenhaDao {
-
-//	private Connection connection;
-//	private PermissaoService permissaoService;
-//	UsuarioDaoJDBC usuarioDao = new UsuarioDaoJDBC(connection, permissaoService);
-//
-//	public AlterarSenhaDaoJDBC(Connection connection) {
-//		this.connection = connection;
-//	}
-
     private Connection connection;
     private PermissaoService permissaoService;
     private UsuarioDaoJDBC usuarioDao;
@@ -71,15 +62,4 @@ public class AlterarSenhaDaoJDBC implements AlterarSenhaDao {
             throw new SQLException("Erro ao gerar hash da senha.", e);
         }
     }
-
-//	private String hashSenha(String senha) throws NoSuchAlgorithmException {
-//        MessageDigest md = MessageDigest.getInstance("SHA-256");
-//        //byte[] hashBytes = md.digest(senha.getBytes(StandardCharsets.UTF_8));
-//        byte[] hashBytes = md.digest(senha.getBytes(StandardCharsets.UTF_8));
-//        StringBuilder hexString = new StringBuilder();
-//        for (byte b : hashBytes) {
-//            hexString.append(String.format("%02x", b));
-//        }
-//        return hexString.toString();
-//    }
 }
