@@ -1,7 +1,5 @@
 package model.dao.impl;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,8 +40,10 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 	            throw new IllegalArgumentException("Esta pessoa já tem um usuário vinculado!");
 	        }
 
-	        String sql = "INSERT INTO usuarios (login, senha, idpessoa, id_tipo_usuario, cpf) VALUES (?, ?, ?, ?, ?)";
-	        try (PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+	        String sql = "INSERT INTO usuarios (login, senha, idpessoa, id_tipo_usuario, " +
+                    "cpf) VALUES (?, ?, ?, ?, ?)";
+	        try (PreparedStatement stmt = connection.prepareStatement(sql,
+                    PreparedStatement.RETURN_GENERATED_KEYS)) {
 	            stmt.setString(1, obj.getLogin());
 	            stmt.setString(2, obj.getSenha());
 	            stmt.setInt(3, idPessoa);
@@ -70,13 +70,11 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 	@Override
 	public void update(Usuario obj) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -195,28 +193,13 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             stmt.setString(1, senhaHash);
             stmt.setString(2, username);
             stmt.executeUpdate();
-            Alerts.showAlert("Sucesso", null, "Senha migrada para hash com sucesso para o usuário: " + username, AlertType.INFORMATION);
+            Alerts.showAlert("Sucesso", null,
+                    "Senha migrada para hash com sucesso para o usuário: " + username,
+                    AlertType.INFORMATION);
         } catch (SQLException e) {
         	throw new DbException(e.getMessage());
         }
     }
-	
-//    @Override
-//	public String hashSenha(String senha) {
-//        MessageDigest md = null;
-//		try {
-//			md = MessageDigest.getInstance("SHA-256");
-//		} catch (NoSuchAlgorithmException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        byte[] hashBytes = md.digest(senha.getBytes(StandardCharsets.UTF_8));
-//        StringBuilder hexString = new StringBuilder();
-//        for (byte b : hashBytes) {
-//            hexString.append(String.format("%02x", b));
-//        }
-//        return hexString.toString();
-//    }
 
 	@Override
 	public boolean isUsuarioExistente(Integer idPessoa) {
@@ -254,7 +237,8 @@ public class UsuarioDaoJDBC implements UsuarioDao {
                         UserType userType = getUserTypeFromId(idTipoUsuario);
                         List<String> permissoes = getPermissoesByUsuarioId(id);
 
-                        return new Usuario(id, retrievedLogin, retrievedSenha, permissoes, cpf, idTipoUsuario, userType);
+                        return new Usuario(id, retrievedLogin, retrievedSenha, permissoes, cpf,
+                                idTipoUsuario, userType);
                     }
                 }
             }
@@ -294,7 +278,6 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             case 4 -> UserType.COMUM;
             default -> null;
         };
-
         return (userType != null) ? permissaoService.getPermissoesByUserType(userType) : List.of();
     }
 	
@@ -312,5 +295,4 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             	throw new DbException(e.getMessage());
             }
 	}
-
 }
