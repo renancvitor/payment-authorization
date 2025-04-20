@@ -26,6 +26,11 @@ import model.services.AlterarSenhaService;
 import model.services.UsuarioService;
 
 public class AlterarSenhaFormController implements Initializable {
+	private Stage stage;
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
 		
 	private UsuarioService userService = new UsuarioService();
 	private AlterarSenhaService senhaService = new AlterarSenhaService();
@@ -101,13 +106,16 @@ public class AlterarSenhaFormController implements Initializable {
 	private void alterarSenha(String username, String senhaAtual, String novaSenha, Stage stage) throws SQLException {
 	    if (userService.verificarSenha(username, senhaAtual)) {
 		    if (senhaService.saveOrUpdate(username, novaSenha)) {
-		        Alerts.showAlert("Sucesso!", null, "Senha alterada com sucesso.", Alert.AlertType.INFORMATION);
+		        Alerts.showAlert("Sucesso!", null, "Senha alterada com sucesso.",
+						Alert.AlertType.INFORMATION);
 		        stage.close();
 		    } else {
-		    	Alerts.showAlert("Erro", null, "Erro ao alterar a senha.", Alert.AlertType.ERROR);
+		    	Alerts.showAlert("Erro", null, "Erro ao alterar a senha.",
+						Alert.AlertType.ERROR);
 		    }
 		} else {
-		    Alerts.showAlert("Erro", null, "Erro ao alterar a senha.", Alert.AlertType.ERROR);
+		    Alerts.showAlert("Erro", null, "Erro ao alterar a senha.",
+					Alert.AlertType.ERROR);
 		}
 	}
 

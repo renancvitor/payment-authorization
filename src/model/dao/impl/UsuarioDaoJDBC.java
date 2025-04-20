@@ -1,5 +1,6 @@
 package model.dao.impl;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -161,7 +162,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 	@Override
 	public boolean verificarSenhaPorUsuario(String username, String senhaAtual) {
         try {
-            String senhaHash = hashSenha(senhaAtual);
+            String senhaHash = Usuario.gerarHash(senhaAtual);
 
             String query = "SELECT senha FROM usuarios WHERE login = ?";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -200,22 +201,22 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         }
     }
 	
-	@Override
-	public String hashSenha(String senha) {
-        MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        byte[] hashBytes = md.digest(senha.getBytes());
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : hashBytes) {
-            hexString.append(String.format("%02x", b));
-        }
-        return hexString.toString();
-    }
+//    @Override
+//	public String hashSenha(String senha) {
+//        MessageDigest md = null;
+//		try {
+//			md = MessageDigest.getInstance("SHA-256");
+//		} catch (NoSuchAlgorithmException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        byte[] hashBytes = md.digest(senha.getBytes(StandardCharsets.UTF_8));
+//        StringBuilder hexString = new StringBuilder();
+//        for (byte b : hashBytes) {
+//            hexString.append(String.format("%02x", b));
+//        }
+//        return hexString.toString();
+//    }
 
 	@Override
 	public boolean isUsuarioExistente(Integer idPessoa) {
@@ -247,7 +248,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
                     String cpf = rs.getString("cpf");
                     int idTipoUsuario = rs.getInt("id_tipo_usuario");
 
-                    String senhaHash = hashSenha(senha);
+                    String senhaHash = Usuario.gerarHash(senha);
 
                     if (senhaHash.equals(retrievedSenha)) {
                         UserType userType = getUserTypeFromId(idTipoUsuario);
@@ -300,7 +301,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 	@Override
 	public boolean update(String username, String novaSenha)  {
             String senhaHash = null;
-			senhaHash = hashSenha(novaSenha);
+			senhaHash = Usuario.gerarHash(novaSenha);
             String query = "UPDATE usuarios SET senha = ? WHERE login = ?";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
                 stmt.setString(1, senhaHash);

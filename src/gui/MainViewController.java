@@ -28,6 +28,11 @@ import model.services.UserLoginService;
 import model.services.UsuarioService;
 
 public class MainViewController implements Initializable {
+	private Stage stage;
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
 	
 	private Usuario usuarioAtual;
 	
@@ -55,7 +60,8 @@ public class MainViewController implements Initializable {
 	@FXML
 	public void onMenuItemSolicitacoesEnviadasAction() {
 		this.usuarioAtual = UserLoginService.getUsuarioLogado();
-		loadView("/gui/SolicitacoesEnviadas.fxml", (SolicitacoesEnviadasListController controller) -> {
+		loadView("/gui/SolicitacoesEnviadas.fxml",
+				(SolicitacoesEnviadasListController controller) -> {
 			controller.setSolicitacoesEnviadasService(new SolicitacoesEnviadasService());
 			controller.updateTableView(usuarioAtual);
 		});
@@ -64,7 +70,8 @@ public class MainViewController implements Initializable {
 	@FXML
 	public void onMenuItemSolicitacoesAnalisadasAction() {
 		this.usuarioAtual = UserLoginService.getUsuarioLogado();
-		loadView("/gui/SolicitacoesAnalisadas.fxml", (SolicitacoesAnalisadasListController controller) -> {
+		loadView("/gui/SolicitacoesAnalisadas.fxml",
+				(SolicitacoesAnalisadasListController controller) -> {
 			controller.setSolicitacoesAnalisadasService(new SolicitacoesAnalisadasService());
 			controller.updateTableView(usuarioAtual);
 		});
@@ -112,7 +119,8 @@ public class MainViewController implements Initializable {
 	    
 	    Stage currentStage = (Stage) Main.getMainScene().getWindow();
 	    
-	    Alerts.showAlertWithOwner("Logout", "Você foi desconectado", "Você foi desconectado do sistema.", AlertType.INFORMATION, currentStage);
+	    Alerts.showAlertWithOwner("Logout", "Você foi desconectado",
+				"Você foi desconectado do sistema.", AlertType.INFORMATION, currentStage);
 
 	    currentStage.close();
 
@@ -121,12 +129,13 @@ public class MainViewController implements Initializable {
 	        Main mainApp = new Main();
 	        mainApp.start(loginStage);
 	    } catch (Exception e) {
-	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(), AlertType.ERROR);
+	        Alerts.showAlert("Erro", "Erro ao retornar à tela de login", e.getMessage(),
+					AlertType.ERROR);
 	        e.printStackTrace();
 	    }
 	}
 
-		
+
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {
 		this.usuarioAtual = UserLoginService.getUsuarioLogado();
@@ -138,25 +147,61 @@ public class MainViewController implements Initializable {
 	        menuItemCargo.setVisible(false);
 	    }
 	}
-	
+
 	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			VBox newVBox = loader.load();
-			
+
 			Scene mainScene = Main.getMainScene();
-			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-			
-			Node mainManu = mainVBox.getChildren().get(0);
-			mainVBox.getChildren().clear();
-			mainVBox.getChildren().add(mainManu);
-			mainVBox.getChildren().addAll(newVBox.getChildren());
-			
+
+			// Verificar se o nó raiz é um ScrollPane
+			if (mainScene.getRoot() instanceof ScrollPane) {
+				// Se for um ScrollPane, pega o conteúdo, que pode ser um VBox
+				VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+
+				Node mainMenu = mainVBox.getChildren().get(0);  // Acessa o primeiro item (menu)
+				mainVBox.getChildren().clear();
+				mainVBox.getChildren().add(mainMenu);  // Adiciona o menu de volta
+				mainVBox.getChildren().addAll(newVBox.getChildren());  // Adiciona o conteúdo carregado
+			} else if (mainScene.getRoot() instanceof VBox) {
+				// Caso o nó raiz seja diretamente um VBox, trata como tal
+				VBox mainVBox = (VBox) mainScene.getRoot();
+
+				Node mainMenu = mainVBox.getChildren().get(0);  // Acessa o primeiro item (menu)
+				mainVBox.getChildren().clear();
+				mainVBox.getChildren().add(mainMenu);  // Adiciona o menu de volta
+				mainVBox.getChildren().addAll(newVBox.getChildren());  // Adiciona o conteúdo carregado
+			}
+
+			// Inicializar o controlador da nova view
 			T controller = loader.getController();
 			initializingAction.accept(controller);
+
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
 	}
+
+//	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
+//		try {
+//			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+//			VBox newVBox = loader.load();
+//
+//			Scene mainScene = Main.getMainScene();
+////			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+//			VBox mainVBox = (VBox) mainScene.getRoot();
+//
+//			Node mainManu = mainVBox.getChildren().get(0);
+//			mainVBox.getChildren().clear();
+//			mainVBox.getChildren().add(mainManu);
+//			mainVBox.getChildren().addAll(newVBox.getChildren());
+//
+//			T controller = loader.getController();
+//			initializingAction.accept(controller);
+//		} catch (IOException e) {
+//			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+//		}
+//	}
 			
 }

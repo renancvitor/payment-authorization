@@ -20,7 +20,7 @@ public interface UsuarioDao {
 	void consultarPermissoesUsuario(Usuario usuario);
 	boolean verificarSenhaPorUsuario(String username, String senhaAtual);
 	void atualizarSenhaParaHash(String username, String senhaHash);
-	String hashSenha(String senha);
+	//String hashSenha(String senha);
 	Usuario getUsuarioByLogin(String login, String senha) throws SQLException, NoSuchAlgorithmException;
 	UserType getUserTypeFromId(int idTipoUsuario);
 	List<String> getPermissoesByUsuarioId(int usuarioId) throws SQLException;

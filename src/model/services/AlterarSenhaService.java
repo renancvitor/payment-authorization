@@ -5,6 +5,7 @@ import java.util.List;
 import model.dao.AlterarSenhaDao;
 import model.dao.DaoFactory;
 import model.entities.AlterarSenha;
+import model.entities.Usuario;
 
 public class AlterarSenhaService {
 	
