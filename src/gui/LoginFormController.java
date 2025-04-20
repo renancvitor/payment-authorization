@@ -36,7 +36,7 @@ public class LoginFormController implements Initializable {
 	private TextField txtLogin;
 
 	@FXML
-	private PasswordField txtSenha;  // Alterado para PasswordField
+	private PasswordField txtSenha;
 
 	@FXML
 	private Label labelErrorLogin;
@@ -99,22 +99,12 @@ public class LoginFormController implements Initializable {
 		try {
 			UsuarioDao usuarioDao = DaoFactory.createUsuarioDao();
 			return usuarioDao.getUsuarioByLogin(login, senha);
-//			Usuario usuario = usuarioDao.getUsuarioByLogin(login, senha);
-//
-//			if (usuario != null) {
-//				UserLoginService.setUsuarioLogado(usuario);
-//				return usuario;
-//			} else {
-//				Alerts.showAlert("Erro de Login", null, "Usuário ou senha inválidos.",
-//						Alert.AlertType.WARNING);
-//			}
 		} catch (SQLException e) {
 			Alerts.showAlert("Erro de Conexão", null,
 					"Erro ao conectar ao banco de dados. Tente novamente mais tarde.",
 					Alert.AlertType.ERROR);
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 
