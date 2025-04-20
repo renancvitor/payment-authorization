@@ -155,26 +155,22 @@ public class MainViewController implements Initializable {
 
 			Scene mainScene = Main.getMainScene();
 
-			// Verificar se o nó raiz é um ScrollPane
 			if (mainScene.getRoot() instanceof ScrollPane) {
-				// Se for um ScrollPane, pega o conteúdo, que pode ser um VBox
 				VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
 
-				Node mainMenu = mainVBox.getChildren().get(0);  // Acessa o primeiro item (menu)
+				Node mainMenu = mainVBox.getChildren().get(0);
 				mainVBox.getChildren().clear();
-				mainVBox.getChildren().add(mainMenu);  // Adiciona o menu de volta
-				mainVBox.getChildren().addAll(newVBox.getChildren());  // Adiciona o conteúdo carregado
+				mainVBox.getChildren().add(mainMenu);
+				mainVBox.getChildren().addAll(newVBox.getChildren());
 			} else if (mainScene.getRoot() instanceof VBox) {
-				// Caso o nó raiz seja diretamente um VBox, trata como tal
 				VBox mainVBox = (VBox) mainScene.getRoot();
 
-				Node mainMenu = mainVBox.getChildren().get(0);  // Acessa o primeiro item (menu)
+				Node mainMenu = mainVBox.getChildren().get(0);
 				mainVBox.getChildren().clear();
-				mainVBox.getChildren().add(mainMenu);  // Adiciona o menu de volta
-				mainVBox.getChildren().addAll(newVBox.getChildren());  // Adiciona o conteúdo carregado
+				mainVBox.getChildren().add(mainMenu);
+				mainVBox.getChildren().addAll(newVBox.getChildren());
 			}
 
-			// Inicializar o controlador da nova view
 			T controller = loader.getController();
 			initializingAction.accept(controller);
 
@@ -182,26 +178,4 @@ public class MainViewController implements Initializable {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
 	}
-
-//	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
-//		try {
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-//			VBox newVBox = loader.load();
-//
-//			Scene mainScene = Main.getMainScene();
-////			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-//			VBox mainVBox = (VBox) mainScene.getRoot();
-//
-//			Node mainManu = mainVBox.getChildren().get(0);
-//			mainVBox.getChildren().clear();
-//			mainVBox.getChildren().add(mainManu);
-//			mainVBox.getChildren().addAll(newVBox.getChildren());
-//
-//			T controller = loader.getController();
-//			initializingAction.accept(controller);
-//		} catch (IOException e) {
-//			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
-//		}
-//	}
-			
 }
