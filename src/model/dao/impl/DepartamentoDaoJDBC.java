@@ -79,5 +79,4 @@ public class DepartamentoDaoJDBC implements DepartamentoDao {
     	}
         return departamentos;
 	}
-
 }
