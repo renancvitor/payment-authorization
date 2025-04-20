@@ -32,19 +32,16 @@ public class CargoDaoJDBC implements CargoDao {
         } catch (SQLException e) {
         	throw new DbException(e.getMessage());
         }
-		
 	}
 
 	@Override
 	public void update(Cargo obj) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void debeteById(Cargo obj) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

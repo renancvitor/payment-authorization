@@ -76,6 +76,4 @@ public class SolicitacoesAnalisadasDaoJDBC implements SolicitacoesAnalisadasDao 
         }
         return solicitacoes;
 	}
-
-
 }

@@ -38,13 +38,11 @@ public class DepartamentoDaoJDBC implements DepartamentoDao {
 	@Override
 	public void update(Departamento obj) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void debeteById(Departamento obj) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
