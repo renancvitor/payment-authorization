@@ -95,5 +95,4 @@ public class SolicitacoesEnviadasDaoJDBC implements SolicitacoesEnviadasDao {
         	throw new DbException(e.getMessage());
         }		
 	}
-	
 }
