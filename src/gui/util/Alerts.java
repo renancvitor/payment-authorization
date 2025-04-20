@@ -22,6 +22,5 @@ public class Alerts {
 		alert.setContentText(content);
 		alert.initOwner(ownerStage);
 		alert.showAndWait();
-}
-
+	}
 }
