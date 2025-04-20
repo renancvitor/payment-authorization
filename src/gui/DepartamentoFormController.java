@@ -124,5 +124,4 @@ public class DepartamentoFormController implements Initializable {
 			labelErrorNome.setText(errors.get("nome"));
 		}
 	}
-
 }
