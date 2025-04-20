@@ -28,7 +28,8 @@ public class PessoaDaoJDBC implements PessoaDao {
 		if (obj.getNome() == null || obj.getNome().isEmpty()) {
             throw new IllegalArgumentException("Nome da pessoa não pode ser vazio.");
         }
-        String sql = "INSERT INTO pessoa (nome, datanascimento, iddepartamento, idcargo, cpf) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pessoa (nome, datanascimento, iddepartamento, idcargo, " +
+				"cpf) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, obj.getNome());
             stmt.setDate(2, Date.valueOf(obj.getDatanascimento()));
@@ -39,19 +40,16 @@ public class PessoaDaoJDBC implements PessoaDao {
         } catch (SQLException e) {
         	throw new DbException(e.getMessage());
         }
-		
 	}
 
 	@Override
 	public void update(Pessoa obj) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -102,8 +100,6 @@ public class PessoaDaoJDBC implements PessoaDao {
     		DB.closeStatement(stmt);
     		DB.closeResultSet(rs);
     	}
-        
         return pessoas;
 	}
-
 }
