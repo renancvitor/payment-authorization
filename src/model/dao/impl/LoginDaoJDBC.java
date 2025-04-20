@@ -101,5 +101,4 @@ public class LoginDaoJDBC implements LoginDao {
         }
         return hexString.toString();
     }
-
 }
