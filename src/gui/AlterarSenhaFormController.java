@@ -103,7 +103,8 @@ public class AlterarSenhaFormController implements Initializable {
 		}
 	}
 
-	private void alterarSenha(String username, String senhaAtual, String novaSenha, Stage stage) throws SQLException {
+	private void alterarSenha(String username, String senhaAtual, String novaSenha, Stage stage)
+			throws SQLException {
 	    if (userService.verificarSenha(username, senhaAtual)) {
 		    if (senhaService.saveOrUpdate(username, novaSenha)) {
 		        Alerts.showAlert("Sucesso!", null, "Senha alterada com sucesso.",
@@ -144,5 +145,4 @@ public class AlterarSenhaFormController implements Initializable {
 			labelErrorRepetirNovaSenha.setText(errors.get("repetirnovasenha"));
 		}
 	}
-	
 }
