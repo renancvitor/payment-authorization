@@ -93,7 +93,6 @@ public class CargoFormController implements Initializable {
 		if (exception.getErrors().size() > 0) {
 			throw exception;
 		}
-			
 		return obj;
 	}
 
@@ -124,5 +123,4 @@ public class CargoFormController implements Initializable {
 			labelErrorNome.setText(errors.get("nome"));
 		}
 	}
-
 }
