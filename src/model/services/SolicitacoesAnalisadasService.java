@@ -14,5 +14,4 @@ public class SolicitacoesAnalisadasService {
 	public List<SolicitacoesAnalisadas> select(StatusSolicitacao status, int idTipoUsuario, int idUsuario) {
 		return dao.select(status, idTipoUsuario, idUsuario);
 	}
-
 }

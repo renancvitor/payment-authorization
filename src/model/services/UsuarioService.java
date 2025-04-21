@@ -7,7 +7,6 @@ import model.dao.UsuarioDao;
 import model.entities.Usuario;
 
 public class UsuarioService {
-	
 	private UsuarioDao dao = DaoFactory.createUsuarioDao();
 	
 	public List<Usuario> findAll() {
@@ -22,5 +21,4 @@ public class UsuarioService {
 	public boolean verificarSenha(String username, String senhaAtual) {
 		return dao.verificarSenhaPorUsuario(username, senhaAtual);
 	}
-
 }

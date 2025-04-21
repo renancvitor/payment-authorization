@@ -3,7 +3,6 @@ package model.services;
 import model.entities.Usuario;
 
 public class UserLoginService {
-	
 	private static Usuario usuarioLogado;
 
 	public static void setUsuarioLogado(Usuario usuario) {
@@ -21,5 +20,4 @@ public class UserLoginService {
 	public static void logout() {
         usuarioLogado = null;
     }
-	
 }
