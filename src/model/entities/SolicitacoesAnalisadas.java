@@ -15,7 +15,9 @@ public class SolicitacoesAnalisadas {
     private StatusSolicitacao status;
     private String login;
 
-    public SolicitacoesAnalisadas(Integer id, String fornecedor, String descricao, Timestamp data_criacao, Date data_pagamento, String forma_pagamento, double valor_total, int id_usuario, StatusSolicitacao status, String login) {
+    public SolicitacoesAnalisadas(Integer id, String fornecedor, String descricao,
+                                  Timestamp data_criacao, Date data_pagamento, String forma_pagamento,
+                                  double valor_total, int id_usuario, StatusSolicitacao status, String login) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.descricao = descricao;
