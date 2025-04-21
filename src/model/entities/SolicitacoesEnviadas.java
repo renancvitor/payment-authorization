@@ -16,7 +16,9 @@ public class SolicitacoesEnviadas {
     private StatusSolicitacao status;
     private String login;
 
-    public SolicitacoesEnviadas(Integer id, String fornecedor, String descricao, Timestamp dataCriacao, Date dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
+    public SolicitacoesEnviadas(Integer id, String fornecedor, String descricao, Timestamp dataCriacao,
+                                Date dataPagamento, String formaPagamento, double valorTotal,
+                                int idUsuario, StatusSolicitacao status, String login) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.descricao = descricao;
@@ -111,5 +113,4 @@ public class SolicitacoesEnviadas {
     public void setLogin(String login) {
         this.login = login;
     }
-
 }
