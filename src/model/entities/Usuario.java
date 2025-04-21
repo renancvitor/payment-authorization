@@ -15,7 +15,8 @@ public class Usuario {
     private UserType userType;
     private List<String> permissoes;
 
-    public Usuario(Integer id, String login, String senha, List<String> permissoes, String cpf, int idTipoUsuario, UserType userType) {
+    public Usuario(Integer id, String login, String senha, List<String> permissoes, String cpf,
+                   int idTipoUsuario, UserType userType) {
         this.id = id;
         this.login = login;
         this.senha = senha;
