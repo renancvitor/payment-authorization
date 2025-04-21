@@ -13,7 +13,8 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(Integer id, String nome, LocalDate datanascimento, Departamento departamento, Cargo cargo, String cpf) {
+    public Pessoa(Integer id, String nome, LocalDate datanascimento, Departamento departamento,
+                  Cargo cargo, String cpf) {
         this.id = id;
         this.nome = nome;
         this.datanascimento = datanascimento;
