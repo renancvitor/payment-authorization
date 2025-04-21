@@ -14,9 +14,12 @@ public class PermissaoService {
 
     public PermissaoService() {
         permissoesPorTipoUsuario = new HashMap<>();
-        permissoesPorTipoUsuario.put(UserType.ADMIN, List.of("aprovarReprovarSolicitacoes", "visualizarTodasSolicitacoes", "gerenciarUsuarios", "realizarSolicitacoes"));
-        permissoesPorTipoUsuario.put(UserType.GESTOR, List.of("aprovarReprovarSolicitacoes", "visualizarTodasSolicitacoes", "realizarSolicitacoes"));
-        permissoesPorTipoUsuario.put(UserType.VISUALIZADOR, List.of("visualizarTodasSolicitacoes", "realizarSolicitacoes"));
+        permissoesPorTipoUsuario.put(UserType.ADMIN, List.of("aprovarReprovarSolicitacoes",
+                "visualizarTodasSolicitacoes", "gerenciarUsuarios", "realizarSolicitacoes"));
+        permissoesPorTipoUsuario.put(UserType.GESTOR, List.of("aprovarReprovarSolicitacoes",
+                "visualizarTodasSolicitacoes", "realizarSolicitacoes"));
+        permissoesPorTipoUsuario.put(UserType.VISUALIZADOR, List.of("visualizarTodasSolicitacoes",
+                "realizarSolicitacoes"));
         permissoesPorTipoUsuario.put(UserType.COMUM, List.of("realizarSolicitacoes"));
     }
 

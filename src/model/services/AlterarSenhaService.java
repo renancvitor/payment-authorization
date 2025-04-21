@@ -18,5 +18,4 @@ public class AlterarSenhaService {
 	public boolean saveOrUpdate(String username, String novaSenha) {
 		return dao.update(username, novaSenha);
 	}
-
 }

@@ -17,5 +17,4 @@ public class NovaSolicitacaoService {
 	public void saveOrUpdate(NovaSolicitacao obj, int idUsuario) {
 		dao.insert(obj, idUsuario);
 	}
-	
 }

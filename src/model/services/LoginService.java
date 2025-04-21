@@ -9,5 +9,4 @@ public class LoginService {
 	public List<Login> findAll() {
 		return null;
 	}
-
 }

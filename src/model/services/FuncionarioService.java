@@ -21,5 +21,4 @@ public class FuncionarioService {
 			dao.update(obj);
 		}
 	}
-
 }
