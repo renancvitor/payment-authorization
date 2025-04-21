@@ -9,5 +9,4 @@ public class Login {
 	public Login(Connection connection) {
 		this.connection = connection;
 	}
-
 }

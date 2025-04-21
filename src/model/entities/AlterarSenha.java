@@ -12,5 +12,4 @@ public class AlterarSenha {
 	
 	public AlterarSenha() {
 	}
-
 }

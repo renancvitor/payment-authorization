@@ -17,7 +17,9 @@ public class NovaSolicitacao {
     private StatusSolicitacao status;
     private String login;
 
-    public NovaSolicitacao(Integer id, String fornecedor, String descricao, Timestamp dataCriacao, LocalDate dataPagamento, String formaPagamento, double valorTotal, int idUsuario, StatusSolicitacao status, String login) {
+    public NovaSolicitacao(Integer id, String fornecedor, String descricao, Timestamp dataCriacao,
+                           LocalDate dataPagamento, String formaPagamento, double valorTotal,
+                           int idUsuario, StatusSolicitacao status, String login) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.descricao = descricao;
@@ -112,5 +114,4 @@ public class NovaSolicitacao {
     public void setLogin(String login) {
         this.login = login;
     }
-
 }
