@@ -1,6 +1,8 @@
 <h1 align="center">💳 Autorização Pagamento 💵 <br> <img src="https://img.shields.io/badge/Status-Concluído-green"></h1>
 
 ---
+## Refatoração completa de [projeto-autorizacao-pagamento](https://github.com/renancvitor/projeto-autorizacao-pagamento)
+--
 
 <h4 align="center">✅ Projeto concluído! ✅</h4>
 
